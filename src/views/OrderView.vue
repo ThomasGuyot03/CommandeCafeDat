@@ -138,7 +138,7 @@
           <div id="promo-errors" role="alert"></div>
           <p class="subtitle mb-5">Total: {{ getTotalPrice() }} €</p>
         </div>
-        <div class="payment-form">
+        <!-- <div class="payment-form">
           <form @submit.prevent="submitPayment" class="stripe-form">
             <div id="card-number-element"></div>
             <div id="card-expiry-element"></div>
@@ -147,7 +147,7 @@
             <div id="card-errors" role="alert"></div>
             <button class="btn btn-primary">Payer</button>
           </form>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -155,14 +155,14 @@
 
 <script>
   import { mapGetters } from 'vuex'
-  import { loadStripe } from "@stripe/stripe-js"
+  // import { loadStripe } from "@stripe/stripe-js"
   import isEqual from 'lodash/isEqual';
   
   export default {
     data() {
       return {
         origin:'OrderView',
-        stripe: null,
+        // stripe: null,
         elements: null,
         codePromo: null,
         card: null,
@@ -194,7 +194,7 @@
     methods: {
       async init() {
         await this.getUserData()
-        await this.initStripe()
+        // await this.initStripe()
       },
       async updateUserData() {
         if (this.getUser) {
@@ -224,60 +224,60 @@
           console.log('error =>', error)
         }
       },
-      async initStripe() {
-        // CREATION DOM STRIPE //
-        this.stripe = await loadStripe(process.env.VUE_APP_STRIPE_PUBLIC_KEY)
-        this.elements = this.stripe.elements()
+      // async initStripe() {
+      //   // CREATION DOM STRIPE //
+      //   this.stripe = await loadStripe(process.env.VUE_APP_STRIPE_PUBLIC_KEY)
+      //   this.elements = this.stripe.elements()
 
-        this.cardNumberElement = this.elements.create("cardNumber")
-        this.cardNumberElement.mount("#card-number-element")
+      //   this.cardNumberElement = this.elements.create("cardNumber")
+      //   this.cardNumberElement.mount("#card-number-element")
 
-        this.cardExpiryElement = this.elements.create("cardExpiry")
-        this.cardExpiryElement.mount("#card-expiry-element")
+      //   this.cardExpiryElement = this.elements.create("cardExpiry")
+      //   this.cardExpiryElement.mount("#card-expiry-element")
 
-        this.cardCvcElement = this.elements.create("cardCvc")
-        this.cardCvcElement.mount("#card-cvc-element")
+      //   this.cardCvcElement = this.elements.create("cardCvc")
+      //   this.cardCvcElement.mount("#card-cvc-element")
 
-        this.postalCodeElement = this.elements.create("postalCode")
-        this.postalCodeElement.mount("#postal-code-element")
-      },
-      async submitPayment() {
-        await this.checkUserIsComplete(this.customer)
+      //   this.postalCodeElement = this.elements.create("postalCode")
+      //   this.postalCodeElement.mount("#postal-code-element")
+      // },
+      // async submitPayment() {
+      //   await this.checkUserIsComplete(this.customer)
 
-        // CREATION PAIEMENT STRIPE //
-        let cartUpToDate = await this.checkCartData()
-        if (!cartUpToDate) {
-          console.log('Attention ! Le prix d\'un article a changé')
-          return
-        }
+      //   // CREATION PAIEMENT STRIPE //
+      //   let cartUpToDate = await this.checkCartData()
+      //   if (!cartUpToDate) {
+      //     console.log('Attention ! Le prix d\'un article a changé')
+      //     return
+      //   }
 
-        const params = {
-            user: this.customer,
-            cart:  this.getCartId
-        } 
-        const response = await this.$http.post('/create-payment-intent', params)
-        const client_secret = response.data.client_secret
+      //   const params = {
+      //       user: this.customer,
+      //       cart:  this.getCartId
+      //   } 
+      //   const response = await this.$http.post('/create-payment-intent', params)
+      //   const client_secret = response.data.client_secret
 
-        const result = await this.stripe.confirmCardPayment(client_secret, {
-          payment_method: {
-            card: this.cardNumberElement,
-            billing_details: {
-              name: 'leger',
-              email: 'guillaumeleger140@gmail.com'
-            }
-          }
-        })
-        if (result.error) {
-          var errorElement = document.getElementById('card-errors')
-          errorElement.textContent = result.error.message
-        } else {
-          if (result.paymentIntent.status === 'succeeded') {
-            await this.updateUserData()
-            await this.createOrder()
-            console.log("Payment processed successfully!")
-          }
-        }
-      },
+      //   const result = await this.stripe.confirmCardPayment(client_secret, {
+      //     payment_method: {
+      //       card: this.cardNumberElement,
+      //       billing_details: {
+      //         name: 'leger',
+      //         email: 'guillaumeleger140@gmail.com'
+      //       }
+      //     }
+      //   })
+      //   if (result.error) {
+      //     var errorElement = document.getElementById('card-errors')
+      //     errorElement.textContent = result.error.message
+      //   } else {
+      //     if (result.paymentIntent.status === 'succeeded') {
+      //       await this.updateUserData()
+      //       await this.createOrder()
+      //       console.log("Payment processed successfully!")
+      //     }
+      //   }
+      // },
       async checkCodePromo() {
         var errorElement = document.getElementById('promo-errors')
         if (!this.codePromo || this.codePromo == "" || this.codePromo == null) {
@@ -399,11 +399,11 @@
   padding: 10px;
 }
 
-.stripe-form {
+/* .stripe-form {
   background: #f8f9fa;
   padding: 20px;
   border-radius: 5px;
-}
+} */
 
 .form-group {
   margin-bottom: 20px;

@@ -1,69 +1,88 @@
 <template>
-    <div class="home">
-        <h1 class="title">Produits</h1>
-        <div class="notification is-light text-align-center">
-          Commandez le meilleur de notre café ! 
+  <div class="home">
+    <h1 class="title">Produits</h1>
+    <div class="notification is-light text-align-center">
+      Commandez le meilleur de notre café ! 
+    </div>
+    <div v-if="loading" class="loading-indicator text-align-center">
+      <i class="fas fa-spinner fa-spin"></i> Chargement en cours...
+    </div>
+    <div v-else>
+      <div class="columns">
+        <div class="column is-3">
+          <h2 class="subtitlee">Filtres</h2>
+          <FilterCollapse
+            :initialFilters="filters"
+            @filters-changed="getProducts(currentPage)"
+          />
         </div>
-        <div v-if="loading" class="loading-indicator text-align-center">
-          <i class="fas fa-spinner fa-spin"></i> Chargement en cours...
-        </div>
-        <div v-else>
-          <div class="columns">
-            <div class="column is-3">
-              <h2 class="subtitlee">Filtres</h2>
-              <FilterCollapse
-                  :initialFilters="filters"
-                  @filters-changed="getProducts(currentPage)"
-              />
-            </div>
-            <div class="column">
-              <div class="columns is-multiline">
-              <div v-for="(product, index) in products" :key="index" class="column is-one-quarter is-4-tablet is-4-desktop is-3-widescreen">
-                <div class="card text-align-center">
-                  <div class="card-image">
-                    <a href='https://postimg.cc/NyZs9pQG' target='_blank'><img src='https://i.postimg.cc/NyZs9pQG/48-capsules-espresso-vivace-1.jpg' border='0' alt='48-capsules-espresso-vivace-1'/></a > 
+        <div class="column">
+          <div class="columns is-multiline">
+            <div v-for="(product, index) in products" :key="index" class="column is-one-quarter is-4-tablet is-4-desktop is-3-widescreen">
+              <div class="card text-align-center">
+                <div class="card-image">
+                  <a href='https://postimg.cc/NyZs9pQG' target='_blank'><img src='https://i.postimg.cc/NyZs9pQG/48-capsules-espresso-vivace-1.jpg' border='0' alt='48-capsules-espresso-vivace-1'/></a > 
+                </div>
+                <div class="card-content">
+                  <div class="media">
+                    <div class="media-left">
+                    </div>
+                    <div class="media-content">
+                      <p class="is-1 no-wrap">{{ product.name }}</p>
+                      <p class="subtitle is-6">{{ product.price }} €</p>
+                    </div>
                   </div>
-                  <div class="card-content">
-                    <div class="media">
-                      <div class="media-left">
-                      </div>
-                      <div class="media-content">
-                        <p class="is-1 no-wrap">{{ product.name }}</p>
-                        <p class="subtitle is-6">{{ product.price }} €</p>
-                      </div>
-                    </div>
-                    <div class="content">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Phasellus nec iaculis mauris.
-                      <br>
-                      <!-- <time datetime="2016-1-1">en stock</time> -->
-                    </div>
-                    <div class="columns reverse">
-                      <div class="column">
-                        <button 
-                          class="button is-primary"
-                          @click="addItem(product)"><i class="fas fa-shopping-basket"></i></button>
-                      </div>
+                  <div class="content">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Phasellus nec iaculis mauris.
+                    <br>
+                  </div>
+                  <div class="columns reverse">
+                    <div class="column">
+                      <button 
+                        class="button is-primary"
+                        @click="addItem(product)"><i class="fas fa-shopping-basket"></i></button>
+                      <button 
+                        v-if="getUser && getUser.isAdmin" 
+                        class="button is-warning"
+                        @click="openEditModal(product)">
+                        <i class="fas fa-edit"></i> Modifier
+                      </button>
+
                     </div>
                   </div>
                 </div>
               </div>
-              </div>
             </div>
           </div>
-          <PaginationComponent
-          :current-page="currentPage"
-          :total-pages="totalPages"
-          :service-props="service"
-          @update-page="updatePage"
-          ></PaginationComponent>
         </div>
+      </div>
+      <PaginationComponent
+        :current-page="currentPage"
+        :total-pages="totalPages"
+        :service-props="service"
+        @update-page="updatePage"
+      ></PaginationComponent>
     </div>
+    
+    <!-- Intégration de la modale -->
+    <EditProductModal
+      :is-visible="isEditModalVisible"
+      :product="selectedProduct"
+      @close="isEditModalVisible = false"
+      @product-updated="getProducts(currentPage)"
+    />
+  </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import EditProductModal from './EditProductModal.vue'
+
 export default {
+  components: {
+    EditProductModal
+  },
   data() {
     return {
       loading: true,
@@ -75,17 +94,20 @@ export default {
       filters: {
         category: '',
         sortByPrice: ''
-      }
+      },
+      isEditModalVisible: false,
+      selectedProduct: null
     }
   },
   computed: {
-    ...mapGetters(['getUser', 'getCart'])
+    ...mapGetters(['getUser', 'getCart']),
+    isAdmin() {
+      const user = this.getUser
+      console.log('User:', user)
+      return user && user.role === 'admin'
+    }
   },
   mounted() {
-    const user = this.getUser
-    if (user) {
-      console.log('user =>', user)
-    }
     this.getProducts()
   },
   methods: {
@@ -120,15 +142,14 @@ export default {
         for (const filterKey in this.filters) {
           if (Object.prototype.hasOwnProperty.call(this.filters, filterKey)) {
             const filterValue = this.filters[filterKey]
-            console.log('filterValue =>', filterValue)
-            if (filterValue !== null  && filterValue !== '') {
+            if (filterValue !== null && filterValue !== '') {
               params[filterKey] = filterValue
             } else {
               delete params[filterKey]
             }
           }
         }
-        const result = await this.$http.get('/products', {params: params})
+        const result = await this.$http.get('/products', { params: params })
         const { products, totalItems, totalPages } = result.data
         this.products = products
         this.totalItems = totalItems
@@ -140,49 +161,16 @@ export default {
     },
     updatePage(page) {
       this.getProducts(page)
+    },
+    openEditModal(product) {
+      console.log('Opening edit modal for:', product)
+      this.selectedProduct = { ...product }
+      this.isEditModalVisible = true
     }
   }
 }
 </script>
 
 <style>
-/* .router-link-active,
-.router-link-exact-active {
-    color: inherit !important;
-} */
-
-.card-header-title {
-  height: 300px;
-}
-.image-class {
-  max-height: 200px;
-  object-fit: cover;
-  object-position: center;
-}
-.button.is-success {
-  width: 20%;
-}
-.card {
-  height: 500px;
-}
-.card-image {
-  height: 40%;
-}
-.no-wrap {
-  white-space: nowrap;
-}
-.subtitlee {
-  text-align: center;
-  font-weight: 600;
-  line-height: 1.125;
-  font-size: 1.5rem;
-}
-/* .image.is-4by3 {
-    padding-top: 75%;
-    object-fit: cover;
-    object-position: center;
-} */
-/* .reverse {
-  flex-direction: row-reverse;
-} */
+/* ... styles existants ... */
 </style>

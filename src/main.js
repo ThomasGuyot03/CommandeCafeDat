@@ -6,6 +6,9 @@ import CryptoJS from 'crypto-js'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import Toast from 'vue-toastification'; // Nouvelle bibliothèque compatible Vue 3
+import 'vue-toastification/dist/index.css'; // Styles nécessaires pour vue-toastification
+
 import './assets/css/styles.css'
 import './assets/js/bulma.js'
 import 'bulma/css/bulma.css'
@@ -15,6 +18,7 @@ import FooterVue from '@/components/FooterVue.vue'
 import FilterCollapse from '@/components/FilterCollapse.vue'
 import PaginationComponent from '@/components/PaginationComponent.vue'
 import GenericMixin from '@/mixins/GenericMixin.js'
+
 
 window.process = process
 axios.defaults.baseURL = 'http://localhost:3000/api/'
@@ -71,6 +75,13 @@ if (cartData) {
 } else {
   console.log("Aucune donnée de panier trouvée dans le localStorage.");
 }
+
+// Utilisation du plugin Toastification
+app.use(Toast, {
+  position: 'bottom-right',
+  timeout: 50000,
+  hideProgressBar: true,
+});
 
 app.config.globalProperties.$http = axios
 app.component('NavBar', NavBar)

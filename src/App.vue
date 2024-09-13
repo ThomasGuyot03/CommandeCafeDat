@@ -5,7 +5,7 @@
     <FooterVue></FooterVue>
   </div>
 </template>
-
+  
 <style>
 
 .title {
@@ -28,8 +28,5 @@ nav a {
   color: #2c3e50;
 }
 
-nav a.router-link-exact-active {
-  color: #00d1b2;
-}
 
 </style>

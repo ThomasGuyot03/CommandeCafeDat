@@ -1,3 +1,4 @@
+import { useToast } from "vue-toastification"
 import jwt from 'jsonwebtoken'
 import { mapActions } from 'vuex'
 const myMixin = {
@@ -11,6 +12,20 @@ const myMixin = {
       },
       openLogin:true
     }
+  },
+  setup() {
+    // Get toast interface
+    const toast = useToast();
+
+    // Use it!
+    toast("I'm a toast!");
+
+    // or with options
+    toast.success("My toast content", {
+      timeout: 2000
+    });
+
+    return { toast }
   },
   methods: {
     ...mapActions(['updateUser']),
@@ -60,6 +75,19 @@ const myMixin = {
       } catch (error) {
           this.errorMessage = error
           this.successMessage = ''
+      }
+    },
+    showToast(type, message) {
+      const toast = useToast();
+      switch (type) {
+        case 'success':
+          toast.success(message, { timeout: 2000 });
+          break;
+        case 'error':
+          toast.error(message, { timeout: 2000 });
+          break;
+        default:
+          toast(message, { timeout: 2000 });
       }
     }
   }
