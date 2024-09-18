@@ -2,7 +2,7 @@
   <div class="home">
     <h1 class="title">Produits</h1>
     <div class="notification is-light text-align-center">
-      Commandez le meilleur de notre café ! 
+      Commandez le meilleur de notre café ! {{ theme }}
     </div>
     <div v-if="loading" class="loading-indicator text-align-center">
       <i class="fas fa-spinner fa-spin"></i> Chargement en cours...
@@ -105,6 +105,9 @@ export default {
       const user = this.getUser
       console.log('User:', user)
       return user && user.role === 'admin'
+    },
+    theme() {
+      return this.$appConfig.theme
     }
   },
   mounted() {
@@ -149,7 +152,9 @@ export default {
             }
           }
         }
-        const result = await this.$http.get('/products', { params: params })
+        const result = await this.$http.get('/products', { params: {accountId:this.$appConfig.accountId} })
+        // const result = await this.$http.get(`/products/${this.$appConfig.accountId}`)
+        console.log(result)
         const { products, totalItems, totalPages } = result.data
         this.products = products
         this.totalItems = totalItems

@@ -85,7 +85,8 @@ export default {
                     firstname: this.firstname,
                     name:  this.name,
                     email: this.email,
-                    password:  this.password
+                    password:  this.password,
+                    accountId: this.$appConfig.accountId
                 }
                 await this.$http.post('/user/signup', params)
                 this.$router.push('/login')
