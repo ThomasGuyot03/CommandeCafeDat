@@ -20,6 +20,12 @@
                 <input class="input" type="number" v-model="localProduct.price" step="1" required>
               </div>
             </div>
+            <div class="field">
+              <label class="label">Description</label>
+              <div class="control">
+                <input class="input" type="text" v-model="localProduct.description" required>
+              </div>
+            </div>
             <!-- Ajoutez plus de champs si nécessaire -->
           </form>
         </section>

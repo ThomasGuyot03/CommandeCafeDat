@@ -2,7 +2,7 @@
   <div class="home">
     <h1 class="title">Produits</h1>
     <div class="notification is-light text-align-center">
-      Commandez le meilleur de notre café ! {{ theme }}
+      Commandez le meilleur de notre café ! 
     </div>
     <div v-if="loading" class="loading-indicator text-align-center">
       <i class="fas fa-spinner fa-spin"></i> Chargement en cours...
@@ -33,8 +33,7 @@
                     </div>
                   </div>
                   <div class="content">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Phasellus nec iaculis mauris.
+                    {{ product.description }}
                     <br>
                   </div>
                   <div class="columns reverse">
