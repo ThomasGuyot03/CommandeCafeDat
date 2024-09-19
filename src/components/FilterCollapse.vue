@@ -10,38 +10,7 @@
                     <option value="3">Lait</option>
                     <option value="4">Toppin</option>
 
-                    <!-- Ajoutez d'autres options de catégorie -->
                 </select>
-            </div>
-        </div>
-        <label class="label">Prix </label>
-        <div class="control">
-            <div class="select">
-                <select v-model="filters.sortByPrice" @change="updateFilters">
-                    <option value="">Aucun</option>
-                    <option value="asc">Croissant</option>
-                    <option value="desc">Décroissant</option>
-                </select>
-            </div>
-        </div>
-        <div class="flex">
-            <div class="control">
-                <label class="label">Min</label>
-                <input
-                    v-model="filters.minPrice" 
-                    class="input" 
-                    type="number" 
-                    placeholder="€"  
-                    min="0">
-            </div>
-            <div class="control">
-                <label class="label">Max</label>
-                <input
-                v-model="filters.maxPrice" 
-                    class="input" 
-                    type="number" 
-                    placeholder="€"  
-                    min="0">
             </div>
         </div>
     </div>

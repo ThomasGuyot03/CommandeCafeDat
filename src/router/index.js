@@ -55,6 +55,11 @@ const routes = [
     component: EditProduct,
     props: true // Permet de passer des paramètres à la vue
   },
+  // {
+  //   path: '/product/:id',
+  //   name: 'ProductPage',
+  //   component: () => import('@/components/ProductPage.vue')
+  // },
   {
     path: '/gestion',
     name: 'GestionAdmin',

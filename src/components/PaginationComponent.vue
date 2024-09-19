@@ -92,14 +92,4 @@ export default {
     border-color: #00d1b2;
     color: inherit;
 }
-/* .pagination-previous {
-  order: 1;
-}
-.pagination-list {
-  justify-content: inherit;
-  flex-wrap: inherit;
-}
-.pagination {
-  width: 50%;
-} */
 </style>

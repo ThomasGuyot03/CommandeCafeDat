@@ -28,7 +28,7 @@
                     <div class="media-left">
                     </div>
                     <div class="media-content">
-                      <p class="is-1 no-wrap">{{ product.name }}</p>
+                      <p class="card-title no-wrap">{{ product.name }}</p>
                       <p class="subtitle is-6">{{ product.price }} €</p>
                     </div>
                   </div>
@@ -176,5 +176,58 @@ export default {
 </script>
 
 <style>
-/* ... styles existants ... */
-</style>
+.card {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  transition: transform 0.3s ease-in-out;
+  border: grey 1px solid;
+}
+
+.card-title {
+  font-size: 1.25rem; /* Ajustez la taille selon vos préférences */
+  font-weight: bold; /* Pour un titre plus audacieux */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.card:hover {
+  transform: translateY(-15px);
+}
+
+.card-image img {
+  border-radius: 10px 10px 0 0;
+}
+
+.card-content {
+  padding: 15px;
+}
+
+/* Boutons avec effet de hover */
+.button.is-primary {
+  background-color: #ff5722;
+  color: white;
+}
+
+.button.is-primary:hover {
+  background-color: #e64a19;
+}
+
+/* Effets sur les colonnes */
+.columns.is-multiline {
+  gap: 20px;
+}
+
+/* Notification styling */
+.notification {
+  background-color: #ffe0b2;
+  border-radius: 8px;
+  color: #ff5722;
+}
+
+/* Loading indicator centré */
+.loading-indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  font-size: 1.5rem;
+}</style>

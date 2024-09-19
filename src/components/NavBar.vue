@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-      <a href="https://postimg.cc/CdFtCbdw" target="_blank">
+      <a href="#" target="_blank">
         <img src="https://i.postimg.cc/CdFtCbdw/1.png" border="0" alt="1" />
       </a>
       <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
@@ -21,13 +21,13 @@
           <div class="buttons">
             <div v-if="!getUser">
               <router-link class="button" to="/signup">
-                <strong>Sign up</strong>
+                <strong>Inscription</strong>
               </router-link>
               <router-link class="button" to="/login">
-                <strong>Login</strong>
+                <strong>Connexion</strong>
               </router-link>
               <router-link class="button" to="/panier">
-                <strong><i class="fas fa-shopping-basket"></i></strong>
+                <strong><i class="fas fa-shopping-basket"></i> Panier</strong>
                 <span class="cart-badge">{{ cartItemsCount }}</span>
               </router-link>
             </div>
