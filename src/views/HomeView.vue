@@ -10,7 +10,6 @@
     <div v-else>
       <div class="columns">
         <div class="column is-3">
-          <h2 class="subtitlee">Filtres</h2>
           <FilterCollapse
             :initialFilters="filters"
             @filters-changed="getProducts(currentPage)"
@@ -152,7 +151,6 @@ export default {
           }
         }
         const result = await this.$http.get('/products', { params: {accountId:this.$appConfig.accountId} })
-        // const result = await this.$http.get(`/products/${this.$appConfig.accountId}`)
         console.log(result)
         const { products, totalItems, totalPages } = result.data
         this.products = products
