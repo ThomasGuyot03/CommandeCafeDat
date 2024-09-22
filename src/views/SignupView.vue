@@ -11,37 +11,41 @@
                     <div class="box">
                     <form @submit.prevent="signup">
                         <div class="field">
-                        <label class="label">Prénom</label>
-                        <div class="control">
-                            <input class="input" type="text" v-model="firstname" placeholder="Guillaume">
-                        </div>
-                        </div>
-                        <div class="field">
-                        <label class="label">Nom</label>
-                        <div class="control">
-                            <input class="input" type="text" v-model="lastname" placeholder="Leger">
-                        </div>
+                            <label class="label">Prénom</label>
+                            <div class="control">
+                                <input class="input" type="text" v-model="firstname" placeholder="Prénom">
+                            </div>
                         </div>
                         <div class="field">
-                        <label class="label is-left">Adresse e-mail</label>
-                        <div class="control">
-                            <input class="input" type="email" v-model="email" placeholder="guillaume@gmail.com">
-                        </div>
+                            <label class="label">Nom</label>
+                            <div class="control">
+                                <input class="input" type="text" v-model="name" placeholder="Nom">
+                            </div>
                         </div>
                         <div class="field">
-                        <label class="label">Mot de passe</label>
-                        <div class="control">
-                            <input class="input" type="password" v-model="password" placeholder="*******">
+                            <label class="label">societe</label>
+                            <div class="control">
+                                <input class="input" type="text" v-model="company" placeholder="Entreprise">
+                            </div>
                         </div>
+                        <div class="field">
+                            <label class="label is-left">Adresse e-mail</label>
+                            <div class="control">
+                                <input class="input" type="email" v-model="email" placeholder="Exemple@exemple.com ">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">Mot de passe</label>
+                            <div class="control">
+                                <input class="input" type="password" v-model="password" placeholder="*******">
+                            </div>
                         </div>
                         <div class="field">
                         <div v-if="errorMessage" class="error-message">
                             {{ errorMessage }}
                         </div>
                         <div class="control">
-                            <button 
-                                class="button is-primary is-fullwidth"
-                                @click="signup">Créer un compte</button>
+                            <button class="button is-primary is-fullwidth" type="submit">Créer un compte</button>
                         </div>
                         </div>
                     </form>
@@ -58,16 +62,21 @@ export default {
     data() {
         return {
             firstname: null,
-            lastname: null,
+            name: null,
             email: null,
             password: null,
-            errorMessage: null
+            errorMessage: null,
+            line: null,
+            zip_code: null,
+            city: null,
+            country: "France",
+            company: null
         }
     },
     methods: {
         async signup() {
             try {
-                if (!this.firstname || !this.lastname || !this.email || !this.password) {
+                if (!this.firstname || !this.name || !this.email || !this.password) {
                     this.errorMessage = "Veuillez remplir tous les champs."
                 return
                 }
@@ -86,7 +95,15 @@ export default {
                     name:  this.name,
                     email: this.email,
                     password:  this.password,
-                    accountId: this.$appConfig.accountId
+                    accountId: this.$appConfig.accountId,
+                    address: {
+                        line: this.line,
+                        zip_code: this.zip_code,
+                        city: this.city,
+                        country: this.country
+                    },
+                    company: this.company
+                
                 }
                 await this.$http.post('/user/signup', params)
                 this.$router.push('/login')

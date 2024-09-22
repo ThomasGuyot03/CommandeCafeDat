@@ -1,12 +1,14 @@
 <template>
   <div>
     <h1 class="title">Gestion des Utilisateurs</h1>
-    <div v-if="loading" class="loading-indicator">Chargement...</div>
+    <div  v-if="loading" class="loading-indicator">Chargement...</div>
     <table v-else class="table">
       <thead>
         <tr>
           <th>Prénom</th>
           <th>Nom</th>
+          <th>Mail</th>
+          <th>Société</th>
           <th>Compte Client</th>
         </tr>
       </thead>
@@ -14,6 +16,8 @@
         <tr v-for="user in users" :key="user.id">
           <td>{{ user.firstname }}</td>
           <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.company }}</td>
           <td v-if="clientAccount">{{ clientAccount.name }}</td>
           <td>
             <button class="button is-info" @click="openModal(user)">
@@ -58,7 +62,7 @@ export default {
   },
   mounted() {
     this.fetchUsers();
-    this.fetchClientAccount();
+    // this.fetchClientAccount();
   },
   methods: {
     async fetchUsers() {
@@ -67,22 +71,24 @@ export default {
           params: { accountId: this.$appConfig.accountId }
         });
         this.users = response.data;
+        this.loading = false;
+        console.log('this.users', this.users)
       } catch (error) {
         console.error('Erreur lors de la récupération des utilisateurs:', error);
       }
     },
-    async fetchClientAccount() {
-      try {
-        const response = await this.$http.get('/client-account', {
-          params: { accountId: this.$appConfig.accountId }
-        });
-        this.clientAccount = response.data;
-      } catch (error) {
-        console.error('Erreur lors de la récupération du compte client:', error);
-      } finally {
-        this.loading = false;
-      }
-    },
+    // async fetchClientAccount() {
+    //   try {
+    //     const response = await this.$http.get('/client-account', {
+    //       params: { accountId: this.$appConfig.accountId }
+    //     });
+    //     this.clientAccount = response.data;
+    //   } catch (error) {
+    //     console.error('Erreur lors de la récupération du compte client:', error);
+    //   } finally {
+    //     this.loading = false;
+    //   }
+    // },
     openModal(user) {
       this.selectedUser = user;
       this.isModalOpen = true;

@@ -34,7 +34,7 @@
         </table>
         <div class="content has-text-right">
             <p>Total: {{ total }} €</p>
-            <button class="button is-success" @click="checkout">Commander</button>
+            <button class="button is-success" @click="submitOrder">Commander</button>
         </div>
         </div>
         <div 
@@ -50,20 +50,37 @@ import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
+      customer: null
     }
   },
   computed: {
-    ...mapGetters(['getCart']),
+    ...mapGetters(['getCart', 'getUser']),
     total() {
       return this.getCart.products.reduce((total, product) => total + product.price * product.quantity, 0)
     }
   },
   async mounted() {
     await this.checkProductsInCart()
+    await this.init()
   },
   methods: {
-    checkout() {
-      this.$router.push('/pre-order')
+    async init() {
+      await this.getUserData()
+    },
+     async submitOrder() {
+      const params = {
+        user: this.customer,
+        cart:  this.getCart
+      }
+      try {
+        const response = await this.$http.post('/orders/create',params);
+        if (response.status === 200){
+          this.showToast('success', 'Commande réussie');
+          this.$router.push('/');
+        }
+      } catch (error) {
+        this.showToast('error', 'Erreur lors de l\'ajout du produit');
+      }
     },
     async checkProductsInCart() {
       // CHECK IF PRODUCTS ALREADY EXIST //
