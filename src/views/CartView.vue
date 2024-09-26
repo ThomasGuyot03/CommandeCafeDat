@@ -12,7 +12,7 @@
             <thead>
             <tr>
                 <th>Produit</th>
-                <th>Prix</th>
+                <!-- <th>Prix</th> -->
                 <th>Quantité</th>
                 <!-- <th>Total</th> -->
                 <th></th>

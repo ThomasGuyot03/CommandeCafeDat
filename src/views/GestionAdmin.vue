@@ -37,7 +37,7 @@
     </div>
 
     <div class="column p-5">
-      <h1 class="title">Gestion des Produits et Commandes</h1>
+      <h1 class="title">Menu Administrateur</h1>
       <router-view></router-view>
     </div>
   </div>

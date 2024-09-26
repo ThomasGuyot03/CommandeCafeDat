@@ -10,13 +10,12 @@
         </div>
       </div>
 
-      <!-- Prix du produit -->
-      <div class="field">
+      <!-- <div class="field">
         <label class="label">Prix</label>
-        <!-- <div class="control">
+        <div class="control">
           <input v-model="product.price" class="input" type="number" placeholder="Prix du produit" min="0" required>
-        </div> -->
-      </div>
+        </div>
+      </div> -->
 
       <!-- Description du produit -->
       <div class="field">
@@ -63,7 +62,7 @@ export default {
     return {
       product: {
         title: '',
-        price: '',
+        // price: '',
         description: '',
         category: '',
         image: null
@@ -86,7 +85,7 @@ export default {
       try {
         const params = {
           name: this.product.title,
-          price: this.product.price,
+          // price: this.product.price,
           description: this.product.description,
           category: this.product.category,
           accountId: this.$appConfig.accountId
