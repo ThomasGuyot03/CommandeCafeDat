@@ -40,12 +40,12 @@
                       <button 
                         class="button is-primary"
                         @click="addItem(product)"><i class="fas fa-shopping-basket"></i></button>
-                      <button 
-                        v-if="getUser && getUser.isAdmin" 
-                        class="button is-warning"
-                        @click="openEditModal(product)">
-                        <i class="fas fa-edit"></i> Modifier
-                      </button>
+                        <button
+                          v-if="getUser && getUser.isAdmin"
+                          class="button custom-edit-button"
+                          @click="openEditModal(product)">
+                          <i class="fas fa-edit"></i> Modifier
+                        </button>
 
                     </div>
                   </div>
@@ -202,12 +202,22 @@ export default {
 
 /* Boutons avec effet de hover */
 .button.is-primary {
-  background-color: #ff5722;
+  background-color: #a8a8a8;
   color: white;
 }
 
 .button.is-primary:hover {
-  background-color: #e64a19;
+  background-color: #a5a5a5;
+}
+
+.custom-edit-button {
+  background-color: #575757; /* Rouge */
+  color: rgb(107, 107, 107);
+  border-color: #7e7e7e;
+}
+
+.custom-edit-button:hover {
+  background-color: #9e9e9e; /* Rouge plus foncé au hover */
 }
 
 /* Effets sur les colonnes */
@@ -219,7 +229,7 @@ export default {
 .notification {
   background-color: #ffe0b2;
   border-radius: 8px;
-  color: #ff5722;
+  color: #bdbdbd;
 }
 
 /* Loading indicator centré */

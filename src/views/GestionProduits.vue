@@ -7,7 +7,6 @@
       <thead>
         <tr>
           <th>Nom</th>
-          <th>Prix</th>
           <th>Stock</th>
           <th>Actions</th>
         </tr>
@@ -15,7 +14,6 @@
       <tbody>
         <tr v-for="produit in produits" :key="produit._id">
           <td>{{ produit.name }}</td>
-          <td>{{ produit.price }} €</td>
           <td>
             <input class="input is-small" type="number" v-model="produit.stock" />
           </td>
