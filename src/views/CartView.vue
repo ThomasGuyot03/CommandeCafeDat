@@ -14,26 +14,26 @@
                 <th>Produit</th>
                 <th>Prix</th>
                 <th>Quantité</th>
-                <th>Total</th>
+                <!-- <th>Total</th> -->
                 <th></th>
             </tr>
             </thead>
             <tbody>
             <tr v-for="(product, index) in getCart.products" :key="index">
                 <td>{{ product.name }}</td>
-                <td>{{ product.price }}</td>
+                <!-- <td>{{ product.price }}</td> -->
                 <td>
                 <button class="button is-small" @click="decrementQuantity(product)">-</button>
                 {{ product.quantity }}
                 <button class="button is-small" @click="incrementQuantity(product)">+</button>
                 </td>
-                <td>{{ product.quantity * product.price }}</td>
+                <!-- <td>{{ product.quantity * product.price }}</td> -->
                 <td><button class="button is-danger is-small" @click="removeFromCart(product)">Supprimer</button></td>
             </tr>
             </tbody>
         </table>
         <div class="content has-text-right">
-            <p>Total: {{ total }} €</p>
+            <!-- <p>Total: {{ total }} €</p> -->
             <button class="button is-success" @click="submitOrder">Commander</button>
         </div>
         </div>
@@ -56,7 +56,7 @@ export default {
   computed: {
     ...mapGetters(['getCart', 'getUser']),
     total() {
-      return this.getCart.products.reduce((total, product) => total + product.price * product.quantity, 0)
+      return this.getCart.products.reduce((total, product) =>  product.quantity, 0)
     }
   },
   async mounted() {

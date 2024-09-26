@@ -3,7 +3,7 @@
       <h1>{{ product.name }}</h1>
       <img :src="product.image" alt="product.name" />
       <p>{{ product.description }}</p>
-      <p>Prix: {{ product.price }} €</p>
+      <!-- <p>Prix: {{ product.price }} €</p> -->
     </div>
   </template>
   

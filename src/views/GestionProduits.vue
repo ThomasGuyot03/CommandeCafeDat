@@ -82,4 +82,11 @@ export default {
   max-width: 80px;
   margin: 0 auto;
 }
+
+.title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #333;
+}
 </style>

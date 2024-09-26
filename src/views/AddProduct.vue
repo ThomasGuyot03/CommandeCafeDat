@@ -13,9 +13,9 @@
       <!-- Prix du produit -->
       <div class="field">
         <label class="label">Prix</label>
-        <div class="control">
+        <!-- <div class="control">
           <input v-model="product.price" class="input" type="number" placeholder="Prix du produit" min="0" required>
-        </div>
+        </div> -->
       </div>
 
       <!-- Description du produit -->
@@ -78,7 +78,7 @@ export default {
     async submitProduct() {
       const formData = new FormData();
       formData.append('title', this.product.title);
-      formData.append('price', this.product.price);
+      // formData.append('price', this.product.price);
       formData.append('description', this.product.description);
       formData.append('category', this.product.category);
       formData.append('image', this.product.image);

@@ -28,7 +28,7 @@
                     </div>
                     <div class="media-content">
                       <p class="card-title no-wrap">{{ product.name }}</p>
-                      <p class="subtitle is-6">{{ product.price }} €</p>
+                      <!-- <p class="subtitle is-6">{{ product.price }} €</p> -->
                     </div>
                   </div>
                   <div class="content">
@@ -116,7 +116,7 @@ export default {
       const itemData = {
         id: product._id,
         name: product.name,
-        price: product.price,
+        // price: product.price,
         quantity: 1,
       }
       let products = this.getCart.products
@@ -138,6 +138,7 @@ export default {
         const params = {
           page: this.currentPage,
           limit: this.itemsLimit
+          
         }
 
         for (const filterKey in this.filters) {

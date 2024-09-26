@@ -79,6 +79,11 @@ const routes = [
         path: 'utilisateurs',
         name: 'GestionUtilisateurs',
         component: () => import('@/views/GestionUtilisateurs.vue')
+      },
+      {
+        path: 'graphique',
+        name: 'GestionGraphique',
+        component: () => import('@/views/GestionGraphique.vue')
       }
     ]
   }
