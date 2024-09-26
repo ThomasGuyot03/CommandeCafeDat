@@ -17,7 +17,7 @@
         <tr v-for="order in orders" :key="order._id">
           <td>{{ order.user.name }}</td>
           <td>{{ order.user.email }}</td>
-          <td>{{ order.user.address }}</td>
+          <td>{{ formatAddress(order.user.address) }}</td>
           <td>
             <ul>
               <li v-for="product in order.products" :key="product._id">
@@ -26,13 +26,11 @@
             </ul>
           </td>
           <td>{{ formatDate(order.createdAt) }}</td>
-          <!-- Ajouter le bouton d'impression dans chaque ligne -->
           <td>
             <button @click="printBL(order)" class="button is-info">
               <i class="fas fa-print icon-space"></i>  BL
             </button>
           </td>
-
         </tr>
       </tbody>
     </table>
@@ -64,62 +62,67 @@ export default {
       const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
       return new Date(date).toLocaleDateString('fr-FR', options);
     },
-    // Méthode pour gérer l'impression du bon de livraison
+    formatAddress(address) {
+      if (!address) return ''; // Vérifie si l'adresse existe
+      return `${address.line}, ${address.zip_code} ${address.city}`; // Formate l'adresse
+    },
     printBL(order) {
-  console.log('Impression du BL pour la commande:', order);
-
-  const printWindow = window.open('', '_blank');
-  printWindow.document.write(`
-    <html>
-      <head>
-        <title>Bon de livraison</title>
-        <style>
-          body { font-family: Arial, sans-serif; margin: 20px; }
-          h1 { color: #333; }
-          table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-          table, th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
-          th { background-color: #f2f2f2; }
-          .logo { width: 150px; margin-bottom: 20px; } /* Ajuste la taille du logo */
-        </style>
-      </head>
-      <body>
-        <img src="../images/1.png" alt="Logo de l'entreprise" class="logo" />        
-        <h1>Bon de livraison</h1>
-        <p><strong>Client:</strong> ${order.user.name}</p>
-        <p><strong>Email:</strong> ${order.user.email}</p>
-        <p><strong>Adresse:</strong> ${order.user.address}</p>
-        <p><strong>Date de commande:</strong> ${this.formatDate(order.createdAt)}</p>
-        <h2>Produits commandés</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Produit</th>
-              <th>Quantité</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${order.products.map(product => `
-              <tr>
-                <td>${product.name}</td>
-                <td>${product.quantity}</td>
-              </tr>
-            `).join('')}
-          </tbody>
-        </table>
-      </body>
-    </html>
-  `);
-  printWindow.document.close();
-  printWindow.focus();
-  printWindow.print();
-}
-
+      console.log('Impression du BL pour la commande:', order);
+      const printWindow = window;
+      printWindow.document.write(`
+        <html>
+          <head>
+            <title>Bon de livraison</title>
+            <style>
+              body { font-family: Arial, sans-serif; margin: 20px; }
+              h1 { color: #333; }
+              table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+              table, th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+              th { background-color: #f2f2f2; }
+              .logo { width: 150px; margin-bottom: 20px; }
+            </style>
+          </head>
+          <body>
+            <img src="../images/1.png" alt="Logo de l'entreprise" class="logo" />        
+            <h1>Bon de livraison</h1>
+            <p><strong>Client:</strong> ${order.user.name}</p>
+            <p><strong>Email:</strong> ${order.user.email}</p>
+            <p><strong>Adresse:</strong> ${this.formatAddress(order.user.address)}</p>
+            <p><strong>Date de commande:</strong> ${this.formatDate(order.createdAt)}</p>
+            <h2>Produits commandés</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Produit</th>
+                  <th>Quantité</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${order.products.map(product => `
+                  <tr>
+                    <td>${product.name}</td>
+                    <td>${product.quantity}</td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </body>
+        </html>
+      `);
+      // printWindow.document.close();
+      // printWindow.focus();
+      printWindow.print();
+    },
   },
   mounted() {
     this.fetchOrders();
   }
 }
 </script>
+
+<style scoped>
+/* styles existants ici */
+</style>
 
 
 <style scoped>

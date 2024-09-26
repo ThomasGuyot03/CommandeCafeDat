@@ -10,13 +10,6 @@
         </div>
       </div>
 
-      <!-- <div class="field">
-        <label class="label">Prix</label>
-        <div class="control">
-          <input v-model="product.price" class="input" type="number" placeholder="Prix du produit" min="0" required>
-        </div>
-      </div> -->
-
       <!-- Description du produit -->
       <div class="field">
         <label class="label">Description</label>
@@ -62,7 +55,6 @@ export default {
     return {
       product: {
         title: '',
-        // price: '',
         description: '',
         category: '',
         image: null
@@ -76,21 +68,18 @@ export default {
     },
     async submitProduct() {
       const formData = new FormData();
-      formData.append('title', this.product.title);
-      // formData.append('price', this.product.price);
+      formData.append('name', this.product.title); // Renommé en 'name'
       formData.append('description', this.product.description);
       formData.append('category', this.product.category);
-      formData.append('image', this.product.image);
+      formData.append('accountId', this.$appConfig.accountId);
+      formData.append('image', this.product.image); // Ajout de l'image
 
       try {
-        const params = {
-          name: this.product.title,
-          // price: this.product.price,
-          description: this.product.description,
-          category: this.product.category,
-          accountId: this.$appConfig.accountId
-        };
-        const response = await this.$http.post('/products/create', params);
+        const response = await this.$http.post('/products/create', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        });
         if (response.status === 201) {
           this.showToast('success', 'Produit ajouté');
           this.$router.push('/');

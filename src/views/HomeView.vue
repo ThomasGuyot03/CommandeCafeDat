@@ -20,7 +20,7 @@
             <div v-for="(product, index) in products" :key="index" class="column is-one-quarter is-4-tablet is-4-desktop is-3-widescreen">
               <div class="card text-align-center">
                 <div class="card-image">
-                  <a href='https://postimg.cc/NyZs9pQG' target='_blank'><img src='https://i.postimg.cc/NyZs9pQG/48-capsules-espresso-vivace-1.jpg' border='0' alt='48-capsules-espresso-vivace-1'/></a > 
+                  <a href='' target='_blank'><img :src="product.picture" border='0' alt='48-capsules-espresso-vivace-1'/></a > 
                 </div>
                 <div class="card-content">
                   <div class="media">
