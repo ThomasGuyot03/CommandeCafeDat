@@ -14,7 +14,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="order in orders" :key="order._id">
+        <tr v-for="order in paginatedOrders()" :key="order._id">
           <td>{{ order.user.name }}</td>
           <td>{{ order.user.email }}</td>
           <td>{{ formatAddress(order.user.address) }}</td>
@@ -28,7 +28,7 @@
           <td>{{ formatDate(order.createdAt) }}</td>
           <td>
             <button @click="printBL(order)" class="button is-info">
-              <i class="fas fa-print icon-space"></i>  BL
+              <i class="fas fa-print icon-space"></i> BL
             </button>
           </td>
         </tr>
@@ -36,6 +36,23 @@
     </table>
 
     <div v-else class="loading-indicator">Chargement...</div>
+    <div v-if="totalPages > 1" class="pagination">
+      <button
+        :disabled="currentPage === 1"
+        @click="currentPage--"
+        class="button is-light"
+      >
+        Précédent
+      </button>
+      <span>Page {{ currentPage }} sur {{ totalPages }}</span>
+      <button
+        :disabled="currentPage === totalPages"
+        @click="currentPage++"
+        class="button is-light"
+      >
+        Suivant
+      </button>
+    </div>
   </div>
 </template>
 
@@ -45,7 +62,10 @@ import axios from 'axios'
 export default {
   data() {
     return {
-      orders: []
+      orders: [],          
+      currentPage: 1,      
+      itemsPerPage: 10,    
+      totalPages: 0        
     }
   },
   methods: {
@@ -53,18 +73,24 @@ export default {
       try {
         const response = await axios.get('/orders');
         this.orders = response.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-        console.log('Données reçues du serveur:', response.data); 
+        this.totalPages = Math.ceil(this.orders.length / this.itemsPerPage); // Calcul du nombre total de pages
+        console.log('Données reçues du serveur:', response.data);
       } catch (error) {
         console.error('Erreur lors de la récupération des commandes:', error);
       }
+    },
+    paginatedOrders() {
+      const start = (this.currentPage - 1) * this.itemsPerPage;
+      const end = start + this.itemsPerPage;
+      return this.orders.slice(start, end);
     },
     formatDate(date) {
       const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
       return new Date(date).toLocaleDateString('fr-FR', options);
     },
     formatAddress(address) {
-      if (!address) return ''; // Vérifie si l'adresse existe
-      return `${address.line}, ${address.zip_code} ${address.city}`; // Formate l'adresse
+      if (!address) return ''; 
+      return `${address.line}, ${address.zip_code} ${address.city}`; 
     },
     printBL(order) {
       console.log('Impression du BL pour la commande:', order);
@@ -109,27 +135,16 @@ export default {
           </body>
         </html>
       `);
-      // printWindow.document.close();
-      // printWindow.focus();
       printWindow.print();
-    },
+    }
   },
   mounted() {
-    this.fetchOrders();
+    this.fetchOrders(); 
   }
 }
 </script>
 
 <style scoped>
-/* styles existants ici */
-</style>
-
-
-<style scoped>
-body {
-  font-family: 'Arial', sans-serif;
-}
-
 .title {
   text-align: center;
   font-size: 1.5rem;
@@ -146,17 +161,31 @@ body {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
-  margin-left: 50px; /* Décale le tableau vers la droite */
+  margin-left: 50px; 
   margin-right: auto;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .icon-space {
-  margin-right: 8px; /* Ajoute un espace de 8px entre l'icône et le texte */
+  margin-right: 8px;
 }
 
+/* Pagination styles */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
 
-/* Responsivité : adaptation aux petits écrans */
+.button.is-light {
+  margin: 0 5px;
+}
+
+.pagination span {
+  margin: 0 10px;
+  font-size: 1rem;
+}
+
 @media screen and (max-width: 768px) {
   .table {
     font-size: 0.9rem;
@@ -200,7 +229,6 @@ body {
   }
 }
 
-/* Styles généraux */
 .table th, .table td {
   border: 1px solid #ddd;
   padding: 12px;
@@ -223,12 +251,12 @@ body {
 
 /* Boutons */
 .button.is-primary {
-  background-color: #3273dc; /* Couleur bleue */
+  background-color: #3273dc; 
   color: white;
   border-radius: 5%;
 }
 
 .button.is-primary:hover {
-  background-color: #276cda; /* Bleue plus foncée au hover */
+  background-color: #276cda; 
 }
 </style>

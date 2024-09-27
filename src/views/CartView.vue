@@ -36,31 +36,32 @@
     </section>
     
     <section class="section">
-      <h2 class="title">Produits Suggérés</h2>
-      <div class="columns is-multiline">
-        <div v-for="(product, index) in suggestedProducts" :key="index" class="column is-one-quarter is-4-tablet is-4-desktop is-3-widescreen">
-          <div class="card text-align-center">
-            <div class="card-image">
-              <a href='https://postimg.cc/NyZs9pQG' target='_blank'><img src='https://i.postimg.cc/NyZs9pQG/48-capsules-espresso-vivace-1.jpg' border='0' alt='48-capsules-espresso-vivace-1'/></a > 
-              </div>
-            <div class="card-content">
-              <p class="card-title no-wrap">{{ product.name }}</p>
-              <div class="content">
-                {{ product.description }}
-                <br>
-              </div>
-              <div class="columns reverse">
-                <div class="column">
-                  <button class="button is-primary" @click="addItem(product)">
-                    <i class="fas fa-shopping-basket"></i> Ajouter au panier
-                  </button>
-                </div>
-              </div>
+  <h2 class="title">Produits Suggérés</h2>
+  <div class="columns is-multiline">
+    <div v-for="(product, index) in suggestedProducts" :key="index" class="column is-one-quarter is-4-tablet is-4-desktop is-3-widescreen">
+      <div class="card text-align-center">
+        <div class="card-image">
+          <a href='' target='_blank'><img :src="product.picture || defaultImage" border='0' alt='Image du produit'/></a> 
+        </div>
+        <div class="card-content">
+          <p class="card-title no-wrap">{{ product.name }}</p>
+          <div class="content">
+            {{ product.description }}
+            <br>
+          </div>
+          <div class="columns reverse">
+            <div class="column">
+              <button class="button is-primary" @click="addItem(product)">
+                <i class="fas fa-shopping-basket"></i> Ajouter au panier
+              </button>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
+
   </div>
 </template>
 
@@ -85,13 +86,14 @@ export default {
     await this.checkProductsInCart();
     await this.init();
     await this.getAllProducts();
-    this.getRandomProducts();
   },
   methods: {
     async getAllProducts() {
       try {
         const response = await this.$http.get('/products');
         this.allProducts = response.data.products;
+        console.log('Produits récupérés :', this.allProducts); // Ajoutez ceci pour vérifier
+        this.getRandomProducts();  // Appel de getRandomProducts après avoir récupéré les produits
       } catch (error) {
         console.error('Erreur lors de la récupération des produits:', error);
       }
@@ -99,7 +101,8 @@ export default {
     
     getRandomProducts() {
       const shuffled = this.allProducts.sort(() => 0.5 - Math.random());
-      this.suggestedProducts = shuffled.slice(0, 3);
+      this.suggestedProducts = shuffled.slice(0, 3); // Récupération de trois produits aléatoires
+      console.log('Produits suggérés (aléatoires) :', this.suggestedProducts); // Ajoutez ceci pour vérifier
     },
 
     async init() {
@@ -158,6 +161,7 @@ export default {
   }
 }
 </script>
+
 
 
 <style scoped>

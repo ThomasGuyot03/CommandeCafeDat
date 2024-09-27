@@ -1,67 +1,64 @@
 <template>
-  <nav class="navbar" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-      <a href="#" target="_blank">
-        <img src="https://i.postimg.cc/CdFtCbdw/1.png" border="0" alt="1" />
-      </a>
-      <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
+  <nav class="sidebar">
+    <div class="sidebar-brand">
+      <a href="#" target="_blank" class="sidebar-logo">
+        <img src="https://i.postimg.cc/CdFtCbdw/1.png" border="0" alt="Logo" />
       </a>
     </div>
-    <div class="navbar-menu" id="navMenu">
-      <div class="navbar-start">
-        <a class="navbar-item has-text-is-light">
-          <router-link class="button" to="/"><strong>Accueil</strong></router-link>
+
+    <ul class="sidebar-menu">
+      <li>
+        <router-link class="sidebar-item" to="/">
+          <i class="fas fa-home"></i>
+          <span>Accueil</span>
+        </router-link>
+      </li>
+      <li>
+        <router-link class="button" to="/panier" style="position: relative;">
+        <i class="fas fa-shopping-basket"></i>
+        <span class="cart-badge">{{ cartItemsCount }}</span>
+      </router-link>
+
+      </li>
+
+      <li v-if="!getUser">
+        <router-link class="sidebar-item" to="/signup">
+          <i class="fas fa-user-plus"></i>
+          <span>Inscription</span>
+        </router-link>
+        <router-link class="sidebar-item" to="/login">
+          <i class="fas fa-sign-in-alt"></i>
+          <span>Connexion</span>
+        </router-link>
+      </li>
+
+      <li v-else>
+        <router-link class="sidebar-item" to="/profil">
+          <i class="fas fa-user"></i>
+          <span>Profil</span>
+        </router-link>
+        <a class="sidebar-item" @click="logout">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Déconnexion</span>
         </a>
-      </div>
-      <div class="navbar-end">
-        <div class="navbar-item">
-          <div class="buttons">
-            <div v-if="!getUser">
-              <router-link class="button" to="/signup">
-                <strong>Inscription</strong>
-              </router-link>
-              <router-link class="button" to="/login">
-                <strong>Connexion</strong>
-              </router-link>
-              <router-link class="button" to="/panier">
-                <strong><i class="fas fa-shopping-basket"></i> Panier</strong>
-                <span class="cart-badge">{{ cartItemsCount }}</span>
-              </router-link>
-            </div>
-            <div v-else>
-              <router-link class="button" to="/profil">
-                <strong>Profil</strong>
-              </router-link>
-              <div class="button" @click="logout">
-                <strong>Déconnexion</strong>
-              </div>
-              <router-link class="button" to="/panier">
-                <strong><i class="fas fa-shopping-basket"></i></strong>
-                <span class="cart-badge">{{ cartItemsCount }}</span>
-              </router-link>
 
-              <!-- Bouton visible uniquement pour les admins -->
-              <router-link v-if="getUser.isAdmin" class="button has-border" to="/ajouter-produit">
-                <strong>Ajouter un produit</strong>
-              </router-link>
+        <router-link v-if="getUser.isAdmin" class="sidebar-item" to="/ajouter-produit">
+          <i class="fas fa-plus"></i>
+          <span>Ajouter produit</span>
+        </router-link>
 
-              <!-- Nouveau bouton "Gestion" visible uniquement pour les admins -->
-              <router-link v-if="getUser.isAdmin" class="button has-border" to="/gestion">
-                <strong>Gestion</strong>
-              </router-link>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+        <router-link v-if="getUser.isAdmin" class="sidebar-item" to="/gestion">
+          <i class="fas fa-cogs"></i>
+          <span>Gestion</span>
+        </router-link>
+      </li>
+    </ul>
   </nav>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+
 export default {
   computed: {
     ...mapGetters(['getUser', 'cartItemsCount']),
@@ -75,20 +72,86 @@ export default {
 }
 </script>
 
-
 <style scoped>
-.has-border {
-  border-color: #dadada; 
-  border-width: 1px; 
-  border-style: solid;
+/* Style pour la sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 220px;
+  height: 100%;
+  background-color: #303649;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.sidebar-logo {
+  width: 120px;
+  margin-bottom: 30px;
+}
+
+.sidebar-menu {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.sidebar-item {
+  width: 100%;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  text-decoration: none;
+  transition: background-color 0.3s;
+  font-size: 16px;
+}
+
+.sidebar-item:hover {
+  background-color: #575757;
+}
+
+.sidebar-item i {
+  margin-right: 10px;
+}
+
+.sidebar-item span {
+  flex-grow: 1;
 }
 
 .cart-badge {
-  background-color: #ff3860;
-  border-radius: 50%;
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #ff3860; /* Une couleur vive, tu peux changer selon ton thème */
   color: white;
-  padding: 0 5px;
-  margin-left: 5px;
-}
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 4px 6px;
+  border-radius: 50%; /* Rendre la pastille ronde */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 20px;
+  min-height: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Ajout d'une ombre légère */
+  z-index: 1; /* Pour la mettre au-dessus de l'icône */
+};
 
+/* Responsivité pour rendre la barre de navigation rétractable (optionnel) */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 80px;
+  }
+  .sidebar-item span {
+    display: none;
+  }
+  .sidebar-logo {
+    width: 40px;
+  }
+}
 </style>

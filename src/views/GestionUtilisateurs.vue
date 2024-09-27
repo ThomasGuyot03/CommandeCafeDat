@@ -36,7 +36,7 @@
           <div class="client-info">
             <p><strong>Prénom:</strong> {{ selectedUser.firstname }}</p>
             <p><strong>Nom:</strong> {{ selectedUser.name }}</p>
-            <p><strong>Adresse:</strong> {{ selectedUser.address }}</p>
+            <p><strong>Adresse:</strong> {{ selectedUser.address.line }}</p>
             <p><strong>Société:</strong> {{ selectedUser.company }}</p>
             <p><strong>Email:</strong> {{ selectedUser.email }}</p>
             <p><strong>Téléphone:</strong> {{ selectedUser.phone }}</p>
