@@ -14,11 +14,10 @@
         </router-link>
       </li>
       <li>
-        <router-link class="button" to="/panier" style="position: relative;">
-        <i class="fas fa-shopping-basket"></i>
-        <span class="cart-badge">{{ cartItemsCount }}</span>
-      </router-link>
-
+        <router-link class="button sidebar-cart-button" to="/panier" style="position: relative;">
+          <i class="fas fa-shopping-basket"></i>
+          <span class="cart-badge">{{ cartItemsCount }}</span>
+        </router-link>
       </li>
 
       <li v-if="!getUser">
@@ -102,13 +101,13 @@ export default {
 
 .sidebar-item {
   width: 100%;
-  padding: 15px 20px;
+  padding: 20px; /* Augmenter la taille du padding */
   display: flex;
   align-items: center;
   color: #fff;
   text-decoration: none;
   transition: background-color 0.3s;
-  font-size: 16px;
+  font-size: 18px; /* Augmenter la taille de la police */
 }
 
 .sidebar-item:hover {
@@ -121,6 +120,15 @@ export default {
 
 .sidebar-item span {
   flex-grow: 1;
+}
+
+.sidebar-cart-button {
+  padding: 15px 20px; /* Ajuster les dimensions pour le bouton panier */
+  background-color: #475057; /* Couleur de fond pour le bouton panier */
+  color: white; /* Couleur du texte */
+  border: none; /* Pas de bordure */
+  border-radius: 5px; /* Bords arrondis */
+  text-align: center; /* Centre le contenu */
 }
 
 .cart-badge {
@@ -140,7 +148,7 @@ export default {
   min-height: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Ajout d'une ombre légère */
   z-index: 1; /* Pour la mettre au-dessus de l'icône */
-};
+}
 
 /* Responsivité pour rendre la barre de navigation rétractable (optionnel) */
 @media (max-width: 768px) {

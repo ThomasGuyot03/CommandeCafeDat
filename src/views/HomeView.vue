@@ -1,8 +1,8 @@
 <template>
-  <div class="home">
+  <div class="home page-padding">
     <h1 class="title">Produits</h1>
     <div class="notification is-light text-align-center">
-      Commandez le meilleur de notre café ! 
+      Commandez le meilleur de notre café! 
     </div>
     <div v-if="loading" class="loading-indicator text-align-center">
       <i class="fas fa-spinner fa-spin"></i> Chargement en cours...
@@ -20,7 +20,7 @@
             <div v-for="(product, index) in products" :key="index" class="column is-one-quarter is-4-tablet is-4-desktop is-3-widescreen">
               <div class="card text-align-center">
                 <div class="card-image">
-                  <a href='' target='_blank'><img :src="product.picture" border='0' alt='48-capsules-espresso-vivace-1'/></a > 
+                  <a href='' target='_blank'><img :src="product.picture" border='0' alt='48-capsules-espresso-vivace-1'/></a> 
                 </div>
                 <div class="card-content">
                   <div class="media">
@@ -38,15 +38,14 @@
                   <div class="columns reverse">
                     <div class="column">
                       <button 
-                        class="button is-primary"
-                        @click="addItem(product)"><i class="fas fa-shopping-basket"></i></button>
-                        <button
-                          v-if="getUser && getUser.isAdmin"
-                          class="button custom-edit-button"
-                          @click="openEditModal(product)">
-                          <i class="fas fa-edit"></i> Modifier
-                        </button>
-
+                      class="button custom-add-to-cart-button" 
+                      @click="addItem(product)"><i class="fas fa-shopping-basket"></i></button>
+                      <button
+                        v-if="getUser && getUser.isAdmin"
+                        class="button custom-edit-button"
+                        @click="openEditModal(product)">
+                        <i class="fas fa-edit"></i> Modifier
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -84,7 +83,7 @@ export default {
   data() {
     return {
       loading: true,
-      service:'products',
+      service: 'products',
       itemsLimit: 10,
       products: null,
       currentPage: 1,
@@ -138,7 +137,6 @@ export default {
         const params = {
           page: this.currentPage,
           limit: this.itemsLimit
-          
         }
 
         for (const filterKey in this.filters) {
@@ -151,7 +149,7 @@ export default {
             }
           }
         }
-        const result = await this.$http.get('/products', { params: {accountId:this.$appConfig.accountId} })
+        const result = await this.$http.get('/products', { params: { accountId: this.$appConfig.accountId } })
         console.log(result)
         const { products, totalItems, totalPages } = result.data
         this.products = products
@@ -175,6 +173,10 @@ export default {
 </script>
 
 <style>
+.page-padding {
+  padding-top: 50px; /* Ajustez la valeur selon vos besoins */
+}
+
 .card {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
@@ -205,6 +207,17 @@ export default {
   background-color: #a8a8a8;
   color: white;
 }
+
+.button.custom-add-to-cart-button {
+  background-color: #4f4f4f; /* Couleur de la sidebar */
+  color: white;
+  border: none; /* Pas de bordure */
+}
+
+.button.custom-add-to-cart-button:hover {
+  background-color: #cfcfcf; /* Couleur légèrement plus sombre au hover */
+}
+
 
 .button.is-primary:hover {
   background-color: #a5a5a5;
@@ -239,4 +252,5 @@ export default {
   align-items: center;
   height: 100px;
   font-size: 1.5rem;
-}</style>
+}
+</style>

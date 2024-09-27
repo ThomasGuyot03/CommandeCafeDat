@@ -42,10 +42,8 @@
 
   <style scoped>
 .footer {
-  background-color: #333;
+  background-color: #303649;
   color: #fff;
-  padding: 20px 0;
-  text-align: center;
 }
 
 .footer-content {
