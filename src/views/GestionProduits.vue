@@ -111,7 +111,6 @@ body {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
-  margin-left: 50px; /* Décale le tableau vers la droite */
   margin-right: auto;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
@@ -147,6 +146,7 @@ body {
     border: none;
     border-bottom: 1px solid #ddd;
     position: relative;
+    vertical-align: middle; /* Centrer verticalement */
   }
 
   .table td::before {
@@ -161,6 +161,7 @@ body {
   .table td:last-child {
     text-align: right;
     border-bottom: 0;
+    text-align: center; /* Centrer horizontalement */
   }
 }
 
@@ -187,11 +188,17 @@ body {
 
 /* Boutons */
 .button.is-info {
-  background-color: #3273dc; /* Couleur bleue */
+  background-color: #303649; /* Couleur bleue */
   color: white;
 }
 
 .button.is-info:hover {
-  background-color: #276cda; /* Bleue plus foncée au hover */
+  background-color: #8d8d8d; /* Bleue plus foncée au hover */
+}
+
+.table td:last-child button {
+  display: inline-block;
+  margin: auto;
+  vertical-align: middle; /* Centrage vertical */
 }
 </style>

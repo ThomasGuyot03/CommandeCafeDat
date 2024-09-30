@@ -122,7 +122,6 @@ body {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px; 
-  margin-left: 50px;
   margin-right: 5%;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); 
 }

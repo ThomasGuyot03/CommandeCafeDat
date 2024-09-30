@@ -14,11 +14,13 @@
         </router-link>
       </li>
       <li>
-        <router-link class="button sidebar-cart-button" to="/panier" style="position: relative;">
+        <router-link class="sidebar-item" to="/panier" style="position: relative;">
           <i class="fas fa-shopping-basket"></i>
-          <span class="cart-badge">{{ cartItemsCount }}</span>
+          <span>Panier</span>
+          <span class="cart-badge" style="position: absolute; top: -10px; right: -10px; background-color: red; color: white; border-radius: 50%; padding: 2px 6px; font-size: 12px;">{{ cartItemsCount }}</span>
         </router-link>
       </li>
+
 
       <li v-if="!getUser">
         <router-link class="sidebar-item" to="/signup">
@@ -41,10 +43,11 @@
           <span>Déconnexion</span>
         </a>
 
-        <router-link v-if="getUser.isAdmin" class="sidebar-item" to="/ajouter-produit">
+        <router-link v-if="getUser.isAdmin" class="sidebar-item to-ajouter-produit" to="/ajouter-produit">
           <i class="fas fa-plus"></i>
           <span>Ajouter produit</span>
         </router-link>
+
 
         <router-link v-if="getUser.isAdmin" class="sidebar-item" to="/gestion">
           <i class="fas fa-cogs"></i>
@@ -135,7 +138,6 @@ export default {
   position: absolute;
   top: -8px;
   right: -8px;
-  background-color: #ff3860; /* Une couleur vive, tu peux changer selon ton thème */
   color: white;
   font-size: 0.75rem;
   font-weight: bold;
@@ -161,5 +163,12 @@ export default {
   .sidebar-logo {
     width: 40px;
   }
+}
+
+/* Trait blanc au-dessus du bouton "Ajouter produit" */
+.sidebar-item.to-ajouter-produit {
+  border-top: 4px solid white;
+  margin-top: 20px; /* Espacement entre le trait et l'élément du dessus */
+  padding-top: 20px; /* Ajoute de l'espace à l'intérieur du bouton */
 }
 </style>

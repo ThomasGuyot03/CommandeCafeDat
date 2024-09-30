@@ -1,8 +1,8 @@
 <template>
   <div class="home page-padding">
-    <h1 class="title">Produits</h1>
+    <h1 class="title">Accueil</h1>
     <div class="notification is-light text-align-center">
-      Commandez le meilleur de notre café! 
+      Commandez le meilleur de notre café ! 
     </div>
     <div v-if="loading" class="loading-indicator text-align-center">
       <i class="fas fa-spinner fa-spin"></i> Chargement en cours...
@@ -27,7 +27,7 @@
                     <div class="media-left">
                     </div>
                     <div class="media-content">
-                      <p class="card-title no-wrap">{{ product.name }}</p>
+                      <p class="card-title no-wrap is-size-6 custom-title-size">{{ product.name }}</p>
                       <!-- <p class="subtitle is-6">{{ product.price }} €</p> -->
                     </div>
                   </div>
@@ -174,7 +174,11 @@ export default {
 
 <style>
 .page-padding {
-  padding-top: 50px; /* Ajustez la valeur selon vos besoins */
+  padding-top: 50px; 
+}
+
+.custom-title-size {
+  font-size: 14px 
 }
 
 .card {
@@ -182,11 +186,12 @@ export default {
   border-radius: 10px;
   transition: transform 0.3s ease-in-out;
   border: grey 1px solid;
+  min-width: 220px; /* Ajustez cette valeur selon vos besoins */
 }
 
 .card-title {
-  font-size: 1.25rem; /* Ajustez la taille selon vos préférences */
-  font-weight: bold; /* Pour un titre plus audacieux */
+  font-size: 1.25rem; 
+  font-weight: bold; 
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -251,6 +256,6 @@ export default {
   justify-content: center;
   align-items: center;
   height: 100px;
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 </style>

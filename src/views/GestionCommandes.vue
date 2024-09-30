@@ -161,7 +161,6 @@ export default {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
-  margin-left: 50px; 
   margin-right: auto;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
