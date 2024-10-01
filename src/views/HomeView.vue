@@ -16,8 +16,8 @@
     </div>
     <div v-else>
       <div class="columns">
-        <div class="columns is-multiline ">
-          <div v-for="(product, index) in products" 
+        <div class="columns is-multiline">
+  <div v-for="(product, index) in products" 
        :key="index" 
        class="column is-one-quarter-desktop is-one-third-tablet is-half-mobile">
     <div class="card text-align-center">
@@ -207,33 +207,22 @@ export default {
   padding: 15px;
 }
 
-/* Colonnes des cartes produits */
 .columns.is-multiline {
   display: flex;
   justify-content: center; /* Centre les cartes horizontalement */
   flex-wrap: wrap; /* Permet aux cartes de se renvoyer à la ligne */
-  gap: 0px; /* Supprime tout espacement par défaut entre les cartes */
-  margin: 0; /* Supprime toute marge externe */
-  padding: 0; /* Supprime tout padding externe */
-}
-
-/* Colonnes sur mobile */
-.column.is-half-mobile {
-  flex: 0 0 50%; /* Chaque carte prend 50% de la largeur sur mobile */
-  max-width: 100%; /* Assure que les cartes prennent toute la largeur disponible */
-  padding-left: 0; /* Supprime le padding à gauche des colonnes */
-  padding-right: 0; /* Supprime le padding à droite des colonnes */
+  gap: 0px; /* Espacement entre les cartes */
 }
 
 /* Responsive design */
 @media (max-width: 768px) {
   .column.is-half-mobile {
-    max-width: 40%; /* Assure que les cartes prennent bien 50% de la largeur */
+    flex: 0 0 50%; /* Chaque carte prend 50% de la largeur, donc deux cartes par ligne */
+    max-width: 35%;
   }
 
   .card {
-    min-width: 100%; /* Assure que chaque carte utilise bien toute la largeur disponible */
-    margin: 0 auto; /* Centre chaque carte horizontalement */
+    min-width: 150px; /* Réduction de la largeur minimale sur mobile */
   }
 
   .card-title {
@@ -242,7 +231,14 @@ export default {
 
   .columns.is-multiline {
     gap: 10px; /* Réduction de l'espacement entre les cartes sur mobile */
-    justify-content: center; /* Centre les cartes */
+  }
+
+  .button {
+    font-size: 0.875rem; /* Réduction de la taille des boutons sur mobile */
+  }
+
+  .content {
+    font-size: 0.85rem; /* Réduction de la taille du texte des descriptions */
   }
 }
 
@@ -280,4 +276,10 @@ export default {
   background-color: #9e9e9e;
 }
 
+  .columns.is-multiline {
+    justify-content: center; 
+    gap: 10px;
+  }
+
+  
 </style>
