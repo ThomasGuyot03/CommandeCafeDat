@@ -18,18 +18,19 @@
         </div>
       </div>
 
-      <!-- Catégorie du produit -->
-      <div class="field">
-        <label class="label">Catégorie</label>
-        <div class="control">
-          <div class="select is-fullwidth">
-            <select v-model="product.category" required>
-              <option value="" disabled selected>Sélectionnez une catégorie</option>
-              <option v-for="cat in categories" :key="cat" :value="cat">{{ cat }}</option>
-            </select>
+        <!-- Catégorie du produit -->
+        <div class="field">
+          <label class="label">Catégorie</label>
+          <div class="control">
+            <div class="select is-fullwidth">
+              <select v-model="product.category" required>
+                <option value="" disabled selected>Sélectionnez une catégorie</option>
+                <option v-for="cat in categories" :key="cat.id" :value="cat.id">{{ cat.name }}</option>
+              </select>
+            </div>
           </div>
         </div>
-      </div>
+
 
       <!-- Image du produit -->
       <div class="field">
@@ -59,7 +60,13 @@ export default {
         category: '',
         image: null
       },
-      categories: ['Café', 'Thé', 'Lait', 'Toppin'] 
+      categories: [
+                    { id: 1, name: 'Café' },
+                    { id: 2, name: 'Thé' },
+                    { id: 3, name: 'Lait' },
+                    { id: 4, name: 'Cappuccino' },
+                    { id: 5, name: 'Accessoires' }
+                  ]
     }
   },
   methods: {

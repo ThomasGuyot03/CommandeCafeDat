@@ -42,7 +42,7 @@ if (domain === 'thomasguyot.local') {
     theme: 'light',
     accountId:'66e964aec8bf10e1ef23bb9a'
   };
-} else if (domain === 'guillaumeleger.local') {
+} else if (domain === 'lustrous-mermaid-d4bf0c.netlify.app') {
   // Configurations spécifiques pour example2.local
   app.config.globalProperties.$appConfig = {
     theme: 'dark',
