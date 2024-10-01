@@ -203,7 +203,6 @@ export default {
   max-width: 100%;
 }
 
-
 .card-content {
   padding: 15px;
 }

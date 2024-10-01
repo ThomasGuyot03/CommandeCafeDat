@@ -9,13 +9,13 @@
 
       <ul class="sidebar-menu">
         <li>
-          <router-link class="sidebar-item" to="/">
+          <router-link class="sidebar-item" to="/" @click="toggleSidebar">
             <i class="fas fa-home"></i>
             <span>Accueil</span>
           </router-link>
         </li>
         <li>
-          <router-link class="sidebar-item" to="/panier" style="position: relative;">
+          <router-link class="sidebar-item" to="/panier" style="position: relative;" @click="toggleSidebar">
             <i class="fas fa-shopping-basket"></i>
             <span>Panier</span>
             <span class="cart-badge">{{ cartItemsCount }}</span>
@@ -23,32 +23,32 @@
         </li>
 
         <li v-if="!getUser">
-          <router-link class="sidebar-item" to="/signup">
+          <router-link class="sidebar-item" to="/signup" @click="toggleSidebar">
             <i class="fas fa-user-plus"></i>
             <span>Inscription</span>
           </router-link>
-          <router-link class="sidebar-item" to="/login">
+          <router-link class="sidebar-item" to="/login" @click="toggleSidebar">
             <i class="fas fa-sign-in-alt"></i>
             <span>Connexion</span>
           </router-link>
         </li>
 
         <li v-else>
-          <router-link class="sidebar-item" to="/profil">
+          <router-link class="sidebar-item" to="/profil" @click="toggleSidebar">
             <i class="fas fa-user"></i>
             <span>Profil</span>
           </router-link>
-          <a class="sidebar-item" @click="logout">
+          <a class="sidebar-item" @click="logout; toggleSidebar">
             <i class="fas fa-sign-out-alt"></i>
             <span>Déconnexion</span>
           </a>
 
-          <router-link v-if="getUser.isAdmin" class="sidebar-item to-ajouter-produit" to="/ajouter-produit">
+          <router-link v-if="getUser.isAdmin" class="sidebar-item to-ajouter-produit" to="/ajouter-produit" @click="toggleSidebar">
             <i class="fas fa-plus"></i>
             <span>Ajouter produit</span>
           </router-link>
 
-          <router-link v-if="getUser.isAdmin" class="sidebar-item" to="/gestion">
+          <router-link v-if="getUser.isAdmin" class="sidebar-item" to="/gestion" @click="toggleSidebar">
             <i class="fas fa-cogs"></i>
             <span>Gestion</span>
           </router-link>
@@ -62,7 +62,6 @@
     </button>
   </div>
 </template>
-
 
 <script>
 import { mapGetters } from 'vuex'
@@ -83,11 +82,11 @@ export default {
     logout() {
       localStorage.removeItem('token');
       this.$store.dispatch('updateUser', null);
+      this.toggleSidebar(); // Ferme la sidebar après déconnexion
     }
   }
 }
 </script>
-
 
 <style scoped>
 /* Style de base pour la sidebar */
@@ -198,6 +197,4 @@ export default {
   margin-top: 20px;
   padding-top: 20px;
 }
-
 </style>
-
