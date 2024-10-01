@@ -35,14 +35,15 @@ axios.interceptors.request.use(config => {
 const app = createApp(App)
 
 const domain = window.location.hostname;
+console.log('test domaine' ,domain)
 // Paramétrer l'application en fonction du domaine
-if (domain === 'thomasguyot.local') {
+if (domain === 'commandedat.netlify.app') {
   // Configurations spécifiques pour example1.local
   app.config.globalProperties.$appConfig = {
     theme: 'light',
     accountId:'66e964aec8bf10e1ef23bb9a'
   };
-} else if (domain === 'commandedat.netlify.app') {
+} else if (domain === 'thomasguyot.local') {
   // Configurations spécifiques pour example2.local
   app.config.globalProperties.$appConfig = {
     theme: 'dark',
