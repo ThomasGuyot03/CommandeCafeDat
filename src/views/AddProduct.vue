@@ -100,5 +100,33 @@ export default {
 </script>
 
 <style scoped>
-/* Plus besoin de beaucoup de CSS, Bulma gère la mise en page */
+
+.title {
+  margin-top: 30px; /* Ajustez cette valeur pour l'espacement souhaité */
+}
+
+/* Modifier la bordure des champs d'input, textarea, et select */
+.input, .textarea, .select select {
+  border: 2px solid #303649; /* Augmente la taille de la bordure à 2px et change la couleur en rouge */
+}
+
+.input:focus, .textarea:focus, .select select:focus {
+  border-color: rgb(75, 75, 75); /* Change la couleur à une teinte plus foncée lors du focus */
+  box-shadow: 0 0 5px rgba(180, 180, 180, 0.5); /* Ajoute une légère ombre rouge lors du focus */
+}
+
+.button.is-link {
+  background-color: #303649; /* Change la couleur du bouton de soumission à rouge */
+  border-color: rgb(0, 0, 0); /* Ajuste la couleur de la bordure du bouton */
+}
+
+.button.is-link:hover {
+  background-color: rgb(110, 110, 110); /* Couleur plus foncée lors du survol du bouton */
+}
+
+/* Ajustement des labels pour une meilleure visibilité */
+.label {
+  font-weight: bold;
+  color: #303649; /* Change la couleur des labels en rouge pour correspondre aux champs */
+}
 </style>
