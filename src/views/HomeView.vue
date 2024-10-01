@@ -199,9 +199,10 @@ export default {
 }
 
 .card-image img {
-  border-radius: 10px 10px 0 0;
-  max-width: 100%; 
+  border-radius: 8px; /* Applique un petit arrondi aux coins de l'image */
+  max-width: 100%;
 }
+
 
 .card-content {
   padding: 15px;
