@@ -6,26 +6,28 @@
     </div>
     <section class="section">
       <div v-if="getCart.products.length > 0" class="container">
-        <table class="table is-striped is-fullwidth">
-          <thead>
-            <tr>
-              <th>Produit</th>
-              <th>Quantité</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(product, index) in getCart.products" :key="index">
-              <td>{{ product.name }}</td>
-              <td>
-                <button class="button is-small" @click="decrementQuantity(product)">-</button>
-                {{ product.quantity }}
-                <button class="button is-small" @click="incrementQuantity(product)">+</button>
-              </td>
-              <td><button class="button is-danger is-small" @click="removeFromCart(product)">Supprimer</button></td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="table-container">
+          <table class="table is-striped is-fullwidth">
+            <thead>
+              <tr>
+                <th>Produit</th>
+                <th>Quantité</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(product, index) in getCart.products" :key="index">
+                <td>{{ product.name }}</td>
+                <td>
+                  <button class="button is-small" @click="decrementQuantity(product)">-</button>
+                  {{ product.quantity }}
+                  <button class="button is-small" @click="incrementQuantity(product)">+</button>
+                </td>
+                <td><button class="button is-danger is-small" @click="removeFromCart(product)">Supprimer</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
         <div class="content has-text-right">
           <button class="button is-success" @click="submitOrder">Commander</button>
         </div>
@@ -34,34 +36,34 @@
         <p class="title">Panier vide</p>
       </div>
     </section>
-    
+
+    <!-- Section des produits suggérés -->
     <section class="section">
-  <h2 class="title">Produits Suggérés</h2>
-  <div class="columns is-multiline">
-    <div v-for="(product, index) in suggestedProducts" :key="index" class="column is-one-quarter is-4-tablet is-4-desktop is-3-widescreen">
-      <div class="card text-align-center">
-        <div class="card-image">
-          <a href='' target='_blank'><img :src="product.picture || defaultImage" border='0' alt='Image du produit'/></a> 
-        </div>
-        <div class="card-content">
-          <p class="card-title no-wrap">{{ product.name }}</p>
-          <div class="content">
-            {{ product.description }}
-            <br>
-          </div>
-          <div class="columns reverse">
-            <div class="column">
-              <button class="button is-primary" @click="addItem(product)">
-                <i class="fas fa-shopping-basket"></i> Ajouter au panier
-              </button>
+      <h2 class="title">Produits Suggérés</h2>
+      <div class="columns is-multiline">
+        <div v-for="(product, index) in suggestedProducts" :key="index" class="column is-half-mobile is-one-third-tablet is-one-quarter-desktop">
+          <div class="card text-align-center">
+            <div class="card-image">
+              <a href='' target='_blank'><img :src="product.picture || defaultImage" border='0' alt='Image du produit'/></a>
+            </div>
+            <div class="card-content">
+              <p class="card-title no-wrap">{{ product.name }}</p>
+              <div class="content">
+                {{ product.description }}
+                <br>
+              </div>
+              <div class="columns reverse">
+                <div class="column">
+                  <button class="button is-primary" @click="addItem(product)">
+                    <i class="fas fa-shopping-basket"></i> Ajouter au panier
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
+    </section>
   </div>
 </template>
 
@@ -92,7 +94,6 @@ export default {
       try {
         const response = await this.$http.get('/products');
         this.allProducts = response.data.products;
-        console.log('Produits récupérés :', this.allProducts); // Ajoutez ceci pour vérifier
         this.getRandomProducts();  // Appel de getRandomProducts après avoir récupéré les produits
       } catch (error) {
         console.error('Erreur lors de la récupération des produits:', error);
@@ -102,7 +103,6 @@ export default {
     getRandomProducts() {
       const shuffled = this.allProducts.sort(() => 0.5 - Math.random());
       this.suggestedProducts = shuffled.slice(0, 3); // Récupération de trois produits aléatoires
-      console.log('Produits suggérés (aléatoires) :', this.suggestedProducts); // Ajoutez ceci pour vérifier
     },
 
     async init() {
@@ -162,9 +162,8 @@ export default {
 }
 </script>
 
-
-
 <style scoped>
+/* Styles de base */
 .button {
   background-color: #00d1b2;
   border-color: #00d1b2;
@@ -177,6 +176,36 @@ export default {
 }
 
 .card {
-  margin-top: 1rem; /* Ajoute un espace entre les cartes si nécessaire */
+  margin-top: 1rem;
+}
+
+/* Responsivité */
+@media (max-width: 768px) {
+  .table-container {
+    overflow-x: auto; /* Permet le défilement horizontal pour les petits écrans */
+  }
+  
+  .table {
+    white-space: nowrap; /* Empêche le tableau de se casser sur plusieurs lignes */
+  }
+
+  .button {
+    width: 100%; /* Les boutons prennent toute la largeur sur mobile */
+  }
+
+  .card {
+    margin-top: 1rem; /* Espace entre les cartes */
+  }
+
+  /* Cartes en disposition adaptée */
+  .columns.is-multiline {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .column {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
 }
 </style>
