@@ -1,82 +1,81 @@
 <template>
-    <div class="filters-container">
-      <label class="label">Catégorie:</label>
-      <div class="control">
-        <div class="buttons">
-          <button 
-            class="button custom-filter-button" 
-            :class="{ 'is-active': filters.category === '' }" 
-            @click="setCategory('')">
-            Tous
-          </button>
-          <button 
-            class="button custom-filter-button" 
-            :class="{ 'is-active': filters.category === '1' }" 
-            @click="setCategory('1')">
-            Café
-          </button>
-          <button 
-            class="button custom-filter-button" 
-            :class="{ 'is-active': filters.category === '2' }" 
-            @click="setCategory('2')">
-            Thé
-          </button>
-          <button 
-            class="button custom-filter-button" 
-            :class="{ 'is-active': filters.category === '3' }" 
-            @click="setCategory('3')">
-            Lait
-          </button>
-          <button 
-            class="button custom-filter-button" 
-            :class="{ 'is-active': filters.category === '4' }" 
-            @click="setCategory('4')">
-            Cappuccino
-          </button>
-          <button 
-            class="button custom-filter-button" 
-            :class="{ 'is-active': filters.category === '5' }" 
-            @click="setCategory('5')">
-            Accessoires
-          </button>
-        </div>
+  <div class="filters-container">
+    <label class="label">Catégorie:</label>
+    <div class="control">
+      <div class="buttons">
+        <button 
+          class="button custom-filter-button" 
+          :class="{ 'is-active': filters.category === '' }" 
+          @click="setCategory('')">
+          Tous
+        </button>
+        <button 
+          class="button custom-filter-button" 
+          :class="{ 'is-active': filters.category === '1' }" 
+          @click="setCategory('1')">
+          Café
+        </button>
+        <button 
+          class="button custom-filter-button" 
+          :class="{ 'is-active': filters.category === '2' }" 
+          @click="setCategory('2')">
+          Thé
+        </button>
+        <button 
+          class="button custom-filter-button" 
+          :class="{ 'is-active': filters.category === '3' }" 
+          @click="setCategory('3')">
+          Lait
+        </button>
+        <button 
+          class="button custom-filter-button" 
+          :class="{ 'is-active': filters.category === '4' }" 
+          @click="setCategory('4')">
+          Cappuccino
+        </button>
+        <button 
+          class="button custom-filter-button" 
+          :class="{ 'is-active': filters.category === '5' }" 
+          @click="setCategory('5')">
+          Accessoires
+        </button>
       </div>
     </div>
-  </template>
-  
-  <script>
-  import { debounce } from 'lodash'
-  export default {
-    props: ["initialFilters"],
-    data() {
-      return {
-        filters: this.initialFilters
-      }
+  </div>
+</template>
+
+<script>
+import { debounce } from 'lodash'
+export default {
+  props: ["initialFilters"],
+  data() {
+    return {
+      filters: this.initialFilters
+    }
+  },
+  methods: {
+    setCategory(category) {
+      this.filters.category = category;
+      this.updateFilters();
     },
-    methods: {
-      setCategory(category) {
-        this.filters.category = category;
-        this.updateFilters();
-      },
-      updateFilters() {
+    updateFilters() {
+      this.$emit('filters-changed', this.filters);
+    }
+  },
+  watch: {
+    'filters.minPrice': debounce(function (newVal, oldVal) {
+      if (newVal !== oldVal) {
         this.$emit('filters-changed', this.filters);
       }
-    },
-    watch: {
-      'filters.minPrice': debounce(function (newVal, oldVal) {
-        if (newVal !== oldVal) {
-          this.$emit('filters-changed', this.filters);
-        }
-      }, 500),
-      'filters.maxPrice': debounce(function (newVal, oldVal) {
-        if (newVal !== oldVal) {
-          this.$emit('filters-changed', this.filters);
-        }
-      }, 500),
-    },
-  }
-  </script>
-  
+    }, 500),
+    'filters.maxPrice': debounce(function (newVal, oldVal) {
+      if (newVal !== oldVal) {
+        this.$emit('filters-changed', this.filters);
+      }
+    }, 500),
+  },
+}
+</script>
 
 <style scoped>
 
@@ -129,10 +128,21 @@
   cursor: pointer;
 }
 
+/* Responsive styles for mobile */
 @media (max-width: 768px) {
+  .buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Trois boutons par ligne */
+    justify-items: center; /* Centrer les boutons horizontalement */
+    gap: 10px;
+    margin: 0 10px 0 10px;
+  }
+
   .button.custom-filter-button {
     font-size: 0.9rem; /* Réduire la taille du texte sur mobile */
     padding: 0.5rem 1rem; /* Ajuster le padding sur mobile */
+    min-width: unset; /* Supprime la largeur minimale pour un ajustement flexible */
+    width: 100%; /* Rendre les boutons responsive et flexibles */
   }
 
   .icon {
@@ -141,6 +151,4 @@
   }
 }
 
-
 </style>
-  

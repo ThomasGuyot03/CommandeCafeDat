@@ -218,7 +218,7 @@ export default {
 @media (max-width: 768px) {
   .column.is-half-mobile {
     flex: 0 0 50%; /* Chaque carte prend 50% de la largeur, donc deux cartes par ligne */
-    max-width: 40%;
+    max-width: 35%;
   }
 
   .card {
