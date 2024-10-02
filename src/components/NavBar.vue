@@ -9,13 +9,13 @@
 
       <ul class="sidebar-menu">
         <li>
-          <router-link class="sidebar-item" to="/">
+          <router-link class="sidebar-item" to="/" @click="closeSidebar">
             <i class="fas fa-home"></i>
             <span>Accueil</span>
           </router-link>
         </li>
         <li>
-          <router-link class="sidebar-item" to="/panier" style="position: relative;">
+          <router-link class="sidebar-item" to="/panier" style="position: relative;" @click="closeSidebar">
             <i class="fas fa-shopping-basket"></i>
             <span>Panier</span>
             <span class="cart-badge">{{ cartItemsCount }}</span>
@@ -23,18 +23,18 @@
         </li>
 
         <li v-if="!getUser">
-          <router-link class="sidebar-item" to="/signup">
+          <router-link class="sidebar-item" to="/signup" @click="closeSidebar">
             <i class="fas fa-user-plus"></i>
             <span>Inscription</span>
           </router-link>
-          <router-link class="sidebar-item" to="/login">
+          <router-link class="sidebar-item" to="/login" @click="closeSidebar">
             <i class="fas fa-sign-in-alt"></i>
             <span>Connexion</span>
           </router-link>
         </li>
 
         <li v-else>
-          <router-link class="sidebar-item" to="/profil">
+          <router-link class="sidebar-item" to="/profil" @click="closeSidebar">
             <i class="fas fa-user"></i>
             <span>Profil</span>
           </router-link>
@@ -43,12 +43,12 @@
             <span>Déconnexion</span>
           </a>
 
-          <router-link v-if="getUser.isAdmin" class="sidebar-item to-ajouter-produit" to="/ajouter-produit">
+          <router-link v-if="getUser.isAdmin" class="sidebar-item to-ajouter-produit" to="/ajouter-produit" @click="closeSidebar">
             <i class="fas fa-plus"></i>
             <span>Ajouter produit</span>
           </router-link>
 
-          <router-link v-if="getUser.isAdmin" class="sidebar-item" to="/gestion">
+          <router-link v-if="getUser.isAdmin" class="sidebar-item" to="/gestion" @click="closeSidebar">
             <i class="fas fa-cogs"></i>
             <span>Gestion</span>
           </router-link>
@@ -57,7 +57,7 @@
     </nav>
 
     <!-- Hamburger button for mobile -->
-    <button class="hamburger" @click="toggleSidebar">
+    <button class="hamburger" @click.stop="toggleSidebar">
       <i class="fas fa-bars"></i>
     </button>
   </div>
@@ -80,13 +80,31 @@ export default {
     toggleSidebar() {
       this.isSidebarActive = !this.isSidebarActive;
     },
+    closeSidebar() {
+      this.isSidebarActive = false;
+    },
+    handleClickOutside(event) {
+      const sidebar = this.$el.querySelector('.sidebar');
+      const hamburger = this.$el.querySelector('.hamburger');
+      if (sidebar && !sidebar.contains(event.target) && !hamburger.contains(event.target)) {
+        this.closeSidebar();
+      }
+    },
     logout() {
       localStorage.removeItem('token');
       this.$store.dispatch('updateUser', null);
+      this.closeSidebar();  // Ferme aussi la sidebar après déconnexion
     }
+  },
+  mounted() {
+    document.addEventListener('click', this.handleClickOutside);
+  },
+  beforeUnmount() {
+    document.removeEventListener('click', this.handleClickOutside);
   }
 }
 </script>
+
 
 
 <style scoped>
