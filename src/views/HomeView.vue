@@ -88,6 +88,7 @@
 <script>
 import { mapGetters } from "vuex";
 import EditProductModal from "./EditProductModal.vue";
+import { useToast } from "vue-toastification"; // Importez le toast ici
 
 export default {
   components: {
@@ -132,12 +133,17 @@ export default {
       };
       let products = this.getCart.products;
       let productAlreadyInCart = products.find((i) => i.id === product._id);
+      
       if (productAlreadyInCart) {
         productAlreadyInCart.quantity += itemData.quantity;
       } else {
         products.push(itemData);
       }
+
       this.$store.commit("updateToCart", { obj: products, source: "products" });
+
+      // Utilisation de la méthode showToast du mixin
+      this.showToast('success', `Le produit "${product.name}" a été ajouté au panier.`);
     },
     async getProducts(page) {
       if (page) {
@@ -191,9 +197,23 @@ export default {
         this.quantities[index]--;
       }
     },
+    showToast(type, message) {
+      const toast = useToast(); // Obtenez l'instance du toast
+      switch (type) {
+        case 'success':
+          toast.success(message, { timeout: 2000 });
+          break;
+        case 'error':
+          toast.error(message, { timeout: 2000 });
+          break;
+        default:
+          toast(message, { timeout: 2000 });
+      }
+    }
   },
 };
 </script>
+
 
 <style>
 
