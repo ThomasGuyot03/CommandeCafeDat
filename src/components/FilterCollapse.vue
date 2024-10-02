@@ -1,8 +1,9 @@
 <template>
   <div class="filters-container">
-    <label class="label">Catégorie:</label>
+    <h2 class="category-title">Catégorie</h2>
+
     <div class="control">
-      <div class="buttons">
+      <div class="buttons is-centered">
         <button 
           class="button custom-filter-button" 
           :class="{ 'is-active': filters.category === '' }" 
@@ -45,13 +46,13 @@
 </template>
 
 <script>
-import { debounce } from 'lodash'
+import { debounce } from 'lodash';
 export default {
   props: ["initialFilters"],
   data() {
     return {
-      filters: this.initialFilters
-    }
+      filters: this.initialFilters,
+    };
   },
   methods: {
     setCategory(category) {
@@ -60,7 +61,7 @@ export default {
     },
     updateFilters() {
       this.$emit('filters-changed', this.filters);
-    }
+    },
   },
   watch: {
     'filters.minPrice': debounce(function (newVal, oldVal) {
@@ -78,27 +79,27 @@ export default {
 </script>
 
 <style scoped>
-
 .filters-container {
   margin-bottom: 2rem;
 }
 
-.label {
-  font-size: 1.4rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
+.category-title {
+  text-align: center;
+  font-size: 1.6rem;
+  margin: 1rem 0;
 }
 
 .buttons {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  justify-content: center; /* Ajouté pour centrer les boutons */
 }
 
 .icon {
   margin-right: 10px;
   font-size: 1.2rem;
-  flex-shrink: 0; /* Empêche l'icône de se réduire */
+  flex-shrink: 0;
 }
 
 .button.custom-filter-button {
@@ -109,13 +110,13 @@ export default {
   padding: 0.75rem 1.5rem;
   border-radius: 8px;
   border: none;
-  display: inline-flex; /* Assure un alignement horizontal */
-  align-items: center; /* Aligne verticalement l'icône et le texte */
-  justify-content: center; /* Centrer le contenu */
-  min-width: 120px; /* Assure que les boutons ont une largeur suffisante */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;
   transition: all 0.3s ease;
-  white-space: nowrap; /* Empêche le texte de se diviser sur plusieurs lignes */
-  flex-wrap: nowrap; /* Empêche l'empilement des éléments dans le bouton */
+  white-space: nowrap;
+  flex-wrap: nowrap;
 }
 
 .button.custom-filter-button.is-active {
@@ -128,27 +129,26 @@ export default {
   cursor: pointer;
 }
 
-/* Responsive styles for mobile */
 @media (max-width: 768px) {
   .buttons {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Trois boutons par ligne */
-    justify-items: center; /* Centrer les boutons horizontalement */
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
     gap: 10px;
-    margin: 0 10px 0 10px;
+    margin: 0 10px; /* Marge ajoutée pour éviter que les boutons touchent les bords */
+    padding: 0 15px; /* Ajout de padding sur les côtés */
   }
 
   .button.custom-filter-button {
-    font-size: 0.9rem; /* Réduire la taille du texte sur mobile */
-    padding: 0.5rem 1rem; /* Ajuster le padding sur mobile */
-    min-width: unset; /* Supprime la largeur minimale pour un ajustement flexible */
-    width: 100%; /* Rendre les boutons responsive et flexibles */
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    min-width: unset;
+    width: 100%;
   }
 
   .icon {
-    margin-right: 5px; /* Réduire l'espace entre l'icône et le texte */
-    font-size: 1rem; /* Réduire la taille de l'icône sur mobile */
+    margin-right: 5px;
+    font-size: 1rem;
   }
 }
-
 </style>
