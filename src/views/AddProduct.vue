@@ -102,7 +102,7 @@ export default {
 <style scoped>
 
 .title {
-  margin-top: 30px; /* Ajustez cette valeur pour l'espacement souhaité */
+  margin-top: 30px; 
 }
 
 /* Modifier la bordure des champs d'input, textarea, et select */
