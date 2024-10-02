@@ -115,7 +115,7 @@ export default {
 
     getRandomProducts() {
       const shuffled = this.allProducts.sort(() => 0.5 - Math.random());
-      this.suggestedProducts = shuffled.slice(0, 3); // Récupération de trois produits aléatoires
+      this.suggestedProducts = shuffled.slice(0, 4); // Récupération de trois produits aléatoires
     },
 
     async init() {

@@ -21,18 +21,16 @@
           <div
             v-for="(product, index) in products"
             :key="index"
-            class="column is-one-quarter-desktop is-one-third-tablet is-half-mobile"
+            class="column is-one-third-desktop is-one-third-tablet is-half-mobile"  
           >
             <div class="card text-align-center">
               <div class="card-image">
-                <a href="" target="_blank">
-                  <img :src="product.picture" border="0" alt="product" />
-                </a>
+                  <img :src="product.picture" border="0" alt="product" />               
               </div>
               <div class="card-content">
                 <div class="media">
                   <div class="media-content">
-                    <p class="card-title no-wrap is-size-6 custom-title-size">
+                    <p class="card-title no-wrap is-size-4 custom-title-size">
                       {{ product.name }}
                     </p>
                   </div>
@@ -54,7 +52,7 @@
                       class="button custom-add-to-cart-button"
                       @click="addItem(product, quantities[index])"
                     >
-                      Ajoutez au <i class="fas fa-shopping-basket"></i>
+                      Ajoutez au&nbsp;<i class="fas fa-shopping-basket"></i>
                     </button>
                     <button
                       v-if="getUser && getUser.isAdmin"
@@ -198,6 +196,11 @@ export default {
 </script>
 
 <style>
+
+.home {
+  padding-left: 160px; /* Ajoutez ce padding */
+}
+
 .quantity-selector {
   display: flex;
   justify-content: center;
@@ -212,7 +215,7 @@ export default {
 }
 
 .quantity-btn {
-  background-color: #4f4f4f;
+  background-color: #303649;
   color: white;
   border: none;
   padding: 5px 10px;
@@ -236,12 +239,18 @@ export default {
   border-radius: 10px;
   transition: transform 0.3s ease-in-out;
   border: grey 1px solid;
-  min-width: 220px;
-  max-width: 100%;
+  min-width: 140px; /* Réduit la largeur minimale */
+  max-width: 220px; /* Réduit la largeur maximale */
+  width: 100%; /* Rendre la largeur de la carte flexible */
+  margin: 8px; /* Ajuste la marge autour de chaque carte */
+}
+
+.card-content {
+  padding: 8px; /* Réduit le remplissage à l'intérieur de la carte */
 }
 
 .card-title {
-  font-size: 1.25rem;
+  font-size: 3.25rem;
   font-weight: bold;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -252,21 +261,18 @@ export default {
 
 .card-image img {
   border-radius: 8px;
-  max-width: 100%;
-}
-
-.card-content {
-  padding: 15px;
+  max-width: 80%;
 }
 
 .columns.is-multiline {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap; /* Permet aux colonnes de s'enrouler */
 }
 
 .notification {
   background-color: #ffe0b2;
-  border-radius: 8px;
+  border-radius: 10px;
   color: #bdbdbd;
 }
 
@@ -279,7 +285,7 @@ export default {
 }
 
 .button.custom-add-to-cart-button {
-  background-color: #4f4f4f;
+  background-color: #303649;
   color: white;
   border: none;
   display: flex;
@@ -303,6 +309,11 @@ export default {
 }
 
 @media (max-width: 768px) {
+
+  .home {
+  padding-left: 0px; /* Ajoutez ce padding */
+}
+
   .columns {
     margin-left: 0 !important;
     margin-right: 0 !important;
@@ -327,16 +338,20 @@ export default {
     padding: 4px 8px;
   }
 
+  .card {
+    min-width: 150px; /* Vous pouvez également ajuster ici si nécessaire */
+    max-width: 100%; /* Assurez-vous qu'il ne dépasse pas la largeur de l'écran */
+  }
+
+  .column.is-one-third-desktop {
+      flex: none;
+      width: 30%; /* Ajuste la largeur à 30% pour les écrans moyens */
+  }
+
   .column.is-half-mobile {
-    flex: 0 0 45%;
+    flex: 0 0 45%; /* Pour les écrans mobiles */
     max-width: 45%;
   }
-
-  .card {
-    min-width: 150px;
-    margin-bottom: 20px;
-  }
-
   .card-title {
     font-size: 0.875rem;
   }
@@ -363,5 +378,19 @@ export default {
   .content {
     font-size: 0.85rem;
   }
+}
+
+@media screen and (min-width: 1024px) {
+.column.is-one-third-desktop {
+    flex: none;
+    width: 25%; /* Réduit la largeur de la colonne */
+}
+}
+
+@media screen and (min-width: 1024px) {
+.column.is-one-third-desktop {
+    flex: none;
+    width: 25%; /* Réduit la largeur de la colonne */
+}
 }
 </style>

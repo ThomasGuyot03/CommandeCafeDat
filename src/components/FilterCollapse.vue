@@ -93,7 +93,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  justify-content: center; /* Ajouté pour centrer les boutons */
+  justify-content: center; 
 }
 
 .icon {
@@ -135,8 +135,8 @@ export default {
     grid-template-columns: repeat(2, 1fr);
     justify-items: center;
     gap: 10px;
-    margin: 0 10px; /* Marge ajoutée pour éviter que les boutons touchent les bords */
-    padding: 0 15px; /* Ajout de padding sur les côtés */
+    margin: 0 10px; 
+    padding: 0 15px; 
   }
 
   .button.custom-filter-button {
