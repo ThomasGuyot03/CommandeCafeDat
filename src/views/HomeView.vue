@@ -321,7 +321,6 @@ export default {
 }
 
 .custom-edit-button {
-  background-color: #575757;
   color: rgb(107, 107, 107);
   border-color: #7e7e7e;
 }
