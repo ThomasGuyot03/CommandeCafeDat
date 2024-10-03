@@ -1,17 +1,13 @@
 <template>
   <div class="home">
-    <!-- Titre de la page -->
     <h1 class="title">Panier</h1>
 
-    <!-- Notification -->
     <div class="notification is-light has-text-centered">
       Commandez le meilleur de notre café ! 
     </div>
 
-    <!-- Section Panier -->
     <section class="section">
       <div v-if="getCart.products.length > 0" class="container">
-        <!-- Table des produits dans le panier -->
         <div class="table-container">
           <table class="table is-striped is-fullwidth">
             <thead>
@@ -37,23 +33,19 @@
           </table>
         </div>
 
-        <!-- Bouton de commande -->
         <div class="content has-text-right">
           <button class="button is-success is-large" @click="submitOrder">Commander</button>
         </div>
       </div>
 
-      <!-- Message si le panier est vide -->
       <div v-else>
         <p class="title">Panier vide</p>
       </div>
     </section>
 
-    <!-- Section Produits Suggérés -->
     <section class="section">
       <h2 class="title has-text-centered">Produits Suggérés</h2>
       <div class="columns is-multiline is-variable is-2">
-        <!-- Boucle sur les produits suggérés -->
         <div
           v-for="(product, index) in suggestedProducts"
           :key="index"
@@ -88,7 +80,7 @@ export default {
       customer: null,
       allProducts: [],
       suggestedProducts: [],
-      defaultImage: 'https://example.com/default-image.jpg', // Remplace par ton image par défaut
+      defaultImage: 'https://example.com/default-image.jpg',
     };
   },
   computed: {
@@ -107,7 +99,7 @@ export default {
       try {
         const response = await this.$http.get('/products', { params: { accountId: this.$appConfig.accountId } });
         this.allProducts = response.data.products;
-        this.getRandomProducts();  // Appel de getRandomProducts après avoir récupéré les produits
+        this.getRandomProducts();
       } catch (error) {
         console.error('Erreur lors de la récupération des produits:', error);
       }
@@ -115,7 +107,7 @@ export default {
 
     getRandomProducts() {
       const shuffled = this.allProducts.sort(() => 0.5 - Math.random());
-      this.suggestedProducts = shuffled.slice(0, 4); // Récupération de trois produits aléatoires
+      this.suggestedProducts = shuffled.slice(0, 4);
     },
 
     async init() {
@@ -129,13 +121,21 @@ export default {
       };
       try {
         const response = await this.$http.post('/orders/create', params);
+        console.log('Response:', response); // Vérifiez la réponse du serveur
         if (response.status === 200) {
           this.showToast('success', 'Commande réussie');
-          this.$router.push('/');
+          this.emptyCart(); // Vider le panier après une commande réussie
+          await this.$nextTick(); // Attendre la mise à jour du DOM
+          this.$router.push('/'); // Redirection vers la page d'accueil
         }
       } catch (error) {
         this.showToast('error', 'Erreur lors de la commande');
       }
+    },
+
+    emptyCart() {
+      console.log('Emptying cart...'); // Vérifiez si cette ligne est exécutée
+      this.$store.commit('updateToCart', { obj: [], source: 'products' }); // Met à jour le panier avec un tableau vide
     },
 
     async checkProductsInCart() {
@@ -183,7 +183,6 @@ export default {
 
 
 <style scoped>
-/* Global button style */
 .button {
   background-color: #00d1b2;
   border-color: #00d1b2;
@@ -191,7 +190,6 @@ export default {
   margin-top: 1.5rem;
 }
 
-/* Adjust table style and responsiveness */
 .table-container {
   margin-top: 2rem;
 }
@@ -210,12 +208,10 @@ export default {
   font-weight: bold;
 }
 
-/* Espace autour des cartes des produits suggérés */
 .product-card {
   margin: 10px;
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
   .table-container {
     overflow-x: auto;
@@ -231,4 +227,3 @@ export default {
   }
 }
 </style>
-
