@@ -4,18 +4,19 @@
       <div class="footer-section about">
         <h2>A propos</h2>
         <p>
-          We are committed to delivering the best services and customer satisfaction.
+          Chez DAT, nous facilitons l'accès à une pause café parfaite grâce à des solutions innovantes. 
+          Commandez facilement votre café ou autres boissons ainsi que vos accessoires via un simple QR code directement sur nos machines installées dans vos locaux.
         </p>
       </div>
 
       <div class="footer-section links">
         <h2>Liens rapide</h2>
         <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Services</a></li>
-          <li><a href="#">Contact</a></li>
-          <li><a href="#">Privacy Policy</a></li>
+          <li><router-link to="/">Accueil</router-link></li>
+          <li><router-link to="/panier">Panier</router-link></li>
+          <li><router-link to="/profil">Profil</router-link></li>
+          <li><router-link to="/">Contact</router-link></li>
+          <li><router-link to="/">Privacy Policy</router-link></li>
         </ul>
       </div>
 
@@ -25,7 +26,7 @@
         <p>Phone: 05.34.48.00.59</p>
         <div class="socials">
           <a href="#"><i class="fab fa-facebook-f"></i></a>
-          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="/CartView"><i class="fab fa-twitter"></i></a>
           <a href="#"><i class="fab fa-instagram"></i></a>
           <a href="#"><i class="fab fa-linkedin-in"></i></a>
         </div>
@@ -42,6 +43,13 @@
 .footer {
   background-color: #303649;
   color: #fff;
+  position: relative;
+  bottom: 0;
+  left: 220px;
+  width: calc(100% - 320px);
+  padding: 10px 0;
+  z-index: 999;
+  margin-top: 5%;
 }
 
 .footer-content {
@@ -50,25 +58,28 @@
   flex-wrap: wrap;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 5px 10px; /* Réduction du padding pour le footer */
+  padding: 10px;
 }
 
 .footer-section {
   flex: 1;
-  min-width: 150px; /* Réduction de la largeur minimum */
-  margin: 5px; /* Réduction des marges */
+  min-width: 200px;
+  margin: 10px;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
 }
 
 .footer-section h2 {
-  margin-bottom: 5px; /* Réduction de la marge en bas des titres */
-  font-size: 1.2em; /* Diminution de la taille des titres */
+  margin-bottom: 10px;
+  font-size: 1.2em;
   color: #f7ca18;
 }
 
 .footer-section p,
 .footer-section ul {
-  font-size: 0.8em; /* Réduction de la taille de police */
-  line-height: 1.2; /* Réduction de l'interligne */
+  font-size: 0.85em;
+  line-height: 1.6;
 }
 
 .footer-section ul {
@@ -77,7 +88,7 @@
 }
 
 .footer-section ul li {
-  margin-bottom: 5px; /* Réduction de la marge en bas des éléments de liste */
+  margin-bottom: 5px;
 }
 
 .footer-section ul li a {
@@ -91,13 +102,13 @@
 }
 
 .footer-section .socials {
-  margin-top: 5px; /* Réduction de la marge */
+  margin-top: 5px;
 }
 
 .footer-section .socials a {
-  margin-right: 10px; /* Espacement entre les icônes */
+  margin-right: 8px;
   color: #bbb;
-  font-size: 1.1em; /* Légère réduction de la taille des icônes */
+  font-size: 1em;
   text-decoration: none;
   transition: color 0.3s;
 }
@@ -107,19 +118,35 @@
 }
 
 .footer-bottom {
-  margin-top: 5px; /* Réduction de la marge supérieure */
-  padding-top: 5px; /* Réduction du padding */
+  margin-top: 10px;
+  padding-top: 10px;
   border-top: 1px solid #444;
-  font-size: 0.8em; /* Réduction de la taille de police */
+  font-size: 0.85em;
+  text-align: center;
 }
 
 @media (max-width: 768px) {
+  .footer {
+    width: 100%;
+    left: 0;
+    margin-top: 10%;
+    position: relative;
+  }
+
   .footer-content {
     flex-direction: column;
   }
 
   .footer-section {
-    margin: 5px 0; /* Ajustement des marges */
+    margin: 5px 0;
   }
+
+  body {
+    padding-bottom: 100px;
+  }
+}
+
+.main-content {
+  padding-bottom: 120px;
 }
 </style>
