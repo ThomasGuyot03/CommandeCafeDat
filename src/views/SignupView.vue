@@ -2,7 +2,7 @@
     <div class="home">
         <h1 class="title">Inscription</h1>
         <div class="notification is-light text-align-center">
-            Commandez le meilleur de notre café ! 
+            Commandez le meilleur de notre café !
         </div>
         <div class="signup-page">
             <div class="container">
@@ -13,13 +13,13 @@
                                 <div class="field">
                                     <label class="label">Prénom</label>
                                     <div class="control">
-                                        <input class="input" type="text" v-model="firstname" placeholder="Prénom">
+                                        <input class="input" type="text" v-model="firstname" placeholder="Prénom" @input="sanitizeInput('firstname')">
                                     </div>
                                 </div>
                                 <div class="field">
                                     <label class="label">Nom</label>
                                     <div class="control">
-                                        <input class="input" type="text" v-model="name" placeholder="Nom">
+                                        <input class="input" type="text" v-model="name" placeholder="Nom" @input="sanitizeInput('name')">
                                     </div>
                                 </div>
                                 <div class="field">
@@ -76,7 +76,6 @@
     </div>
 </template>
 
-  
 <script>
 export default {
     data() {
@@ -94,27 +93,31 @@ export default {
         }
     },
     methods: {
+        sanitizeInput(field) {
+            // Remplace les caractères dangereux
+            this[field] = this[field].replace(/[^a-zA-ZÀ-ÿ '-]/g, '');
+        },
         async signup() {
             try {
                 if (!this.firstname || !this.name || !this.email || !this.password) {
-                    this.errorMessage = "Veuillez remplir tous les champs."
-                return
+                    this.errorMessage = "Veuillez remplir tous les champs.";
+                    return;
                 }
-                const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
-                    if (!emailRegex.test(this.email)) {
-                this.errorMessage = "Veuillez entrer une adresse email valide."
-                return
+                const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+                if (!emailRegex.test(this.email)) {
+                    this.errorMessage = "Veuillez entrer une adresse email valide.";
+                    return;
                 }
-                const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!.@#$%^&*])(?=.{8,})/
-                    if (!PASSWORD_REGEX.test(this.password)) {
-                this.errorMessage = "Le mot de passe doit contenir au moins 8 caractères, dont au moins une lettre et un chiffre."
-                return
+                const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!.@#$%^&*])(?=.{8,})/;
+                if (!PASSWORD_REGEX.test(this.password)) {
+                    this.errorMessage = "Le mot de passe doit contenir au moins 8 caractères, dont au moins une lettre et un chiffre.";
+                    return;
                 }
                 const params = {
                     firstname: this.firstname,
-                    name:  this.name,
+                    name: this.name,
                     email: this.email,
-                    password:  this.password,
+                    password: this.password,
                     accountId: this.$appConfig.accountId,
                     address: {
                         line: this.line,
@@ -123,17 +126,17 @@ export default {
                         country: this.country
                     },
                     company: this.company
-                
-                }
-                await this.$http.post('/user/signup', params)
-                this.$router.push('/login')
+                };
+                await this.$http.post('/user/signup', params);
+                this.$router.push('/login');
             } catch (error) {
-                console.error(error)
+                console.error(error);
             }
         }
     }
 }
 </script>
+
   
 <style scoped>
 .signup-page {

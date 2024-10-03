@@ -232,6 +232,7 @@ export default {
   width: 50px;
   text-align: center;
   margin: 0 10px;
+  border-radius: 5px;
 }
 
 .quantity-btn {
@@ -240,6 +241,7 @@ export default {
   border: none;
   padding: 5px 10px;
   cursor: pointer;
+  border-radius: 5px;
 }
 
 .quantity-btn:hover {

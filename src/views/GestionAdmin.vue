@@ -50,7 +50,7 @@ export default {
 <style scoped>
 /* Style pour que les boutons soient alignés horizontalement */
 .menu-horizontal {
-  margin-top: 20px; /* Ajout d'un espace entre le titre et les boutons */
+  margin-top: 20px; /* Espace entre le titre et les boutons */
 }
 
 .custom-title {
@@ -72,6 +72,7 @@ export default {
   border-radius: 5px; /* Arrondir les bords des boutons */
   transition: background-color 0.3s; /* Animation pour le changement de couleur */
   height: 100px; /* Hauteur fixe pour assurer que tous les boutons aient la même taille */
+  margin: 10px; /* Espace externe pour espacer les boutons */
 }
 
 .menu-square:hover {
@@ -80,7 +81,7 @@ export default {
 
 /* S'assurer que chaque bouton prend la même largeur sur mobile */
 .column.is-half-mobile {
-  padding: 10px; /* Pour ajouter de l'espace entre les colonnes sur mobile */
+  padding: 10px; /* Espace autour des colonnes */
 }
 
 /* Pour ajuster l'affichage sur mobile */
