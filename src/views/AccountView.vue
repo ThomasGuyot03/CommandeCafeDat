@@ -12,13 +12,6 @@
                   </span>
               </a>
           </div>
-          <div class="navbar-menu" :class="{ 'is-active': isMobileMenuOpen }">
-              <div class="navbar-start">
-                  <router-link to="/commands" class="navbar-item">Mes commandes</router-link>
-                  <router-link to="/cart" class="navbar-item">Mon panier</router-link>
-                  <router-link to="/profil" class="navbar-item">Mon profil</router-link>
-              </div>
-          </div>
       </nav>
       <div class="container">
           <div class="columns is-centered">
@@ -41,7 +34,7 @@
                           </div>
                           <div class="field">
                               <label class="label">Adresse</label>
-                              <p>{{ selectedUser.address }}</p>
+                              <p>{{ selectedUser.address.line }}</p>
                           </div>
                           <div class="field">
                               <label class="label">Adresse e-mail</label>
@@ -79,28 +72,16 @@ export default {
         toggleMobileMenu() {
             this.isMobileMenuOpen = !this.isMobileMenuOpen;
         },
-        fetchUserProfile() {
-            // Supposons que l'API renvoie les informations de l'utilisateur connecté
-            fetch('/api/user/profile', {
-                method: 'GET',
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}` // Utilisation d'un token de session s'il existe
-                }
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Erreur lors de la récupération des données');
-                }
-                return response.json();
-            })
-            .then(data => {
-                this.selectedUser = data; // Assigner les données récupérées à selectedUser
-                this.isLoading = false; // Fin de chargement
-            })
-            .catch(error => {
-                console.error('Erreur lors de la récupération du profil:', error);
-                this.isLoading = false; // Fin de chargement même en cas d'erreur
-            });
+
+        async fetchUserProfile() {
+          try {
+            const response = await this.$http.get('/user/profile');
+            this.selectedUser = response.data
+            console.log('réponse user',this.selectedUser)
+            this.isLoading = false
+          } catch (error) {
+            this.showToast('error', 'Erreur lors de la récupération de l\'utilisateur');
+          }
         }
     },
     mounted() {
