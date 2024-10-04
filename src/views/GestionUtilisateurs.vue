@@ -77,18 +77,7 @@ export default {
         console.error('Erreur lors de la récupération des utilisateurs:', error);
       }
     },
-    // async fetchClientAccount() {
-    //   try {
-    //     const response = await this.$http.get('/client-account', {
-    //       params: { accountId: this.$appConfig.accountId }
-    //     });
-    //     this.clientAccount = response.data;
-    //   } catch (error) {
-    //     console.error('Erreur lors de la récupération du compte client:', error);
-    //   } finally {
-    //     this.loading = false;
-    //   }
-    // },
+
     openModal(user) {
       this.selectedUser = user;
       this.isModalOpen = true;

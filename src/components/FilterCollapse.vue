@@ -32,7 +32,7 @@
           class="button custom-filter-button" 
           :class="{ 'is-active': filters.category === '4' }" 
           @click="setCategory('4')">
-          Cappuccino
+          Gourmand
         </button>
         <button 
           class="button custom-filter-button" 
