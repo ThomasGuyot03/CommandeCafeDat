@@ -48,7 +48,12 @@ export default {
 </script>
 
 <style scoped>
-/* Style pour que les boutons soient alignés horizontalement */
+
+.column.p-5 {
+  margin-left: 220px; /* Décale le contenu de 220px pour laisser de la place à la navbar */
+}
+
+
 .menu-horizontal {
   margin-top: 20px; /* Espace entre le titre et les boutons */
 }
@@ -86,8 +91,12 @@ export default {
 
 /* Pour ajuster l'affichage sur mobile */
 @media (max-width: 768px) {
-  .menu-horizontal {
-    justify-content: center;
-  }
+.column.p-5 {
+  margin-left: 0px; /* Décale le contenu de 220px pour laisser de la place à la navbar */
+}
+.menu-horizontal {
+  justify-content: center;
+}
+
 }
 </style>

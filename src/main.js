@@ -6,9 +6,8 @@ import CryptoJS from 'crypto-js'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import Toast from 'vue-toastification'; // Nouvelle bibliothèque compatible Vue 3
-import 'vue-toastification/dist/index.css'; // Styles nécessaires pour vue-toastification
-
+import Toast from 'vue-toastification'; 
+import 'vue-toastification/dist/index.css'; 
 import './assets/css/styles.css'
 import './assets/js/bulma.js'
 import 'bulma/css/bulma.css'
@@ -22,10 +21,10 @@ import GenericMixin from '@/mixins/GenericMixin.js'
 
 window.process = process
 
-// axios.defaults.baseURL = 'http://localhost:3000/api/'
-if (process.env.VUE_APP_API_URL){
-  axios.defaults.baseURL = process.env.VUE_APP_API_URL
-}
+axios.defaults.baseURL = 'http://localhost:3000/api/'
+// if (process.env.VUE_APP_API_URL){
+//   axios.defaults.baseURL = process.env.VUE_APP_API_URL
+// }
 console.log('test axios',axios.defaults)
 axios.interceptors.request.use(config => {
     const token = localStorage.getItem('token')
