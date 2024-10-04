@@ -61,85 +61,72 @@
 
 <script>
 export default {
-data() {
-  return {
-    selectedUser: {
-      firstname: '',
-      lastname: '',
-      company: '',
-      address: '',
-      email: '',
-      phone: ''
+    data() {
+        return {
+            selectedUser: {
+                firstname: '',
+                lastname: '',
+                company: '',
+                address: '',
+                email: '',
+                phone: ''
+            },
+            isLoading: true,
+            isMobileMenuOpen: false
+        };
     },
-    isLoading: true,
-    isMobileMenuOpen: false
-  };
-},
-methods: {
-  toggleMobileMenu() {
-    this.isMobileMenuOpen = !this.isMobileMenuOpen;
-  },
-  fetchUserProfile() {
-    // Supposons que l'API renvoie les informations de l'utilisateur connecté
-    fetch('/api/user/profile', { 
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`  // Utilisation d'un token de session s'il existe
-      }
-    })
-    .then(response => response.json())
-    .then(data => {
-      this.selectedUser = data;  // Assigner les données récupérées à selectedUser
-      this.isLoading = false;
-    })
-    .catch(error => {
-      console.error('Erreur lors de la récupération du profil:', error);
-      this.isLoading = false;
-    });
-  }
-},
-mounted() {
-    fetch('/api/user/profile', {
-        method: 'GET',
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}` // Le token JWT est récupéré depuis le localStorage
+    methods: {
+        toggleMobileMenu() {
+            this.isMobileMenuOpen = !this.isMobileMenuOpen;
+        },
+        fetchUserProfile() {
+            // Supposons que l'API renvoie les informations de l'utilisateur connecté
+            fetch('/api/user/profile', {
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}` // Utilisation d'un token de session s'il existe
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erreur lors de la récupération des données');
+                }
+                return response.json();
+            })
+            .then(data => {
+                this.selectedUser = data; // Assigner les données récupérées à selectedUser
+                this.isLoading = false; // Fin de chargement
+            })
+            .catch(error => {
+                console.error('Erreur lors de la récupération du profil:', error);
+                this.isLoading = false; // Fin de chargement même en cas d'erreur
+            });
         }
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Erreur lors de la récupération des données');
-        }
-        return response.json();
-    })
-    .then(data => {
-        this.selectedUser = data; // Mise à jour des données utilisateur dans la vue
-    })
-    .catch(error => {
-        console.error('Erreur lors de la récupération du profil:', error);
-    });
-}
-
+    },
+    mounted() {
+        this.fetchUserProfile(); // Appel de la méthode pour récupérer les données au moment du montage du composant
+    }
 };
 </script>
 
 <style scoped>
 .navbar-item {
-color: #333;
+    color: #333;
 }
 
 @media screen and (max-width: 768px) {
-.navbar-menu {
-  display: none;
-}
+    .navbar-menu {
+        display: none;
+    }
 
-.is-active .navbar-menu {
-  display: block;
-}
+    .is-active .navbar-menu {
+        display: block;
+    }
 }
 
 p {
-font-size: 1.2rem;
-color: #555;
-margin-top: 5px;
+    font-size: 1.2rem;
+    color: #555;
+    margin-top: 5px;
 }
 </style>
