@@ -23,8 +23,10 @@ import GenericMixin from '@/mixins/GenericMixin.js'
 window.process = process
 
 // axios.defaults.baseURL = 'http://localhost:3000/api/'
-axios.defaults.baseURL = process.env.VUE_APP_API_URL
-
+if (process.env.VUE_APP_API_URL){
+  axios.defaults.baseURL = process.env.VUE_APP_API_URL
+}
+console.log('test axios',axios.defaults)
 axios.interceptors.request.use(config => {
     const token = localStorage.getItem('token')
     if (token) {

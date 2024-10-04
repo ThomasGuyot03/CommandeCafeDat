@@ -6,7 +6,6 @@
 
 <script>
 import { Chart, registerables } from 'chart.js';
-import axios from 'axios'; // Utiliser axios pour récupérer les données
 
 export default {
   name: 'OrdersChart',
@@ -26,7 +25,7 @@ export default {
     async fetchOrders() {
       try {
         // Appel à votre API pour récupérer les commandes
-        const response = await axios.get('/orders');
+        const response = await this.$http.get('/orders');
         this.orders = response.data;
 
         // Transformer les données pour les regrouper par jour et afficher les 7 derniers jours

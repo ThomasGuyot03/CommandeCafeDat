@@ -57,7 +57,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 
 export default {
   data() {
@@ -71,7 +70,7 @@ export default {
   methods: {
     async fetchOrders() {
       try {
-        const response = await axios.get('/orders');
+        const response = await this.$http.get('/orders');
         this.orders = response.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
         this.totalPages = Math.ceil(this.orders.length / this.itemsPerPage); // Calcul du nombre total de pages
         console.log('Données reçues du serveur:', response.data);

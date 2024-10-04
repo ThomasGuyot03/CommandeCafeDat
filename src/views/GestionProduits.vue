@@ -31,7 +31,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import { useToast } from 'vue-toastification' // Importation du système de toast
 
 export default {
@@ -55,7 +54,7 @@ export default {
     async getProducts(page = 1) {
       try {
         this.currentPage = page
-        const response = await axios.get('/products', { params: { accountId: this.$appConfig.accountId } })
+        const response = await this.$http.get('/products', { params: { accountId: this.$appConfig.accountId } })
         this.produits = response.data.products
         this.loading = false
       } catch (error) {
@@ -65,7 +64,7 @@ export default {
     // Mettre à jour le stock d'un produit avec le toast
     async mettreAJourStock(produit) {
       try {
-        await axios.patch(`/products/update/${produit._id}`, { stock: produit.stock })
+        await this.$http.patch(`/products/update/${produit._id}`, { stock: produit.stock })
         // Affichage du toast de succès
         this.toast.success('Stock mis à jour avec succès !', {
           position: 'bottom-right', // Toast en bas à droite
