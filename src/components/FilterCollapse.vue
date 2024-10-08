@@ -90,10 +90,10 @@ export default {
 }
 
 .buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center; 
+  display: flex; 
+  flex-wrap: wrap; 
+  gap: 10px; 
+  justify-content: center; /* Centre les boutons sur desktop */
 }
 
 .icon {
@@ -113,7 +113,7 @@ export default {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 120px;
+  min-width: 120px; /* Conserve la largeur minimale */
   transition: all 0.3s ease;
   white-space: nowrap;
   flex-wrap: nowrap;
@@ -131,19 +131,17 @@ export default {
 
 @media (max-width: 768px) {
   .buttons {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    justify-items: center;
-    gap: 10px;
-    margin: 0 10px; 
-    padding: 0 15px; 
+    display: grid; /* Utilise une grille pour la mise en page mobile */
+    grid-template-columns: repeat(2, 1fr); /* Deux colonnes */
+    gap: 10px; /* Espace entre les colonnes */
+    margin: 0 auto; /* Centre le conteneur */
+    padding: 0 10px; /* Ajoute un espacement sur les côtés */
   }
 
   .button.custom-filter-button {
-    font-size: 0.9rem;
-    padding: 0.5rem 1rem;
-    min-width: unset;
-    width: 100%;
+    font-size: 0.9rem; /* Ajuste la taille de police si nécessaire */
+    padding: 0.5rem 1rem; /* Ajuste le rembourrage si nécessaire */
+    width: 100%; /* Assure que les boutons prennent la largeur du conteneur */
   }
 
   .icon {
@@ -151,4 +149,6 @@ export default {
     font-size: 1rem;
   }
 }
+
+
 </style>

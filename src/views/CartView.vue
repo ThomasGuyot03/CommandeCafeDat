@@ -54,14 +54,14 @@
           <div class="card product-card">
             <div class="card-image">
               <a href="#" target="_blank">
-                <img :src="product.picture || defaultImage" border="0" alt="Image du produit" />
+                <img :src="product.picture || defaultImage" alt="Image du produit" />
               </a>
             </div>
             <div class="card-content has-text-centered">
               <p class="card-title is-size-5">{{ product.name }}</p>
               <p class="content">{{ product.description }}</p>
               <button class="button is-primary is-fullwidth" @click="addItem(product)">
-                <i class="fas fa-shopping-basket"></i> Ajouter au panier
+                Ajouter au &nbsp;<i class="fas fa-shopping-basket"></i>
               </button>
             </div>
           </div>
@@ -183,8 +183,8 @@ export default {
 
 <style scoped>
 .button {
-  background-color: #00d1b2;
-  border-color: #00d1b2;
+  background-color: #303649;
+  border-color: #ffffff;
   color: white;
   margin-top: 1.5rem;
 }
@@ -211,6 +211,26 @@ export default {
   margin: 10px;
 }
 
+.card {
+  display: flex; /* Pour permettre l'utilisation de flexbox dans la carte */
+  flex-direction: column; /* Aligne les éléments verticalement */
+  justify-content: space-between; /* Utilise tout l'espace disponible */
+}
+
+.card-image {
+  display: flex;
+  justify-content: center; /* Centre l'image horizontalement */
+  align-items: center; /* Centre l'image verticalement */
+  height: 200px; /* Ajuste cette hauteur selon tes besoins */
+  overflow: hidden; /* Cache les débordements */
+}
+
+.card-image img {
+  max-width: 100%; /* Limite la largeur à 100% du conteneur */
+  max-height: 100%; /* Limite la hauteur à 100% du conteneur */
+  object-fit: contain; /* Garde les proportions sans couper l'image */
+}
+
 @media (max-width: 768px) {
   .table-container {
     overflow-x: auto;
@@ -222,7 +242,9 @@ export default {
     width: 100%;
   }
   .card {
-    margin-top: 1rem;
+    min-width: 170px; /* Réduit la largeur minimale */
+    max-width: 90%; /* Limite la largeur à 90% pour éviter qu'elles ne dépassent */
+    margin: 0 5% 15px 5%; /* Centre la carte et ajoute de l'espace en bas */
   }
 }
 </style>
