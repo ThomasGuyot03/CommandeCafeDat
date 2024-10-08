@@ -52,9 +52,8 @@ export default {
 </script>
 
 <style scoped>
-
 .column.p-5 {
-  margin-left: 220px; /* Décale le contenu de 220px pour laisser de la place à la navbar */
+  margin-left: 220px; /* Décale le contenu pour laisser de la place à la navbar */
 }
 
 .menu-horizontal {
@@ -110,6 +109,8 @@ export default {
   .menu-square {
     height: 80px; /* Ajuster la hauteur des boutons sur mobile */
     padding: 10px; /* Diminuer l'espacement interne pour mobile */
+    width: 180px; /* Chaque bouton occupe 100% de la largeur de la colonne */
+    box-sizing: border-box; /* S'assure que les bordures et padding sont pris en compte dans la largeur */
   }
 
   .menu-square i {
@@ -119,5 +120,11 @@ export default {
   .menu-square span {
     font-size: 14px; /* Ajuster la taille du texte sur mobile */
   }
+
+  .column.is-half-mobile {
+    flex: 0 0 50%; /* Assurer que chaque bouton prenne 50% de la largeur de l'écran sur mobile */
+    max-width: 50%; /* Limiter la largeur à 50% */
+  }
 }
+
 </style>

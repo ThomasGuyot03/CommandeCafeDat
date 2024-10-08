@@ -216,7 +216,6 @@ export default {
 
 
 <style>
-
 .home {
   padding-left: 160px; /* Ajoutez ce padding */
 }
@@ -261,14 +260,14 @@ export default {
   border-radius: 10px;
   transition: transform 0.3s ease-in-out;
   border: grey 1px solid;
-  min-width: 140px; /* Réduit la largeur minimale */
-  max-width: 220px; /* Réduit la largeur maximale */
-  width: 100%; /* Rendre la largeur de la carte flexible */
-  margin: 8px; /* Ajuste la marge autour de chaque carte */
+  min-width: 140px;
+  max-width: 220px;
+  width: 100%;
+  margin: 8px;
 }
 
 .card-content {
-  padding: 8px; /* Réduit le remplissage à l'intérieur de la carte */
+  padding: 8px;
 }
 
 .card-title {
@@ -289,7 +288,9 @@ export default {
 .columns.is-multiline {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap; /* Permet aux colonnes de s'enrouler */
+  flex-wrap: wrap;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .notification {
@@ -313,7 +314,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 5px
+  margin-bottom: 5px;
 }
 
 .button.custom-add-to-cart-button:hover {
@@ -330,15 +331,14 @@ export default {
 }
 
 @media (max-width: 768px) {
-
   .home {
-  padding-left: 0px; /* Ajoutez ce padding */
-}
+    padding-left: 0px;
+  }
 
-  .columns {
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    margin-top: 0 !important;
+  .columns.is-multiline {
+    justify-content: center;
+    padding-left: 15px;
+    padding-right: 15px;
   }
 
   .filter-wrapper {
@@ -360,19 +360,18 @@ export default {
   }
 
   .card {
-    min-width: 150px; /* Vous pouvez également ajuster ici si nécessaire */
-    max-width: 100%; /* Assurez-vous qu'il ne dépasse pas la largeur de l'écran */
-  }
-
-  .column.is-one-third-desktop {
-      flex: none;
-      width: 30%; /* Ajuste la largeur à 30% pour les écrans moyens */
+    min-width: 140px; /* Réduit la largeur minimale */
+    max-width: 90%; /* Limite la largeur à 90% pour éviter qu'elles ne dépassent */
+    margin: 0 auto 15px; /* Centre la carte et ajoute de l'espace en bas */
   }
 
   .column.is-half-mobile {
-    flex: 0 0 45%; /* Pour les écrans mobiles */
-    max-width: 45%;
+    flex: 0 0 100%;
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
   }
+
   .card-title {
     font-size: 0.875rem;
   }
@@ -402,16 +401,11 @@ export default {
 }
 
 @media screen and (min-width: 1024px) {
-.column.is-one-third-desktop {
+  .column.is-one-third-desktop {
     flex: none;
-    width: 25%; /* Réduit la largeur de la colonne */
-}
+    width: 25%;
+  }
 }
 
-@media screen and (min-width: 1024px) {
-.column.is-one-third-desktop {
-    flex: none;
-    width: 25%; /* Réduit la largeur de la colonne */
-}
-}
+
 </style>

@@ -2,8 +2,8 @@
   <div>
     <nav :class="['sidebar', { 'is-active': isSidebarActive }]">
       <div class="sidebar-brand">
-        <a href="#" target="_blank" class="sidebar-logo">
-          <img src="https://i.postimg.cc/CdFtCbdw/1.png" border="0" alt="Logo" />
+        <a href="#" target="" class="sidebar-logo">
+          <img src="https://i.postimg.cc/mk088cKJ/Design-sans-titre-8.png" border="0" alt="Logo" />
         </a>
       </div>
 
