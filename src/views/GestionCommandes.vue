@@ -197,8 +197,8 @@ export default {
 
   .table tr {
     display: block;
-    margin-bottom: 10px;
-    border-bottom: 1px solid #ddd;
+    margin-bottom: 40px;
+    border-bottom: 2px solid #303649;
   }
 
   .table td {
@@ -206,7 +206,7 @@ export default {
     justify-content: space-between;
     padding: 10px;
     text-align: left;
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     border: none;
     border-bottom: 1px solid #ddd;
     position: relative;
@@ -249,12 +249,12 @@ export default {
 
 /* Boutons */
 .button.is-primary {
-  background-color: #3273dc; 
+  background-color: #303649; 
   color: white;
   border-radius: 5%;
 }
 
 .button.is-primary:hover {
-  background-color: #276cda; 
+  background-color: #303649; 
 }
 </style>
