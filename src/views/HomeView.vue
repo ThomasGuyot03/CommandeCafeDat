@@ -20,13 +20,12 @@
         <div class="columns is-multiline">
           <div
             v-for="(product, index) in products.slice(0, itemsLimit)"
-            :key="index"
+            :key="product._id" 
             class="column is-one-third-desktop is-one-third-tablet is-half-mobile"
           >
-
             <div class="card text-align-center">
               <div class="card-image">
-                  <img :src="product.picture" border="0" alt="product" />               
+                <img :src="product.picture" border="0" alt="product" />
               </div>
               <div class="card-content">
                 <div class="media">
@@ -69,11 +68,12 @@
           </div>
         </div>
       </div>
+
       <PaginationComponent 
-      :currentPage="currentPage" 
-      :totalPages="totalPages" 
-      @update-page="updatePage"
-      ></PaginationComponent>
+        :currentPage="currentPage" 
+        :totalPages="totalPages" 
+        @update-page="updatePage"
+      />
     </div>
 
     <EditProductModal
@@ -88,7 +88,7 @@
 <script>
 import { mapGetters } from "vuex";
 import EditProductModal from "./EditProductModal.vue";
-import { useToast } from "vue-toastification"; // Importez le toast ici
+import { useToast } from "vue-toastification";
 
 export default {
   components: {
@@ -101,7 +101,7 @@ export default {
       itemsLimit: 10,
       products: null,
       currentPage: 1,
-      totalPages: 10,
+      totalPages: 1, // Initialisation avec 1
       filters: {
         category: "",
         sortByPrice: "",
@@ -141,52 +141,35 @@ export default {
       }
 
       this.$store.commit("updateToCart", { obj: products, source: "products" });
-
-      // Utilisation de la méthode showToast du mixin
       this.showToast('success', `Le produit "${product.name}" a été ajouté au panier.`);
     },
-    async getProducts(page) {
-      if (page) {
-        this.currentPage = page;
-      } else {
-        this.currentPage = 1;
-      }
+    async getProducts(page = this.currentPage) { // Utilise la page actuelle par défaut
+      this.currentPage = page;
+      this.loading = true; // Ajoute un indicateur de chargement avant la requête
+
       try {
         const params = {
           page: this.currentPage,
           limit: this.itemsLimit,
+          ...this.filters, // Inclut les filtres ici
         };
 
-        for (const filterKey in this.filters) {
-          if (Object.prototype.hasOwnProperty.call(this.filters, filterKey)) {
-            const filterValue = this.filters[filterKey];
-            if (filterValue !== null && filterValue !== "") {
-              params[filterKey] = filterValue;
-            } else {
-              delete params[filterKey];
-            }
-          }
-        }
         const result = await this.$http.get("/products", {
-          params: { accountId: this.$appConfig.accountId },
+          params: { accountId: this.$appConfig.accountId, ...params },
         });
-        const { products, totalItems } = result.data;
+        const { products, totalPages } = result.data;
+
         this.products = products;
-        this.totalItems = totalItems;
-        this.totalPages = 5;
-        // eslint-disable-next-line no-unused-vars
-
-        console.log(this.totalPages);
-
+        this.totalPages = totalPages; // Récupère le nombre total de pages à partir de la réponse
         this.quantities = products.map(() => 1);
-
-        this.loading = false;
       } catch (error) {
-        console.error(error);
+        console.error("Erreur lors de la récupération des produits:", error);
+      } finally {
+        this.loading = false; // Met à jour l'état de chargement après la requête
       }
     },
     updatePage(page) {
-      this.getProducts(page);
+      this.getProducts(page); // Récupère les produits pour la page sélectionnée
     },
     openEditModal(product) {
       this.selectedProduct = { ...product };
@@ -201,7 +184,7 @@ export default {
       }
     },
     showToast(type, message) {
-      const toast = useToast(); // Obtenez l'instance du toast
+      const toast = useToast();
       switch (type) {
         case 'success':
           toast.success(message, { timeout: 2000 });
@@ -216,7 +199,6 @@ export default {
   },
 };
 </script>
-
 
 <style>
 .home {
@@ -349,7 +331,7 @@ export default {
 
   .columns {
     width: 100%;
-   margin-left: 0rem;
+    margin-left: 0rem;
   }
 
   .column.is-half-mobile {
@@ -412,13 +394,10 @@ export default {
   }
 }
 
-
 @media screen and (min-width: 1024px) {
   .column.is-one-third-desktop {
     flex: none;
     width: 25%;
   }
 }
-
-
 </style>
