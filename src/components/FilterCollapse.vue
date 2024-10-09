@@ -136,6 +136,7 @@ export default {
     gap: 10px; /* Espace entre les colonnes */
     margin: 0 auto; /* Centre le conteneur */
     padding: 0 10px; /* Ajoute un espacement sur les côtés */
+    width: 90%;
   }
 
   .button.custom-filter-button {

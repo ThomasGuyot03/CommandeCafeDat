@@ -331,14 +331,30 @@ export default {
 }
 
 @media (max-width: 768px) {
+  body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
   .home {
     padding-left: 0px;
   }
 
   .columns.is-multiline {
-    justify-content: center;
-    padding-left: 15px;
-    padding-right: 15px;
+    justify-content: center; /* Centre les colonnes */
+  }
+
+  .columns {
+    width: 100%;
+   margin-left: 0rem;
+  }
+
+  .column.is-half-mobile {
+    max-width: 50%;
+    display: flex;
+    justify-content: center; /* Centre chaque colonne pour éviter qu'elles collent à gauche */
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
   .filter-wrapper {
@@ -360,16 +376,9 @@ export default {
   }
 
   .card {
-    min-width: 140px; /* Réduit la largeur minimale */
-    max-width: 90%; /* Limite la largeur à 90% pour éviter qu'elles ne dépassent */
-    margin: 0 auto 15px; /* Centre la carte et ajoute de l'espace en bas */
-  }
-
-  .column.is-half-mobile {
-    flex: 0 0 100%;
-    max-width: 100%;
-    display: flex;
-    justify-content: center;
+    min-width: 120px; /* Réduit la largeur minimale */
+    max-width: 100%; /* Limite la largeur à 100% pour bien s'adapter */
+    margin: 0 auto 15px; /* Ajoute une marge entre les cartes et les centre */
   }
 
   .card-title {
@@ -399,6 +408,7 @@ export default {
     font-size: 0.85rem;
   }
 }
+
 
 @media screen and (min-width: 1024px) {
   .column.is-one-third-desktop {

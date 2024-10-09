@@ -127,8 +127,14 @@ export default {
 }
 
 .sidebar-logo {
-  width: 120px;
+  width: 60px;
+  height: auto;
   margin-bottom: 30px;
+}
+
+.sidebar-logo img {
+  width: 180px;
+  height: auto;
 }
 
 .sidebar-menu {
