@@ -69,11 +69,10 @@
           </div>
         </div>
       </div>
-      <PaginationComponent
-        :current-page="currentPage"
-        :total-pages="totalPages"
-        :service-props="service"
-        @update-page="updatePage"
+      <PaginationComponent 
+      :currentPage="currentPage" 
+      :totalPages="totalPages" 
+      @update-page="updatePage"
       ></PaginationComponent>
     </div>
 
@@ -171,11 +170,12 @@ export default {
         const result = await this.$http.get("/products", {
           params: { accountId: this.$appConfig.accountId },
         });
-        const { products, totalItems, totalPages } = result.data;
+        const { products, totalItems } = result.data;
         this.products = products;
         this.totalItems = totalItems;
-        this.totalPages = totalPages;
-        
+        this.totalPages = 5;
+        // eslint-disable-next-line no-unused-vars
+
         console.log(this.totalPages);
 
         this.quantities = products.map(() => 1);
