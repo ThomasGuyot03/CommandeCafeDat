@@ -25,7 +25,6 @@ window.process = process
 if (process.env.VUE_APP_API_URL){
   axios.defaults.baseURL = process.env.VUE_APP_API_URL
 }
-console.log('test axios',axios.defaults)
 axios.interceptors.request.use(config => {
     const token = localStorage.getItem('token')
     if (token) {

@@ -175,6 +175,8 @@ export default {
         this.products = products;
         this.totalItems = totalItems;
         this.totalPages = totalPages;
+        
+        console.log(this.totalPages);
 
         this.quantities = products.map(() => 1);
 
