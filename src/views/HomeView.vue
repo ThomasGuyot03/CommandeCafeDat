@@ -19,10 +19,11 @@
       <div class="columns">
         <div class="columns is-multiline">
           <div
-            v-for="(product, index) in products"
+            v-for="(product, index) in products.slice(0, itemsLimit)"
             :key="index"
-            class="column is-one-third-desktop is-one-third-tablet is-half-mobile"  
+            class="column is-one-third-desktop is-one-third-tablet is-half-mobile"
           >
+
             <div class="card text-align-center">
               <div class="card-image">
                   <img :src="product.picture" border="0" alt="product" />               
