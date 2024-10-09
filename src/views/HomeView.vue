@@ -98,7 +98,7 @@ export default {
     return {
       loading: true,
       service: "products",
-      itemsLimit: 15,
+      itemsLimit: 10,
       products: null,
       currentPage: 1,
       totalPages: 1, // Initialisation avec 1
