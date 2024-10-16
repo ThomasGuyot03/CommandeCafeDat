@@ -77,7 +77,6 @@ export default {
           try {
             const response = await this.$http.get('/user/profile');
             this.selectedUser = response.data
-            console.log('réponse user',this.selectedUser)
             this.isLoading = false
           } catch (error) {
             this.showToast('error', 'Erreur lors de la récupération de l\'utilisateur');

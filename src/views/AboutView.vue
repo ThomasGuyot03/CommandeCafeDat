@@ -75,8 +75,6 @@ export default {
         })
       })
       const data = await response.json()
-      console.log('data ==>', data)
-      console.log('data.clientSecret ==>', data.client_secret)
       // Confirm the card payment
       console.log('this.card =>', this.card)
       const result = await this.stripe.confirmCardPayment(data.client_secret, {

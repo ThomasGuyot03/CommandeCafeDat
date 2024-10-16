@@ -94,8 +94,8 @@ background-color: #f5f5f5;
 padding: 2rem;
 }
 .button {
-background-color: #00d1b2;
-border-color: #00d1b2;
+background-color: #303649;
+border-color: #303649;
 color: #f5f5f5;
 margin-top: 1.5rem;
 }

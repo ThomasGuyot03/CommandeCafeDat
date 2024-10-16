@@ -21,10 +21,10 @@ import GenericMixin from '@/mixins/GenericMixin.js'
 
 window.process = process
 
-// axios.defaults.baseURL = 'http://localhost:3000/api/'
-if (process.env.VUE_APP_API_URL){
-  axios.defaults.baseURL = process.env.VUE_APP_API_URL
-}
+axios.defaults.baseURL = 'http://localhost:3000/api/'
+// if (process.env.VUE_APP_API_URL){
+//   axios.defaults.baseURL = process.env.VUE_APP_API_URL
+// }
 axios.interceptors.request.use(config => {
     const token = localStorage.getItem('token')
     if (token) {
@@ -38,7 +38,6 @@ axios.interceptors.request.use(config => {
 const app = createApp(App)
 
 const domain = window.location.hostname;
-console.log('test domaine' ,domain)
 // Paramétrer l'application en fonction du domaine
 if (domain === 'commandedat.netlify.app') {
   // Configurations spécifiques pour example1.local
@@ -70,7 +69,6 @@ if (cartData) {
 
     const decryptedBytes = CryptoJS.AES.decrypt(cartData, cleCryptage);
 
-    console.log('decryptedBytes', decryptedBytes);
 
     // Vérification si les données sont déchiffrées correctement
     const panierDecrypte = decryptedBytes.toString(CryptoJS.enc.Utf8);
@@ -84,7 +82,6 @@ if (cartData) {
       const parsedPanier = JSON.parse(panierDecrypte);
       store.state.cartId = cartData;
       store.state.cart = parsedPanier;
-      console.log('panier => ', parsedPanier);
     } catch (jsonError) {
       console.error("Erreur lors du parsing JSON : ", jsonError);
       console.error("Données déchiffrées : ", panierDecrypte);
