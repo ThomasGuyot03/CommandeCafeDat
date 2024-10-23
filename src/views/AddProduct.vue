@@ -2,8 +2,6 @@
   <div class="container">
     <h1 class="title">Ajouter un produit</h1>
     
-    <!-- Inclure le composant de filtre ici -->
-    <filter-collapse :initialFilters="{ category: product.category }" @filters-changed="onFiltersChanged"></filter-collapse>
 
     <form @submit.prevent="submitProduct" class="box">
       <!-- Titre du produit -->
