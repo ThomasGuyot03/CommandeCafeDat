@@ -99,20 +99,28 @@ export default {
         },
         async signup() {
             try {
+                // Validation des champs
                 if (!this.firstname || !this.name || !this.email || !this.password) {
                     this.errorMessage = "Veuillez remplir tous les champs.";
+                    this.showToast('error', this.errorMessage); // Affiche un toast pour les champs manquants
                     return;
                 }
+
                 const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
                 if (!emailRegex.test(this.email)) {
                     this.errorMessage = "Veuillez entrer une adresse email valide.";
+                    this.showToast('error', this.errorMessage); // Affiche un toast pour une adresse email non valide
                     return;
                 }
+
                 const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!.@#$%^&*])(?=.{8,})/;
                 if (!PASSWORD_REGEX.test(this.password)) {
                     this.errorMessage = "Le mot de passe doit contenir au moins 8 caractères, dont au moins une lettre et un chiffre.";
+                    this.showToast('error', this.errorMessage); // Affiche un toast pour un mot de passe non valide
                     return;
                 }
+
+                // Création des paramètres d'inscription
                 const params = {
                     firstname: this.firstname,
                     name: this.name,
@@ -127,15 +135,30 @@ export default {
                     },
                     company: this.company
                 };
-                await this.$http.post('/user/signup', params);
-                this.$router.push('/login');
+
+                // Requête d'inscription
+                const response = await this.$http.post('/user/signup', params);
+
+                // Si la requête est réussie
+                if (response.status === 201) {
+                    this.showToast('success', 'Inscription réussie !'); // Affiche un toast pour succès
+                    this.$router.push('/login');
+                }
             } catch (error) {
+                if (error.response && error.response.status === 400) {
+                    // Erreur 409 : Conflit (par exemple, adresse e-mail déjà utilisée)
+                    this.showToast('error', "L'adresse e-mail est déjà utilisée.");
+                } else {
+                    // Pour toute autre erreur
+                    this.showToast('error', "Une erreur s'est produite lors de l'inscription. Veuillez réessayer.");
+                }
                 console.error(error);
             }
         }
     }
 }
 </script>
+
 
   
 <style scoped>

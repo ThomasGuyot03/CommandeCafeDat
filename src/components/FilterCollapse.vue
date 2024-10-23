@@ -47,31 +47,37 @@
 
 <script>
 import { debounce } from 'lodash';
+
 export default {
-  props: ["initialFilters"],
+  props: {
+    initialFilters: {
+      type: Object,
+      default: () => ({ category: '' }), // Définit un filtre par défaut si aucun n'est fourni
+    },
+  },
   data() {
     return {
-      filters: this.initialFilters,
+      filters: { ...this.initialFilters }, // Clone pour éviter de modifier la prop directement
     };
   },
   methods: {
     setCategory(category) {
-      this.filters.category = category;
-      this.updateFilters();
+      this.filters.category = category; // Modifie la catégorie sélectionnée
+      this.updateFilters(); // Met à jour les filtres
     },
     updateFilters() {
-      this.$emit('filters-changed', this.filters);
+      this.$emit('filters-changed', this.filters); // Émet l'événement avec les filtres actuels
     },
   },
   watch: {
     'filters.minPrice': debounce(function (newVal, oldVal) {
       if (newVal !== oldVal) {
-        this.$emit('filters-changed', this.filters);
+        this.updateFilters();
       }
     }, 500),
     'filters.maxPrice': debounce(function (newVal, oldVal) {
       if (newVal !== oldVal) {
-        this.$emit('filters-changed', this.filters);
+        this.updateFilters();
       }
     }, 500),
   },

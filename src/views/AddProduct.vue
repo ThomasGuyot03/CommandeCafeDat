@@ -1,6 +1,10 @@
 <template>
   <div class="container">
     <h1 class="title">Ajouter un produit</h1>
+    
+    <!-- Inclure le composant de filtre ici -->
+    <filter-collapse :initialFilters="{ category: product.category }" @filters-changed="onFiltersChanged"></filter-collapse>
+
     <form @submit.prevent="submitProduct" class="box">
       <!-- Titre du produit -->
       <div class="field">
@@ -18,19 +22,18 @@
         </div>
       </div>
 
-        <!-- Catégorie du produit -->
-        <div class="field">
-          <label class="label">Catégorie</label>
-          <div class="control">
-            <div class="select is-fullwidth">
-              <select v-model="product.category" required>
-                <option value="" disabled selected>Sélectionnez une catégorie</option>
-                <option v-for="cat in categories" :key="cat.id" :value="cat.id">{{ cat.name }}</option>
-              </select>
-            </div>
+      <!-- Catégorie du produit -->
+      <div class="field">
+        <label class="label">Catégorie</label>
+        <div class="control">
+          <div class="select is-fullwidth">
+            <select v-model="product.category" required>
+              <option value="" disabled selected>Sélectionnez une catégorie</option>
+              <option v-for="cat in categories" :key="cat.id" :value="cat.id">{{ cat.name }}</option>
+            </select>
           </div>
         </div>
-
+      </div>
 
       <!-- Image du produit -->
       <div class="field">
@@ -51,41 +54,45 @@
 </template>
 
 <script>
+import FilterCollapse from '@/components/FilterCollapse.vue';
+
 export default {
+  components: {
+    FilterCollapse,
+  },
   data() {
     return {
       product: {
         title: '',
         description: '',
-        category: '',
-        image: null
+        category: '', // Catégorie sélectionnée par défaut
+        image: null,
       },
       categories: [
-                    { id: 1, name: 'Café' },
-                    { id: 2, name: 'Thé' },
-                    { id: 3, name: 'Lait' },
-                    { id: 4, name: 'Cappuccino' },
-                    { id: 5, name: 'Accessoires' }
-                  ]
-    }
+        { id: '1', name: 'Café' },
+        { id: '2', name: 'Thé' },
+        { id: '3', name: 'Lait' },
+        { id: '4', name: 'Gourmand' },
+        { id: '5', name: 'Accessoires' },
+      ],
+    };
   },
   methods: {
     handleFileUpload(event) {
-      this.product.image = event.target.files[0]; // Récupérer le fichier image
+      this.product.image = event.target.files[0]; // Stocke le fichier image
     },
     async submitProduct() {
       const formData = new FormData();
-      formData.append('name', this.product.title); // Renommé en 'name'
+      formData.append('name', this.product.title);
       formData.append('description', this.product.description);
       formData.append('category', this.product.category);
-      formData.append('accountId', this.$appConfig.accountId);
-      formData.append('image', this.product.image); // Ajout de l'image
+      formData.append('image', this.product.image);
 
       try {
         const response = await this.$http.post('/products/create', formData, {
           headers: {
-            'Content-Type': 'multipart/form-data'
-          }
+            'Content-Type': 'multipart/form-data',
+          },
         });
         if (response.status === 201) {
           this.showToast('success', 'Produit ajouté');
@@ -94,8 +101,11 @@ export default {
       } catch (error) {
         this.showToast('error', 'Erreur lors de l\'ajout du produit');
       }
-    }
-  }
+    },
+    onFiltersChanged(filters) {
+      this.product.category = filters.category; // Mise à jour de la catégorie du produit
+    },
+  },
 };
 </script>
 

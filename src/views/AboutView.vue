@@ -49,7 +49,6 @@ export default {
         displayError.textContent = ''
       }
     })
-    // Vous pouvez maintenant utiliser `this.stripe` dans les autres méthodes de ce composant
   },
   methods: {
     async submitPayment() {
