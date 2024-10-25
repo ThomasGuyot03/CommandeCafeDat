@@ -1,6 +1,9 @@
 <template>
   <div class="container">
     <h1 class="title">Ajouter un produit</h1>
+
+    <FilterCollapse @filters-changed="onFiltersChanged" />
+
     
 
     <form @submit.prevent="submitProduct" class="box">
@@ -84,6 +87,7 @@ export default {
       formData.append('name', this.product.title);
       formData.append('description', this.product.description);
       formData.append('category', this.product.category);
+      // formData.append('accountId', this.$appConfig.accountId);
       formData.append('image', this.product.image);
 
       try {
@@ -109,32 +113,45 @@ export default {
 
 <style scoped>
 
-.title {
-  margin-top: 30px; 
+.container {
+  max-width: 600px; 
+  margin: 0 auto; 
 }
 
-/* Modifier la bordure des champs d'input, textarea, et select */
+.title {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.box {
+  max-width: 600px; 
+  margin: 0 auto; 
+  padding: 20px; 
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  background-color: white; 
+}
+
 .input, .textarea, .select select {
-  border: 2px solid #303649; /* Augmente la taille de la bordure à 2px et change la couleur en rouge */
+  border: 2px solid #303649; 
 }
 
 .input:focus, .textarea:focus, .select select:focus {
-  border-color: rgb(75, 75, 75); /* Change la couleur à une teinte plus foncée lors du focus */
-  box-shadow: 0 0 5px rgba(180, 180, 180, 0.5); /* Ajoute une légère ombre rouge lors du focus */
+  border-color: rgb(75, 75, 75);
+  box-shadow: 0 0 5px rgba(180, 180, 180, 0.5);
 }
 
 .button.is-link {
-  background-color: #303649; /* Change la couleur du bouton de soumission à rouge */
-  border-color: rgb(0, 0, 0); /* Ajuste la couleur de la bordure du bouton */
+  background-color: #303649;
+  border-color: rgb(0, 0, 0);
 }
 
 .button.is-link:hover {
-  background-color: rgb(110, 110, 110); /* Couleur plus foncée lors du survol du bouton */
+  background-color: rgb(110, 110, 110);
 }
 
-/* Ajustement des labels pour une meilleure visibilité */
 .label {
   font-weight: bold;
-  color: #303649; /* Change la couleur des labels en rouge pour correspondre aux champs */
+  color: #303649;
 }
 </style>

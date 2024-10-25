@@ -148,14 +148,14 @@ export default {
       this.loading = true; // Ajoute un indicateur de chargement avant la requête
 
       try {
-        const params = {
-          page: this.currentPage,
-          limit: this.itemsLimit,
-          ...this.filters, // Inclut les filtres ici
-        };
+        // const params = {
+        //   page: this.currentPage,
+        //   limit: this.itemsLimit,
+        //   ...this.filters, // Inclut les filtres ici
+        // };
 
         const result = await this.$http.get("/products", {
-          params: { accountId: this.$appConfig.accountId, ...params },
+          params: { accountId: this.$appConfig.accountId },
         });
         const { products, totalPages } = result.data;
 
