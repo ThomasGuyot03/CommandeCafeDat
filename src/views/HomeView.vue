@@ -8,7 +8,7 @@
     <div class="filter-wrapper">
       <FilterCollapse
         :initialFilters="filters"
-        @filters-changed="getProducts(currentPage)"
+        @updateFilter="updateFilter($event)"
       />
     </div>
 
@@ -144,6 +144,7 @@ export default {
       this.showToast('success', `Le produit "${product.name}" a été ajouté au panier.`);
     },
     async getProducts(page = this.currentPage) { // Utilise la page actuelle par défaut
+      console.log('test page ', page)
       this.currentPage = page;
       this.loading = true; // Ajoute un indicateur de chargement avant la requête
 
@@ -155,7 +156,7 @@ export default {
         // };
 
         const result = await this.$http.get("/products", {
-          params: { accountId: this.$appConfig.accountId },
+          params: {category: this.filters.category},
         });
         const { products, totalPages } = result.data;
 
@@ -195,6 +196,10 @@ export default {
         default:
           toast(message, { timeout: 2000 });
       }
+    },
+    updateFilter(value) {
+      this.filters.category = value
+      this.getProducts()
     }
   },
 };

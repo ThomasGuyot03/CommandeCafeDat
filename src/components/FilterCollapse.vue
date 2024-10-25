@@ -66,7 +66,7 @@ export default {
       this.updateFilters(); // Met à jour les filtres
     },
     updateFilters() {
-      this.$emit('filters-changed', this.filters); // Émet l'événement avec les filtres actuels
+      this.$emit('updateFilter', this.filters.category); // Émet l'événement avec les filtres actuels
     },
   },
   watch: {
