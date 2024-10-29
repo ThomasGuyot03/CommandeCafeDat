@@ -144,19 +144,13 @@ export default {
       this.showToast('success', `Le produit "${product.name}" a été ajouté au panier.`);
     },
     async getProducts(page = this.currentPage) { // Utilise la page actuelle par défaut
-      console.log('test page ', page)
       this.currentPage = page;
       this.loading = true; // Ajoute un indicateur de chargement avant la requête
 
       try {
-        // const params = {
-        //   page: this.currentPage,
-        //   limit: this.itemsLimit,
-        //   ...this.filters, // Inclut les filtres ici
-        // };
 
         const result = await this.$http.get("/products", {
-          params: {category: this.filters.category},
+          params: {category: this.filters.category, page: this.currentPage},
         });
         const { products, totalPages } = result.data;
 
