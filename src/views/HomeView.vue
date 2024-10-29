@@ -1,7 +1,7 @@
 <template>
   <div class="home page-padding">
     <h1 class="title">Accueil</h1>
-    <div class="notification is-light text-align-center">
+    <div class="notification is-dark text-align-center">
       Commandez le meilleur de notre café !
     </div>
 
@@ -278,10 +278,11 @@ export default {
 }
 
 .notification {
-  background-color: #ffe0b2;
+  background-color: #4a4a4a; /* Couleur de fond gris foncé */
   border-radius: 10px;
-  color: #bdbdbd;
+  color: #ffffff; /* Texte blanc */
 }
+
 
 .loading-indicator {
   display: flex;

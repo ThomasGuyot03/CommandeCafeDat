@@ -1,7 +1,7 @@
 <template>
   <div class="app">
       <h1 class="title">Mon Profil</h1>
-      <div class="notification is-light text-align-center">
+      <div class="notification is-dark text-align-center">
           Commandez le meilleur de notre café !
       </div>
       <nav class="navbar">

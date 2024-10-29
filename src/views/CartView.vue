@@ -2,7 +2,7 @@
   <div class="home">
     <h1 class="title">Panier</h1>
 
-    <div class="notification is-light has-text-centered">
+    <div class="notification is-dark text-align-center">
       Commandez le meilleur de notre café ! 
     </div>
 
