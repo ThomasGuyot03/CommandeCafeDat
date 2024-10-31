@@ -1,9 +1,10 @@
 <template>
   <div class="home page-padding">
     <h1 class="title">Accueil</h1>
-    <div class="notification is-dark text-align-center">
-      Commandez le meilleur de notre café !
+    <div class="notification custom-notification text-align-center">
+  Commandez le meilleur de notre café !
     </div>
+
 
     <div class="filter-wrapper">
       <FilterCollapse
@@ -204,6 +205,13 @@ export default {
   padding-left: 160px; /* Ajoutez ce padding */
 }
 
+.custom-notification {
+  background-color: #303649 !important; /* Couleur de fond gris foncé avec priorité */
+  color: #ffffff !important; /* Texte en blanc avec priorité */
+  border-radius: 10px;
+  padding: 1.5rem 2rem;
+}
+
 .quantity-selector {
   display: flex;
   justify-content: center;
@@ -247,6 +255,7 @@ export default {
   min-width: 140px;
   max-width: 220px;
   width: 100%;
+  height: 100%;
   margin: 8px;
 }
 
@@ -255,7 +264,7 @@ export default {
 }
 
 .card-title {
-  font-size: 3.25rem;
+  font-size: 2.25rem;
   font-weight: bold;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
