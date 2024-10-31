@@ -40,7 +40,7 @@ const app = createApp(App)
 
 const domain = window.location.hostname;
 // Paramétrer l'application en fonction du domaine
-if (domain === 'https://dat-commande.com/') {
+if (domain === 'dat-commande.com') {
   // Configurations spécifiques pour example1.local
   app.config.globalProperties.$appConfig = {
     theme: 'light',
