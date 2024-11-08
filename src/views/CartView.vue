@@ -104,8 +104,7 @@ export default {
         console.error('Erreur lors de la récupération des produits:', error);
       }
     },
-
-    getRandomProducts() {
+     getRandomProducts() {
       const shuffled = this.allProducts.sort(() => 0.5 - Math.random());
       this.suggestedProducts = shuffled.slice(0, 4);
     },
