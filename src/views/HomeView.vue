@@ -334,6 +334,12 @@ export default {
     padding-left: 0px;
   }
 
+  .custom-notification {
+    margin: 0 auto; /* Centre horizontalement */
+    width: 90%; /* Ajuste la largeur pour s'adapter à l'écran mobile */
+    text-align: center; /* Centre le texte */
+}
+
   .columns.is-multiline {
     justify-content: center; /* Centre les colonnes */
   }
