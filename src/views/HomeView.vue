@@ -201,21 +201,100 @@ export default {
 </script>
 
 <style>
+
 .home {
-  padding-left: 160px; /* Ajoutez ce padding */
+  padding-left: 160px;
 }
 
 .custom-notification {
-  background-color: #303649 !important; /* Couleur de fond gris foncé avec priorité */
-  color: #ffffff !important; /* Texte en blanc avec priorité */
+  background-color: #303649 !important;
+  color: #ffffff !important;
   border-radius: 10px;
   padding: 1.5rem 2rem;
 }
 
+.page-padding {
+  padding-top: 50px;
+}
+
+.columns.is-multiline {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.notification {
+  background-color: #4a4a4a;
+  border-radius: 10px;
+  color: #ffffff;
+}
+
+.loading-indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  font-size: 1rem;
+}
+
+/* Cartes de produits */
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  transition: transform 0.3s ease-in-out;
+  border: grey 1px solid;
+  min-width: 140px;
+  max-width: 220px;
+  width: 100%;
+  height: 100%;
+  margin: 8px;
+  padding-bottom: 10px;
+}
+
+.card:hover {
+  transform: translateY(-15px);
+}
+
+.card-image img {
+  border-radius: 8px;
+  max-width: 80%;
+}
+
+.card-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+}
+
+.card-title {
+  font-size: 2.25rem;
+  font-weight: bold;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+}
+
+.custom-title-size {
+  font-size: 14px;
+}
+
+.content {
+  text-align: center;
+  font-size: 1rem;
+  margin-top: 5px;
+}
+
+/* Sélecteur de quantité */
 .quantity-selector {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: auto;
   margin-bottom: 10px;
 }
 
@@ -239,68 +318,7 @@ export default {
   background-color: #cfcfcf;
 }
 
-.page-padding {
-  padding-top: 50px;
-}
-
-.custom-title-size {
-  font-size: 14px;
-}
-
-.card {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  transition: transform 0.3s ease-in-out;
-  border: grey 1px solid;
-  min-width: 140px;
-  max-width: 220px;
-  width: 100%;
-  height: 100%;
-  margin: 8px;
-}
-
-.card-content {
-  padding: 8px;
-}
-
-.card-title {
-  font-size: 2.25rem;
-  font-weight: bold;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.card:hover {
-  transform: translateY(-15px);
-}
-
-.card-image img {
-  border-radius: 8px;
-  max-width: 80%;
-}
-
-.columns.is-multiline {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  padding-left: 10px;
-  padding-right: 10px;
-}
-
-.notification {
-  background-color: #4a4a4a; /* Couleur de fond gris foncé */
-  border-radius: 10px;
-  color: #ffffff; /* Texte blanc */
-}
-
-
-.loading-indicator {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100px;
-  font-size: 1rem;
-}
-
+/* Bouton d'ajout au panier */
 .button.custom-add-to-cart-button {
   background-color: #303649;
   color: white;
@@ -309,39 +327,47 @@ export default {
   align-items: center;
   justify-content: center;
   margin-bottom: 5px;
+  width: 100%;
 }
 
 .button.custom-add-to-cart-button:hover {
   background-color: #cfcfcf;
 }
 
+/* Bouton de modification */
 .custom-edit-button {
   color: rgb(107, 107, 107);
   border-color: #7e7e7e;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .custom-edit-button:hover {
   background-color: #9e9e9e;
 }
 
+/* Styles pour les petits écrans */
 @media (max-width: 768px) {
   body {
     width: 100%;
     margin: 0;
     padding: 0;
   }
+  
   .home {
     padding-left: 0px;
   }
 
   .custom-notification {
-    margin: 0 auto; /* Centre horizontalement */
-    width: 90%; /* Ajuste la largeur pour s'adapter à l'écran mobile */
-    text-align: center; /* Centre le texte */
-}
+    margin: 0 auto;
+    width: 90%;
+    text-align: center;
+  }
 
   .columns.is-multiline {
-    justify-content: center; /* Centre les colonnes */
+    justify-content: center;
   }
 
   .columns {
@@ -352,7 +378,7 @@ export default {
   .column.is-half-mobile {
     max-width: 50%;
     display: flex;
-    justify-content: center; /* Centre chaque colonne pour éviter qu'elles collent à gauche */
+    justify-content: center;
     padding-left: 10px;
     padding-right: 10px;
   }
@@ -376,9 +402,9 @@ export default {
   }
 
   .card {
-    min-width: 120px; /* Réduit la largeur minimale */
-    max-width: 100%; /* Limite la largeur à 100% pour bien s'adapter */
-    margin: 0 auto 15px; /* Ajoute une marge entre les cartes et les centre */
+    min-width: 120px;
+    max-width: 100%;
+    margin: 0 auto 15px;
   }
 
   .card-title {
@@ -409,10 +435,12 @@ export default {
   }
 }
 
+/* Styles pour les écrans larges */
 @media screen and (min-width: 1024px) {
   .column.is-one-third-desktop {
     flex: none;
     width: 25%;
   }
 }
+
 </style>
