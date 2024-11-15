@@ -73,6 +73,7 @@
       <PaginationComponent 
         :currentPage="currentPage" 
         :totalPages="totalPages" 
+        :service-props="service"
         @update-page="updatePage"
       />
     </div>

@@ -37,7 +37,7 @@
           <button class="button is-success is-large" @click="submitOrder">Commander</button>
         </div>
       </div>
-
+ 
       <div v-else>
         <p class="title">Panier vide</p>
       </div>
@@ -97,14 +97,24 @@ export default {
   methods: {
     async getAllProducts() {
       try {
-        const response = await this.$http.get('/products', { params: { accountId: this.$appConfig.accountId } });
-        this.allProducts = response.data.products;
-        this.getRandomProducts();
+        const response = await this.$http.get('/products', {
+          params: { page: 1, category: ''}
+        });
+        this.allProducts = response.data.products || [];
+        console.log('Produits récupérés:', this.allProducts);
+
+        if (this.allProducts.length > 0) {
+          this.getRandomProducts();
+        } else {
+          console.warn('Pas de produits disponibles pour les suggestions');
+        }
       } catch (error) {
         console.error('Erreur lors de la récupération des produits:', error);
+        this.showToast('error', 'Impossible de récupérer les produits suggérés.');
       }
     },
-     getRandomProducts() {
+
+    getRandomProducts() {
       const shuffled = this.allProducts.sort(() => 0.5 - Math.random());
       this.suggestedProducts = shuffled.slice(0, 4);
     },
@@ -120,12 +130,12 @@ export default {
       };
       try {
         const response = await this.$http.post('/orders/create', params);
-        console.log('Response:', response); // Vérifiez la réponse du serveur
+        console.log('Response:', response); 
         if (response.status === 200) {
           this.showToast('success', 'Commande réussie');
-          this.emptyCart(); // Vider le panier après une commande réussie
-          await this.$nextTick(); // Attendre la mise à jour du DOM
-          this.$router.push('/'); // Redirection vers la page d'accueil
+          this.emptyCart(); 
+          await this.$nextTick(); 
+          this.$router.push('/'); 
         }
       } catch (error) {
         this.showToast('error', 'Erreur lors de la commande');
