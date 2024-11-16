@@ -4,15 +4,7 @@
       <div class="notification is-dark text-align-center">
           Commandez le meilleur de notre café !
       </div>
-      <nav class="navbar">
-          <div class="navbar-brand">
-              <a class="navbar-item" @click="toggleMobileMenu">
-                  <span class="icon">
-                      <i class="fas fa-bars"></i>
-                  </span>
-              </a>
-          </div>
-      </nav>
+
       <div class="container">
           <div class="columns is-centered">
               <div class="column is-4-tablet is-4-desktop is-3-widescreen">
@@ -21,27 +13,27 @@
                       <div v-if="isLoading">Chargement des informations...</div>
                       <div v-else>
                           <div class="field">
-                              <label class="label">Prénom</label>
+                              <label class="label">Prénom:</label>
                               <p>{{ selectedUser.firstname }}</p>
                           </div>
                           <div class="field">
-                              <label class="label">Nom</label>
+                              <label class="label">Nom:</label>
                               <p>{{ selectedUser.lastname }}</p>
                           </div>
                           <div class="field">
-                              <label class="label">Société</label>
+                              <label class="label">Société:</label>
                               <p>{{ selectedUser.company }}</p>
                           </div>
                           <div class="field">
-                              <label class="label">Adresse</label>
+                              <label class="label">Adresse:</label>
                               <p>{{ selectedUser.address.line }}</p>
                           </div>
                           <div class="field">
-                              <label class="label">Adresse e-mail</label>
+                              <label class="label">Adresse e-mail:</label>
                               <p>{{ selectedUser.email }}</p>
                           </div>
                           <div class="field">
-                              <label class="label">Téléphone</label>
+                              <label class="label">Téléphone:</label>
                               <p>{{ selectedUser.phone }}</p>
                           </div>
                       </div>
@@ -90,8 +82,15 @@ export default {
 </script>
 
 <style scoped>
-.navbar-item {
-    color: #333;
+.title {
+    margin-top: 2rem; /* Ajustez cette valeur pour plus ou moins d'espace */
+}
+
+.notification {
+    max-width: 50%; /* Fixez la largeur maximale */
+    margin: 0 auto;   /* Centrez l'élément horizontalement */
+    margin-bottom: 5%;
+    font-size: 18px;
 }
 
 @media screen and (max-width: 768px) {

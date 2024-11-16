@@ -191,6 +191,11 @@ export default {
 </script>
 
 <style scoped>
+
+.home {
+  margin-top: 2rem; /* Espace supplémentaire en haut */
+}
+
 .button {
   background-color: #303649;
   border-color: #ffffff;
