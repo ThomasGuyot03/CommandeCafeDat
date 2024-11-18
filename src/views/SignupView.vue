@@ -13,7 +13,7 @@
                             <form @submit.prevent="signup">
                                 <!-- Ligne 1 - Prénom et Nom -->
                                 <div class="columns is-multiline">
-                                    <div class="column is-6">
+                                    <div class="column is-12-mobile is-6-desktop">
                                         <div class="field">
                                             <label class="label">Prénom</label>
                                             <div class="control">
@@ -21,7 +21,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="column is-6">
+                                    <div class="column is-12-mobile is-6-desktop">
                                         <div class="field">
                                             <label class="label">Nom</label>
                                             <div class="control">
@@ -33,7 +33,7 @@
 
                                 <!-- Ligne 2 - Société et Adresse -->
                                 <div class="columns is-multiline">
-                                    <div class="column is-6">
+                                    <div class="column is-12-mobile is-6-desktop">
                                         <div class="field">
                                             <label class="label">Société</label>
                                             <div class="control">
@@ -41,7 +41,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="column is-6">
+                                    <div class="column is-12-mobile is-6-desktop">
                                         <div class="field">
                                             <label class="label">Adresse</label>
                                             <div class="control">
@@ -53,7 +53,7 @@
 
                                 <!-- Ligne 3 - Code postal et Ville -->
                                 <div class="columns is-multiline">
-                                    <div class="column is-6">
+                                    <div class="column is-12-mobile is-6-desktop">
                                         <div class="field">
                                             <label class="label">Code postal</label>
                                             <div class="control">
@@ -61,7 +61,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="column is-6">
+                                    <div class="column is-12-mobile is-6-desktop">
                                         <div class="field">
                                             <label class="label">Ville</label>
                                             <div class="control">
@@ -73,7 +73,7 @@
 
                                 <!-- Ligne 4 - Email et Mot de passe -->
                                 <div class="columns is-multiline">
-                                    <div class="column is-6">
+                                    <div class="column is-12-mobile is-6-desktop">
                                         <div class="field">
                                             <label class="label">Adresse e-mail</label>
                                             <div class="control">
@@ -81,7 +81,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="column is-6">
+                                    <div class="column is-12-mobile is-6-desktop">
                                         <div class="field">
                                             <label class="label">Mot de passe</label>
                                             <div class="control">
