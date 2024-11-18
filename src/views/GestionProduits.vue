@@ -54,7 +54,7 @@ export default {
     async getProducts(page = 1) {
       try {
         this.currentPage = page
-        const response = await this.$http.get('/products', { params: { accountId: this.$appConfig.accountId } })
+        const response = await this.$http.get('/products', { params: { findAccount: this.$appConfig.findAccount } })
         this.produits = response.data.products
         this.loading = false
       } catch (error) {
