@@ -263,6 +263,18 @@ export default {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Top gradient bar for the signup container */
+.box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #00ffcc, #0077a6);
+  border-radius: 12px 12px 0 0;
+}
+
 /* Button styling for the sign-up page */
 .button.is-primary {
   background-color: #ffffff;
