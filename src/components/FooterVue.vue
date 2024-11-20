@@ -50,6 +50,7 @@
   padding: 10px 0;
   z-index: 999;
   margin-top: 5%;
+  border-radius: 5px
 }
 
 .footer-content {
