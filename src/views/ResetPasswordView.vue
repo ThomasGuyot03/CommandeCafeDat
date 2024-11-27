@@ -31,7 +31,7 @@
     }
 }
 </script>
-  
+
 
 <style scoped>
 .login-page {
