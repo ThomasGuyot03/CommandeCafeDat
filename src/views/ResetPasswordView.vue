@@ -32,7 +32,6 @@
 }
 </script>
 
-
 <style scoped>
 .login-page {
 height: 100vh;

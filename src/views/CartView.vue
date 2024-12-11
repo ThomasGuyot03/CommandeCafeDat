@@ -30,7 +30,6 @@
                       <i class="fas fa-trash is-hidden-tablet"></i>
                     </button>
                   </td>
-
                 </tr>
               </tbody>
             </table>
@@ -41,7 +40,7 @@
         </div>
       </div>
       <div v-else>
-        <p class="title">Panier vide</p>
+        <p class="title-panier">Panier vide</p>
       </div>
     </section>
 
@@ -197,7 +196,15 @@ export default {
 .title {
   margin-top: 2rem;
   color: #303649;
-  font-size: 2.8rem;
+  font-size: 2.2rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.title-panier {
+  margin-top: 2rem;
+  color: #303649;
+  font-size: 2rem;
   font-weight: bold;
   text-align: center;
 }

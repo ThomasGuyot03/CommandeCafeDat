@@ -156,9 +156,33 @@ export default {
     },
     async signup() {
       try {
-        // Vérification des champs obligatoires
-        if (!this.firstname || !this.name || !this.email || !this.password) {
-          this.errorMessage = "Veuillez remplir tous les champs.";
+        // Vérification des champs obligatoires et des erreurs spécifiques
+        if (!this.firstname) {
+          this.errorMessage = "Le prénom est requis.";
+          this.showToast('error', this.errorMessage);
+          return;
+        }
+
+        if (!this.name) {
+          this.errorMessage = "Le nom est requis.";
+          this.showToast('error', this.errorMessage);
+          return;
+        }
+
+        if (!this.company) {
+          this.errorMessage = "La société est requis.";
+          this.showToast('error', this.errorMessage);
+          return;
+        }
+
+        if (!this.line) {
+          this.errorMessage = "L'adresse est requis.";
+          this.showToast('error', this.errorMessage);
+          return;
+        }
+
+        if (!this.email) {
+          this.errorMessage = "L'adresse e-mail est requise.";
           this.showToast('error', this.errorMessage);
           return;
         }
@@ -166,7 +190,13 @@ export default {
         // Validation de l'email
         const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
         if (!emailRegex.test(this.email)) {
-          this.errorMessage = "Veuillez entrer une adresse email valide.";
+          this.errorMessage = "Veuillez entrer une adresse e-mail valide.";
+          this.showToast('error', this.errorMessage);
+          return;
+        }
+
+        if (!this.password) {
+          this.errorMessage = "Le mot de passe est requis.";
           this.showToast('error', this.errorMessage);
           return;
         }
@@ -180,6 +210,25 @@ export default {
         ) {
           this.errorMessage =
             "Le mot de passe doit respecter les conditions : au moins 8 caractères, une lettre majuscule, une lettre minuscule et un chiffre.";
+          this.showToast('error', this.errorMessage);
+          return;
+        }
+
+        // Champs d'adresse et de société non obligatoires, mais validation si remplis
+        if (this.line && this.line.trim() === "") {
+          this.errorMessage = "L'adresse ne peut pas être vide si renseignée.";
+          this.showToast('error', this.errorMessage);
+          return;
+        }
+
+        if (this.zip_code && this.zip_code.trim() === "") {
+          this.errorMessage = "Le code postal ne peut pas être vide si renseigné.";
+          this.showToast('error', this.errorMessage);
+          return;
+        }
+
+        if (this.city && this.city.trim() === "") {
+          this.errorMessage = "La ville ne peut pas être vide si renseignée.";
           this.showToast('error', this.errorMessage);
           return;
         }
@@ -211,7 +260,6 @@ export default {
       } catch (error) {
         if (error.response && error.response.status === 400) {
           // Erreur d'email déjà utilisé
-          this.showToast('error', "L'adresse e-mail est déjà utilisée.");
         } else {
           // Erreur générale
           this.showToast('error', "Une erreur s'est produite lors de l'inscription. Veuillez réessayer.");
@@ -220,6 +268,7 @@ export default {
       }
     }
   }
+
 };
 </script>
 
@@ -292,7 +341,6 @@ export default {
 .button.is-primary:hover {
   background: linear-gradient(90deg, #00ffcc, #0077a6);
 }
-
 
 .input:focus {
   border-color: #4060ff;

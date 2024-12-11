@@ -1,7 +1,6 @@
 <template>
   <div>
     <h1 class="title">Gestion des Produits</h1>
-
     <!-- Table des produits avec gestion du stock -->
     <table v-if="produits.length > 0" class="table">
       <thead>
@@ -25,7 +24,6 @@
         </tr>
       </tbody>
     </table>
-
     <div v-else class="loading-indicator">Chargement...</div>
   </div>
 </template>
