@@ -22,12 +22,12 @@
           @click="setCategory('2')">
           Thé
         </button>
-        <button 
+        <!-- <button 
           class="button custom-filter-button" 
           :class="{ 'is-active': filters.category === '3' }" 
           @click="setCategory('3')">
           Lait
-        </button>
+        </button> -->
         <button 
           class="button custom-filter-button" 
           :class="{ 'is-active': filters.category === '4' }" 
