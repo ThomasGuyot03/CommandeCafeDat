@@ -18,7 +18,7 @@
         <tr v-for="order in paginatedOrders()" :key="order._id">
           <td>{{ order.user.name }}</td>
           <td>{{ order.user.email }}</td>
-          <td>{{ order.user.company }}</td> <!-- ✅ Affichage de la société -->
+          <p><strong>Société:</strong> {{ selectedUser.company }}</p>
           <td>{{ formatAddress(order.user.address) }}</td>
           <td>
             <ul>
@@ -73,6 +73,7 @@ export default {
     async fetchOrders() {
       try {
         const response = await this.$http.get('/orders');
+        console.log('Données reçues du serveur:', response.data); // 🛠 Vérification des données
         this.orders = response.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
         this.totalPages = Math.ceil(this.orders.length / this.itemsPerPage); // Calcul du nombre total de pages
         console.log('Données reçues du serveur:', response.data);
