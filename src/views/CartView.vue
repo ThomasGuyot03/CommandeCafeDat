@@ -74,6 +74,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import emailjs from 'emailjs-com';
 
 export default {
   data() {
@@ -134,6 +135,7 @@ export default {
         console.log('Response:', response); 
         if (response.status === 200) {
           this.showToast('success', 'Commande réussie');
+          this.sendOrderEmail(); // Envoyer l'email après la commande
           this.emptyCart(); 
           await this.$nextTick(); 
           this.$router.push('/'); 
@@ -141,6 +143,31 @@ export default {
       } catch (error) {
         this.showToast('error', 'Erreur lors de la commande');
       }
+    },
+
+    sendOrderEmail() {
+      const templateParams = {
+        admin_email: 'ton-email@example.com', // Remplace par ton adresse email
+        user_name: this.getUser.name, // Nom du client
+        user_email: this.getUser.email, // Email du client
+        order_details: this.getCart.products
+          .map(p => `${p.quantity} x ${p.name}`)
+          .join(', '), // Liste des produits commandés
+      };
+
+      const SERVICE_ID = 'service_3lomloi';
+      const TEMPLATE_ID = 'template_m8bz2zo';
+      const USER_ID = 'tvhmjKHGt88Qcr-4m';
+
+      emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, USER_ID)
+        .then((response) => {
+          console.log('Email envoyé avec succès:', response);
+          this.showToast('success', 'Notification de commande envoyée');
+        })
+        .catch((error) => {
+          console.error('Erreur lors de l’envoi de l’email:', error);
+          this.showToast('error', 'Erreur lors de l’envoi de l’email');
+        });
     },
 
     emptyCart() {
@@ -190,6 +217,7 @@ export default {
   },
 };
 </script>
+
 
 <style scoped>
 /* Titre principal */

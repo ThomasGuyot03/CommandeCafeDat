@@ -18,7 +18,7 @@
         <tr v-for="order in paginatedOrders()" :key="order._id">
           <td>{{ order.user.name }}</td>
           <td>{{ order.user.email }}</td>
-          <p><strong>Société:</strong> {{ selectedUser.company }}</p>
+          <td>{{ order.user.company }}</td> <!-- ✅ Affichage de la société -->
           <td>{{ formatAddress(order.user.address) }}</td>
           <td>
             <ul>
