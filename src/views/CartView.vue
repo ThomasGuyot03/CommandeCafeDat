@@ -146,8 +146,9 @@ export default {
     },
 
     sendOrderEmail() {
+      console.log('Tentative d\'envoi de l\'email...');
       const templateParams = {
-        admin_email: 'ton-email@example.com', // Remplace par ton adresse email
+        admin_email: 'datcommande@gmail.com', // Remplace par ton adresse email
         user_name: this.getUser.name, // Nom du client
         user_email: this.getUser.email, // Email du client
         order_details: this.getCart.products
