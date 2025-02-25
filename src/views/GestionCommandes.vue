@@ -112,6 +112,7 @@ export default {
             <h1>Bon de livraison</h1>
             <p><strong>Client:</strong> ${order.user.name}</p>
             <p><strong>Email:</strong> ${order.user.email}</p>
+            p><strong>Société:</strong> ${order.user.company}</p>
             <p><strong>Adresse:</strong> ${this.formatAddress(order.user.address)}</p>
             <p><strong>Date de commande:</strong> ${this.formatDate(order.createdAt)}</p>
             <h2>Produits commandés</h2>
