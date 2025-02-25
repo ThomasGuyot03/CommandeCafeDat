@@ -145,33 +145,26 @@ export default {
       }
     },
 
-    sendOrderEmail() {
-      const templateParams = {
-        admin_email: 'ton-email@example.com', // Remplace par ton adresse email
-        user_name: this.getUser.name, // Nom du client
-        user_email: this.getUser.email, // Email du client
-        order_details: this.getCart.products
-          .map(p => `${p.quantity} x ${p.name}`)
-          .join(', '), // Liste des produits commandés
-      };
+    sendTestEmail() {
+        const templateParams = {
+          to_email: 'datcommande@gmail.com',  // Ton adresse email
+          message: 'Ceci est un test',  // Message simple
+        };
 
-      const SERVICE_ID = 'service_3lomloi';
-      const TEMPLATE_ID = 'template_m8bz2zo';
-      const USER_ID = 'XzYSq9HCV9jXLODw3';
+        const SERVICE_ID = 'service_3lomloi';
+        const TEMPLATE_ID = 'template_simple';  // Utilise un modèle simple ici
+        const USER_ID = 'XzYSq9HCV9jXLODw3';  // Ton identifiant utilisateur
 
-      console.log('Envoi des données à EmailJS :', templateParams); // Log des paramètres
+        console.log('Envoi des données à EmailJS (test) :', templateParams);
 
-      emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, USER_ID)
-        .then((response) => {
-          console.log('Réponse d\'EmailJS:', response); // Log de la réponse
-          this.showToast('success', 'Notification de commande envoyée');
-        })
-        .catch((error) => {
-          console.error('Erreur lors de l’envoi de l’email:', error); // Log de l'erreur
-          this.showToast('error', 'Erreur lors de l’envoi de l’email');
-        });
-    },
-
+        emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, USER_ID)
+          .then((response) => {
+            console.log('Réponse d\'EmailJS (test) :', response);
+          })
+          .catch((error) => {
+            console.error('Erreur lors de l\'envoi de l\'email (test) :', error);
+          });
+      },
 
     emptyCart() {
       console.log('Emptying cart...');
