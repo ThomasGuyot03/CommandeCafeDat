@@ -7,6 +7,7 @@
         <tr>
           <th>Nom Utilisateur</th>
           <th>Email</th>
+          <th>Société</th> <!-- ✅ Nouvelle colonne ajoutée -->
           <th>Adresse</th>
           <th>Produits</th>
           <th>Date</th>
@@ -17,6 +18,7 @@
         <tr v-for="order in paginatedOrders()" :key="order._id">
           <td>{{ order.user.name }}</td>
           <td>{{ order.user.email }}</td>
+          <td>{{ order.user.company }}</td> <!-- ✅ Affichage de la société -->
           <td>{{ formatAddress(order.user.address) }}</td>
           <td>
             <ul>
@@ -36,6 +38,7 @@
     </table>
 
     <div v-else class="loading-indicator">Chargement...</div>
+
     <div v-if="totalPages > 1" class="pagination">
       <button
         :disabled="currentPage === 1"
@@ -57,7 +60,6 @@
 </template>
 
 <script>
-
 export default {
   data() {
     return {
@@ -112,7 +114,7 @@ export default {
             <h1>Bon de livraison</h1>
             <p><strong>Client:</strong> ${order.user.name}</p>
             <p><strong>Email:</strong> ${order.user.email}</p>
-            p><strong>Société:</strong> ${order.user.company}</p>
+            <p><strong>Société:</strong> ${order.user.company}</p> <!-- ✅ Ajout dans le BL -->
             <p><strong>Adresse:</strong> ${this.formatAddress(order.user.address)}</p>
             <p><strong>Date de commande:</strong> ${this.formatDate(order.createdAt)}</p>
             <h2>Produits commandés</h2>
