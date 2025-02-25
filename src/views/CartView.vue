@@ -146,9 +146,8 @@ export default {
     },
 
     sendOrderEmail() {
-      console.log('Tentative d\'envoi de l\'email...');
       const templateParams = {
-        admin_email: 'datcommande@gmail.com', // Remplace par ton adresse email
+        admin_email: 'ton-email@example.com', // Remplace par ton adresse email
         user_name: this.getUser.name, // Nom du client
         user_email: this.getUser.email, // Email du client
         order_details: this.getCart.products
@@ -158,18 +157,21 @@ export default {
 
       const SERVICE_ID = 'service_3lomloi';
       const TEMPLATE_ID = 'template_m8bz2zo';
-      const USER_ID = 'tvhmjKHGt88Qcr-4m';
+      const USER_ID = 'XzYSq9HCV9jXLODw3';
+
+      console.log('Envoi des données à EmailJS :', templateParams); // Log des paramètres
 
       emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, USER_ID)
         .then((response) => {
-          console.log('Email envoyé avec succès:', response);
+          console.log('Réponse d\'EmailJS:', response); // Log de la réponse
           this.showToast('success', 'Notification de commande envoyée');
         })
         .catch((error) => {
-          console.error('Erreur lors de l’envoi de l’email:', error);
+          console.error('Erreur lors de l’envoi de l’email:', error); // Log de l'erreur
           this.showToast('error', 'Erreur lors de l’envoi de l’email');
         });
     },
+
 
     emptyCart() {
       console.log('Emptying cart...');
