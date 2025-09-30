@@ -125,25 +125,30 @@ export default {
     },
 
     async submitOrder() {
-      const params = {
-        user: this.customer,
-        cart: this.getCart,
-      };
-      try {
-        const response = await this.$http.post('/orders/create', params);
-        console.log('Response:', response); 
-        if (response.status === 200) {
-          this.showToast('success', 'Commande réussie');
-          this.sendOrderEmail(); // Envoyer l'email après la commande
-          this.emptyCart(); 
-          await this.$nextTick(); 
-          this.$router.push('/'); 
+        const params = {
+          user: this.customer,
+          cart: this.getCart,
+        };
+
+        try {
+          const { data } = await this.$http.post('/orders/create', params);
+          console.log('Response:', data);
+
+          if (data.success) {
+            this.showToast('success', 'Commande réussie');
+            this.sendOrderEmail();
+            this.emptyCart();
+            await this.$nextTick();
+            this.$router.push('/');
+          } else {
+            this.showToast('error', 'La commande a échoué côté serveur.');
+          }
+        } catch (error) {
+          console.error('Erreur Axios:', error.response || error);
+          this.showToast('error', 'Erreur lors de la commande.');
         }
-      } catch (error) {
-        this.showToast('error', 'Erreur lors de la commande');
-      }
-    },
-    
+      },
+
     emptyCart() {
       console.log('Emptying cart...');
       this.$store.commit('updateToCart', { obj: [], source: 'products' });
