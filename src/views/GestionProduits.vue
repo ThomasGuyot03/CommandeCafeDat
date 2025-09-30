@@ -48,35 +48,41 @@ export default {
     this.getProducts() // Récupérer les produits dès que la vue est montée
   },
   methods: {
-    // Récupération des produits
-    async getProducts(page = 1, limit = 10) {
-        try {
-          this.currentPage = page
-          const response = await this.$http.get('/products', {
-            params: { page, limit, findAccount: this.$appConfig.findAccount }
-          });
-          console.log('Response API:', response.data)
-          this.produits = response.data.products || [];
-          this.loading = false;
-        } catch (error) {
-          console.error('Erreur lors de la récupération des produits:', error)
-          this.loading = false
-        }
-      },
+    // Récupération des produits avec pagination
+    async getProducts(page = 1, limit = this.itemsLimit) {
+      try {
+        this.currentPage = page
+        const response = await this.$http.get('/products', {
+          params: { page, limit, category: '' } // category vide si pas de filtre
+        });
+        console.log('Response API:', response.data)
+        this.produits = response.data.products || [];
+        this.loading = false
+      } catch (error) {
+        console.error('Erreur lors de la récupération des produits:', error)
+        this.loading = false
+        this.toast.error('Impossible de récupérer les produits.', {
+          position: 'bottom-right',
+          timeout: 5000,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true
+        })
+      }
+    },
+
     // Mettre à jour le stock d'un produit avec le toast
     async mettreAJourStock(produit) {
       try {
         await this.$http.patch(`/products/update/${produit._id}`, { stock: produit.stock })
-        // Affichage du toast de succès
         this.toast.success('Stock mis à jour avec succès !', {
-          position: 'bottom-right', // Toast en bas à droite
-          timeout: 5000, // Durée d'affichage du toast
+          position: 'bottom-right',
+          timeout: 5000,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true
         })
       } catch (error) {
-        // Affichage du toast d'erreur
         this.toast.error('Erreur lors de la mise à jour du stock.', {
           position: 'bottom-right',
           timeout: 5000,
@@ -90,6 +96,7 @@ export default {
   }
 }
 </script>
+
 
 <style scoped>
 body {
