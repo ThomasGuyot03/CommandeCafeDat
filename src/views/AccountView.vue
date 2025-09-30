@@ -90,7 +90,7 @@
   .title {
     margin-top: 0;
     margin-bottom: 3rem;
-    color: #ffffff;
+    color: #000000;
     font-size: 3rem;
     font-weight: 700;
     text-align: center;
