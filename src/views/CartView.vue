@@ -136,7 +136,7 @@ export default {
 
           if (data.success) {
             this.showToast('success', 'Commande réussie');
-            this.sendOrderEmail();
+            // this.sendOrderEmail();
             this.emptyCart();
             await this.$nextTick();
             this.$router.push('/');
