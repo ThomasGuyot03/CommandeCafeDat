@@ -200,7 +200,7 @@ export default {
 }
 
 .textarea {
-  color: #303649; /* Texte de la description maintenant avec la même couleur que le titre */
+  color: #ffffff; /* Texte de la description maintenant avec la même couleur que le titre */
 }
 
 .textarea::placeholder {
