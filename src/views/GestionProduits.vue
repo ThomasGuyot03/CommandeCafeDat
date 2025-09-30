@@ -49,16 +49,20 @@ export default {
   },
   methods: {
     // Récupération des produits
-    async getProducts(page = 1) {
-      try {
-        this.currentPage = page
-        const response = await this.$http.get('/products', { params: { findAccount: this.$appConfig.findAccount } })
-        this.produits = response.data.products
-        this.loading = false
-      } catch (error) {
-        console.error('Erreur lors de la récupération des produits:', error)
-      }
-    },
+    async getProducts(page = 1, limit = 10) {
+        try {
+          this.currentPage = page
+          const response = await this.$http.get('/products', {
+            params: { page, limit, findAccount: this.$appConfig.findAccount }
+          });
+          console.log('Response API:', response.data)
+          this.produits = response.data.products || [];
+          this.loading = false;
+        } catch (error) {
+          console.error('Erreur lors de la récupération des produits:', error)
+          this.loading = false
+        }
+      },
     // Mettre à jour le stock d'un produit avec le toast
     async mettreAJourStock(produit) {
       try {
