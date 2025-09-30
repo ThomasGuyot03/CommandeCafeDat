@@ -74,7 +74,6 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import emailjs from 'emailjs-com';
 
 export default {
   data() {
@@ -144,28 +143,7 @@ export default {
         this.showToast('error', 'Erreur lors de la commande');
       }
     },
-
-    sendTestEmail() {
-        const templateParams = {
-          to_email: 'datcommande@gmail.com',  // Ton adresse email
-          message: 'Ceci est un test',  // Message simple
-        };
-
-        const SERVICE_ID = 'service_3lomloi';
-        const TEMPLATE_ID = 'template_simple';  // Utilise un modèle simple ici
-        const USER_ID = 'XzYSq9HCV9jXLODw3';  // Ton identifiant utilisateur
-
-        console.log('Envoi des données à EmailJS (test) :', templateParams);
-
-        emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, USER_ID)
-          .then((response) => {
-            console.log('Réponse d\'EmailJS (test) :', response);
-          })
-          .catch((error) => {
-            console.error('Erreur lors de l\'envoi de l\'email (test) :', error);
-          });
-      },
-
+    
     emptyCart() {
       console.log('Emptying cart...');
       this.$store.commit('updateToCart', { obj: [], source: 'products' });
