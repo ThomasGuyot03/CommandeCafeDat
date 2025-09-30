@@ -140,7 +140,6 @@
     transform: translateX(-50%);
     width: 80px;
     height: 4px;
-    background: linear-gradient(90deg, #667eea, #764ba2);
     border-radius: 2px;
   }
   
