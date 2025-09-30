@@ -152,7 +152,6 @@
     left: 0;
     right: 0;
     height: 6px;
-    background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
     border-radius: 24px 24px 0 0;
   }
   
