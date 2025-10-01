@@ -19,8 +19,9 @@
     <div v-else>
       <div class="columns">
         <div class="columns is-multiline">
+          <!-- Home.vue -->
           <div
-            v-for="(product, index) in products.slice(0, itemsLimit)"
+            v-for="(product, index) in products"
             :key="product._id" 
             class="column is-one-third-desktop is-one-third-tablet is-half-mobile"
           >
@@ -152,7 +153,7 @@ export default {
       try {
 
         const result = await this.$http.get("/products", {
-          params: {category: this.filters.category, page: this.currentPage},
+          params: {category: this.filters.category, page: this.currentPage, limit: this.itemsLimit},
         });
         const { products, totalPages } = result.data;
 
