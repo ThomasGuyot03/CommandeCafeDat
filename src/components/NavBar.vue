@@ -56,7 +56,6 @@
       </ul>
     </nav>
 
-    <!-- Hamburger button for mobile -->
     <button class="hamburger" @click.stop="toggleSidebar">
       <i class="fas fa-bars"></i>
     </button>
@@ -93,7 +92,7 @@ export default {
     logout() {
       localStorage.removeItem('token');
       this.$store.dispatch('updateUser', null);
-      this.closeSidebar();  // Ferme aussi la sidebar après déconnexion
+      this.closeSidebar();
     }
   },
   mounted() {
@@ -108,120 +107,281 @@ export default {
 
 
 <style scoped>
-/* Style de base pour la sidebar */
 .sidebar {
   position: fixed;
   top: 0;
   left: 0;
-  width: 220px;
+  width: 260px;
   height: 100%;
-  background-color: #303649;
+  background: linear-gradient(180deg, #1a1f2e 0%, #2c3e50 100%);
   color: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px 0;
+  padding: 0;
   transform: translateX(0);
-  transition: transform 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 1000;
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.15);
+  overflow-y: auto;
+}
+
+.sidebar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(52, 152, 219, 0.05) 0%, rgba(46, 204, 113, 0.05) 100%);
+  pointer-events: none;
+}
+
+.sidebar-brand {
+  width: 100%;
+  padding: 2rem 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  position: relative;
+}
+
+.sidebar-brand::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #3498db, #2ecc71);
+  border-radius: 2px;
 }
 
 .sidebar-logo {
-  width: 60px;
-  height: auto;
-  margin-bottom: 30px;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.sidebar-logo:hover {
+  transform: scale(1.05);
 }
 
 .sidebar-logo img {
   width: 180px;
   height: auto;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
 }
 
 .sidebar-menu {
   list-style-type: none;
-  padding: 0;
+  padding: 1.5rem 0;
   margin: 0;
   width: 100%;
+  flex: 1;
+}
+
+.sidebar-menu li {
+  position: relative;
 }
 
 .sidebar-item {
   width: 100%;
-  padding: 20px;
+  padding: 1rem 1.5rem;
   display: flex;
   align-items: center;
-  color: #fff;
+  color: rgba(255, 255, 255, 0.85);
   text-decoration: none;
-  transition: background-color 0.3s;
-  font-size: 18px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 16px;
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+}
+
+.sidebar-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, #3498db, #2ecc71);
+  transform: scaleY(0);
+  transition: transform 0.3s ease;
+}
+
+.sidebar-item::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, rgba(52, 152, 219, 0.15), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .sidebar-item:hover {
-  background-color: #575757;
+  color: #ffffff;
+  background: rgba(52, 152, 219, 0.1);
+  padding-left: 2rem;
+  transform: translateX(4px);
+}
+
+.sidebar-item:hover::before {
+  transform: scaleY(1);
+}
+
+.sidebar-item:hover::after {
+  opacity: 1;
+}
+
+.sidebar-item.router-link-active {
+  color: #ffffff;
+  background: rgba(52, 152, 219, 0.15);
+  font-weight: 600;
+}
+
+.sidebar-item.router-link-active::before {
+  transform: scaleY(1);
 }
 
 .sidebar-item i {
-  margin-right: 10px;
+  margin-right: 1rem;
+  font-size: 1.2rem;
+  width: 24px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s ease;
+}
+
+.sidebar-item:hover i {
+  transform: scale(1.1);
 }
 
 .sidebar-item span {
   flex-grow: 1;
+  position: relative;
+  z-index: 1;
 }
 
 .cart-badge {
-  background-color: rgb(155, 155, 155);
+  background: linear-gradient(135deg, #3498db, #2ecc71);
   color: white;
-  border-radius: 15%;
-  padding: 2px 6px;
-  font-size: 12px;
-  margin-left: 10px; /* Espace à gauche du badge */
-  font-weight: bold;
-  display: inline-flex; /* Aligne le badge avec le texte */
+  border-radius: 12px;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
-  text-align: center; /* Centre le texte à l'intérieur */
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 2px 8px rgba(52, 152, 219, 0.4);
+  animation: pulse 2s infinite;
+  min-width: 24px;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.4);
+  }
+  50% {
+    box-shadow: 0 2px 16px rgba(52, 152, 219, 0.6);
+  }
 }
 
 .hamburger {
   display: none;
   position: fixed;
-  top: 10px;
-  left: 10px;
-  background: none;
+  top: 20px;
+  left: 20px;
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
   border: none;
   color: white;
   font-size: 24px;
   z-index: 1001;
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 
-/* Responsive styles */
+.hamburger:hover {
+  background: linear-gradient(135deg, #3498db 0%, #2ecc71 100%);
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+}
+
+.hamburger:active {
+  transform: scale(0.95);
+}
+
 @media (max-width: 768px) {
   .sidebar {
     width: 80vw;
+    max-width: 300px;
     transform: translateX(-100%);
+    box-shadow: none;
   }
 
   .sidebar.is-active {
     transform: translateX(0);
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.3);
   }
 
-  .sidebar-logo {
-    width: 40px;
+  .sidebar-logo img {
+    width: 150px;
   }
 
-  /* Display hamburger button on mobile */
   .hamburger {
-    display: block;
-    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
-
 }
 
-/* Trait blanc au-dessus du bouton "Ajouter produit" */
 .sidebar-item.to-ajouter-produit {
-  border-top: 4px solid white;
-  margin-top: 20px;
-  padding-top: 20px;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  position: relative;
 }
 
-</style>
+.sidebar-item.to-ajouter-produit::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 1.5rem;
+  right: 1.5rem;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+}
 
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #3498db, #2ecc71);
+  border-radius: 3px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #2ecc71, #3498db);
+}
+</style>
