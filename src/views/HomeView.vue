@@ -19,10 +19,9 @@
     <div v-else>
       <div class="columns">
         <div class="columns is-multiline">
-          <!-- Home.vue -->
           <div
             v-for="(product, index) in products"
-            :key="product._id" 
+            :key="product._id"
             class="column is-one-third-desktop is-one-third-tablet is-half-mobile"
           >
             <div class="card text-align-center">
@@ -71,9 +70,9 @@
         </div>
       </div>
 
-      <PaginationComponent 
-        :currentPage="currentPage" 
-        :totalPages="totalPages" 
+      <PaginationComponent
+        :currentPage="currentPage"
+        :totalPages="totalPages"
         :service-props="service"
         @update-page="updatePage"
       />
@@ -104,7 +103,7 @@ export default {
       itemsLimit: 12,
       products: null,
       currentPage: 1,
-      totalPages: 1, // Initialisation avec 1
+      totalPages: 1,
       filters: {
         category: "",
         sortByPrice: "",
@@ -136,7 +135,7 @@ export default {
       };
       let products = this.getCart.products;
       let productAlreadyInCart = products.find((i) => i.id === product._id);
-      
+
       if (productAlreadyInCart) {
         productAlreadyInCart.quantity += itemData.quantity;
       } else {
@@ -146,9 +145,9 @@ export default {
       this.$store.commit("updateToCart", { obj: products, source: "products" });
       this.showToast('success', `Le produit "${product.name}" a été ajouté au panier.`);
     },
-    async getProducts(page = this.currentPage) { // Utilise la page actuelle par défaut
+    async getProducts(page = this.currentPage) {
       this.currentPage = page;
-      this.loading = true; // Ajoute un indicateur de chargement avant la requête
+      this.loading = true;
 
       try {
 
@@ -158,16 +157,16 @@ export default {
         const { products, totalPages } = result.data;
 
         this.products = products;
-        this.totalPages = totalPages; // Récupère le nombre total de pages à partir de la réponse
+        this.totalPages = totalPages;
         this.quantities = products.map(() => 1);
       } catch (error) {
         console.error("Erreur lors de la récupération des produits:", error);
       } finally {
-        this.loading = false; // Met à jour l'état de chargement après la requête
+        this.loading = false;
       }
     },
     updatePage(page) {
-      this.getProducts(page); // Récupère les produits pour la page sélectionnée
+      this.getProducts(page);
     },
     openEditModal(product) {
       this.selectedProduct = { ...product };
@@ -241,43 +240,84 @@ export default {
   font-size: 1rem;
 }
 
-/* Cartes de produits */
 .card {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  transition: transform 0.3s ease-in-out;
-  border: grey 1px solid;
+  align-items: center;
+  text-align: center;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 2px solid transparent;
+  overflow: hidden;
+  position: relative;
   min-width: 140px;
   max-width: 220px;
   width: 100%;
   height: 100%;
   margin: 8px;
-  padding-bottom: 10px;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #3498db, #2ecc71);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.card:hover::before {
+  transform: scaleX(1);
 }
 
 .card:hover {
-  transform: translateY(-15px);
+  box-shadow: 0 8px 30px rgba(52, 152, 219, 0.2);
+  transform: translateY(-8px);
+  border-color: #3498db;
+}
+
+.card-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-height: 200px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+.card:hover .card-image {
+  transform: scale(1.05);
 }
 
 .card-image img {
-  border-radius: 8px;
   max-width: 80%;
+  max-height: 80%;
+  object-fit: contain;
 }
 
 .card-content {
-  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  padding: 8px;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .card-title {
-  font-size: 2.25rem;
-  font-weight: bold;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 0.75rem;
+  word-wrap: break-word;
+  font-size: 1.1rem;
   text-align: center;
 }
 
@@ -286,12 +326,13 @@ export default {
 }
 
 .content {
+  color: #7f8c8d;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
   text-align: center;
-  font-size: 1rem;
-  margin-top: 5px;
 }
 
-/* Sélecteur de quantité */
 .quantity-selector {
   display: flex;
   justify-content: center;
@@ -320,23 +361,39 @@ export default {
   background-color: #cfcfcf;
 }
 
-/* Bouton d'ajout au panier */
 .button.custom-add-to-cart-button {
-  background-color: #303649;
-  color: white;
+  margin-top: 1rem;
+  width: 100%;
+  max-width: 250px;
+  padding: 0.85rem 1.5rem;
+  font-size: 1rem;
+  background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+  color: #ffffff;
   border: none;
+  font-weight: 600;
+  border-radius: 50px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 5px;
-  width: 100%;
+  gap: 0.5rem;
 }
 
 .button.custom-add-to-cart-button:hover {
-  background-color: #cfcfcf;
+  background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+  box-shadow: 0 6px 20px rgba(46, 204, 113, 0.4);
+  transform: translateY(-2px);
 }
 
-/* Bouton de modification */
+.button.custom-add-to-cart-button:active {
+  transform: translateY(0);
+}
+
+.button.custom-add-to-cart-button i {
+  font-size: 1.1rem;
+}
+
 .custom-edit-button {
   color: rgb(107, 107, 107);
   border-color: #7e7e7e;
@@ -344,20 +401,20 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 0.5rem;
 }
 
 .custom-edit-button:hover {
   background-color: #9e9e9e;
 }
 
-/* Styles pour les petits écrans */
 @media (max-width: 768px) {
   body {
     width: 100%;
     margin: 0;
     padding: 0;
   }
-  
+
   .home {
     padding-left: 0px;
   }
@@ -407,6 +464,7 @@ export default {
     min-width: 120px;
     max-width: 100%;
     margin: 0 auto 15px;
+    padding: 1.25rem;
   }
 
   .card-title {
@@ -437,7 +495,6 @@ export default {
   }
 }
 
-/* Styles pour les écrans larges */
 @media screen and (min-width: 1024px) {
   .column.is-one-third-desktop {
     flex: none;
