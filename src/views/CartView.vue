@@ -376,7 +376,7 @@ export default {
   font-weight: 700;
   font-size: 1.1rem;
   min-width: 30px;
-  color: #ecf0f1;
+  color: #000000;
 }
 
 .button.is-danger {
