@@ -1,47 +1,31 @@
 <template>
-  <div class="columns is-8 is-gapless is-fullheight">
-    <div class="column p-5">
-      <h1 class="title custom-title">Menu Administrateur</h1>
-      
-      <!-- Les boutons alignés horizontalement et responsives -->
-      <div class="menu-horizontal columns is-mobile is-multiline is-gapless">
-        <div class="column is-one-quarter-desktop is-half-mobile">
-          <router-link to="/gestion/produits">
-            <div class="menu-square">
-              <i class="fas fa-box"></i> 
-              <span>Gestion Produits</span> <!-- Ajout d'un span autour du texte -->
-            </div>
-          </router-link>
-        </div>
-        <div class="column is-one-quarter-desktop is-half-mobile">
-          <router-link to="/gestion/commandes">
-            <div class="menu-square">
-              <i class="fas fa-receipt"></i> 
-              <span>Gestion Commandes</span>
-            </div>
-          </router-link>
-        </div>
-        <div class="column is-one-quarter-desktop is-half-mobile">
-          <router-link to="/gestion/utilisateurs">
-            <div class="menu-square">
-              <i class="fas fa-users"></i> 
-              <span>Gestion Utilisateurs</span>
-            </div>
-          </router-link>
-        </div>
-        <div class="column is-one-quarter-desktop is-half-mobile">
-          <router-link to="/gestion/graphique">
-            <div class="menu-square">
-              <i class="fas fa-chart-line"></i> 
-              <span>Graphique</span>
-            </div>
-          </router-link>
-        </div>
-      </div>
+  <div class="admin-home">
+    <h1 class="title">Menu Administrateur</h1>
 
-      <!-- Contenu du gestionnaire -->
-      <router-view></router-view>
+    <div class="menu-grid">
+      <router-link to="/gestion/produits" class="menu-card">
+        <i class="fas fa-box"></i>
+        <span>Gestion Produits</span>
+      </router-link>
+
+      <router-link to="/gestion/commandes" class="menu-card">
+        <i class="fas fa-receipt"></i>
+        <span>Gestion Commandes</span>
+      </router-link>
+
+      <router-link to="/gestion/utilisateurs" class="menu-card">
+        <i class="fas fa-users"></i>
+        <span>Gestion Utilisateurs</span>
+      </router-link>
+
+      <router-link to="/gestion/graphique" class="menu-card">
+        <i class="fas fa-chart-line"></i>
+        <span>Graphique</span>
+      </router-link>
     </div>
+
+    <!-- Contenu du gestionnaire -->
+    <router-view></router-view>
   </div>
 </template>
 
@@ -52,79 +36,88 @@ export default {
 </script>
 
 <style scoped>
-.column.p-5 {
-  margin-left: 220px; /* Décale le contenu pour laisser de la place à la navbar */
+.admin-home {
+  padding: 50px 20px 20px 20px;
+  background-color: #f8f9fa;
+  min-height: 100vh;
 }
 
-.menu-horizontal {
-  margin-top: 20px; /* Espace entre le titre et les boutons */
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 40px;
+  color: #1a1f2e;
 }
 
-.custom-title {
-  margin-top: 50px;
-  font-weight: bold;
-  margin-bottom: 50px;
+/* Grid responsive des cartes */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  justify-items: center;
+  margin-bottom: 40px;
 }
 
-.menu-square {
+/* Cartes */
+.menu-card {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centre les éléments horizontalement */
-  justify-content: center; /* Centre les éléments verticalement */
-  padding: 20px;
-  gap: 8px; /* Espace entre l'icône et le texte */
-  cursor: pointer;
-  background-color: #303649; /* Couleur de fond personnalisée */
-  color: white; /* Couleur du texte */
-  border-radius: 5px; /* Arrondir les bords des boutons */
-  transition: background-color 0.3s; /* Animation pour le changement de couleur */
-  height: 100px; /* Hauteur fixe pour assurer que tous les boutons aient la même taille */
-  margin: 10px; /* Espace externe pour espacer les boutons */
-  text-align: center; /* Centre le texte à l'intérieur des boutons */
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  color: #1a1f2e;
+  width: 180px;
+  height: 120px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  padding: 15px;
+  text-align: center;
 }
 
-.menu-square i {
-  font-size: 24px; /* Taille de l'icône */
+.menu-card i {
+  font-size: 28px;
+  margin-bottom: 10px;
+  color: #3498db;
+  transition: transform 0.3s ease, color 0.3s ease;
 }
 
-.menu-square:hover {
-  background-color: #475057; /* Couleur de fond lors du survol */
+.menu-card span {
+  font-size: 1rem;
 }
 
-/* S'assurer que chaque bouton prend la même largeur sur mobile */
-.column.is-half-mobile {
-  padding: 10px; /* Espace autour des colonnes */
+/* Hover effects */
+.menu-card:hover {
+  transform: translateY(-6px) scale(1.05);
+  box-shadow: 0 10px 25px rgba(52, 152, 219, 0.2);
 }
 
-/* Pour ajuster l'affichage sur mobile */
+.menu-card:hover i {
+  color: #2ecc71;
+  transform: scale(1.2);
+}
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
-  .column.p-5 {
-    margin-left: 0px; /* Supprimer la marge sur mobile */
+  .title {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
   }
 
-  .menu-horizontal {
-    justify-content: center; /* Centrer les boutons horizontalement sur mobile */
+  .menu-card {
+    width: 150px;
+    height: 100px;
   }
 
-  .menu-square {
-    height: 80px; /* Ajuster la hauteur des boutons sur mobile */
-    padding: 10px; /* Diminuer l'espacement interne pour mobile */
-    width: 180px; /* Chaque bouton occupe 100% de la largeur de la colonne */
-    box-sizing: border-box; /* S'assure que les bordures et padding sont pris en compte dans la largeur */
+  .menu-card i {
+    font-size: 24px;
   }
 
-  .menu-square i {
-    font-size: 20px; /* Réduire la taille de l'icône pour mobile */
-  }
-
-  .menu-square span {
-    font-size: 14px; /* Ajuster la taille du texte sur mobile */
-  }
-
-  .column.is-half-mobile {
-    flex: 0 0 50%; /* Assurer que chaque bouton prenne 50% de la largeur de l'écran sur mobile */
-    max-width: 50%; /* Limiter la largeur à 50% */
+  .menu-card span {
+    font-size: 0.9rem;
   }
 }
-
 </style>
