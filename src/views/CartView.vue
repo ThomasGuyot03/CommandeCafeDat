@@ -312,7 +312,7 @@ export default {
 
 .table th {
   background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
-  color: #ecf0f1;
+  color: #000000;
   font-weight: 700;
   font-size: 1rem;
   text-transform: uppercase;
