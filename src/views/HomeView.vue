@@ -1,10 +1,12 @@
 <template>
   <div class="home page-padding">
-    <h1 class="title">Accueil</h1>
-    <div class="notification custom-notification text-align-center">
-  Commandez le meilleur de notre café !
-    </div>
-
+    <!-- Hero Banner -->
+      <div class="hero-banner">
+        <div class="hero-content">
+          <h1>Le meilleur du café, livré chez vous ☕</h1>
+          <p>Découvrez notre nouvelle game de café Lavazza.</p>
+        </div>
+      </div>
 
     <div class="filter-wrapper">
       <FilterCollapse
@@ -405,6 +407,68 @@ export default {
 .custom-edit-button:hover {
   background-color: #9e9e9e;
 }
+
+/* HERO BANNER */
+.hero-banner {
+  width: 100%;
+  height: 300px;
+  background-image: url('https://i.postimg.cc/NG76ZdRz/tales-of-italy-menu.webp');
+  background-size: cover;
+  background-position: center;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 2rem;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* Overlay sombre pour le contraste */
+.hero-banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/* Contenu centré dans le hero */
+.hero-content {
+  position: relative;
+  color: #fff;
+  text-align: center;
+  z-index: 1;
+  padding: 1rem;
+}
+
+.hero-content h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  color: #e0e0e0;
+}
+
+/* Version mobile */
+@media (max-width: 768px) {
+  .hero-banner {
+    height: 200px;
+  }
+
+  .hero-content h1 {
+    font-size: 1.6rem;
+  }
+
+  .hero-content p {
+    font-size: 0.95rem;
+  }
+}
+
 
 @media (max-width: 768px) {
   body {
