@@ -8,7 +8,7 @@
           <!-- Formulaire divisé en 2 colonnes sur desktop et une seule sur mobile -->
           <div class="column is-12-mobile is-8-tablet is-6-desktop">
             <div class="box">
-              <form @submit.prevent="signup">
+              <form @submit-prevent="signup">
                 <!-- Ligne 1 - Prénom et Nom -->
                 <div class="columns is-multiline">
                   <div class="column is-12-mobile is-6-desktop">
@@ -121,7 +121,7 @@
 export default {
   data() {
     return {
-      darkMode: false,  // Etat initial du mode sombre
+      darkMode: false,
       firstname: null,
       name: null,
       email: null,
@@ -135,7 +135,6 @@ export default {
     };
   },
   computed: {
-    // Validation des conditions du mot de passe
     passwordLengthValid() {
       return this.password && this.password.length >= 8;
     },
@@ -151,12 +150,10 @@ export default {
   },
   methods: {
     sanitizeInput(field) {
-      // Nettoyer les entrées pour éviter les caractères non autorisés
       this[field] = this[field].replace(/[^a-zA-ZÀ-ÿ '-]/g, '');
     },
     async signup() {
       try {
-        // Vérification des champs obligatoires et des erreurs spécifiques
         if (!this.firstname) {
           this.errorMessage = "Le prénom est requis.";
           this.showToast('error', this.errorMessage);
@@ -187,7 +184,6 @@ export default {
           return;
         }
 
-        // Validation de l'email
         const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
         if (!emailRegex.test(this.email)) {
           this.errorMessage = "Veuillez entrer une adresse e-mail valide.";
@@ -201,7 +197,6 @@ export default {
           return;
         }
 
-        // Validation des critères de mot de passe
         if (
           !this.passwordLengthValid ||
           !this.passwordUppercaseValid ||
@@ -214,7 +209,6 @@ export default {
           return;
         }
 
-        // Champs d'adresse et de société non obligatoires, mais validation si remplis
         if (this.line && this.line.trim() === "") {
           this.errorMessage = "L'adresse ne peut pas être vide si renseignée.";
           this.showToast('error', this.errorMessage);
@@ -233,7 +227,6 @@ export default {
           return;
         }
 
-        // Préparation des paramètres d'inscription
         const params = {
           firstname: this.firstname,
           name: this.name,
@@ -249,131 +242,234 @@ export default {
           company: this.company
         };
 
-        // Envoi de la requête d'inscription
         const response = await this.$http.post('/user/signup', params);
 
         if (response.status === 201) {
-          // Succès de l'inscription
           this.showToast('success', 'Inscription réussie !');
           this.$router.push('/login');
         }
       } catch (error) {
         if (error.response && error.response.status === 400) {
-          // Erreur d'email déjà utilisé
+          this.showToast('error', 'Cette adresse email est déjà utilisée.');
         } else {
-          // Erreur générale
           this.showToast('error', "Une erreur s'est produite lors de l'inscription. Veuillez réessayer.");
         }
         console.error(error);
       }
     }
   }
-
 };
 </script>
 
 <style scoped>
-/* Mode clair par défaut */
 .home {
-  margin-top: 1rem;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
+  background: #f8f9fa;
+  padding: 3rem 0;
+  transition: background-color 0.3s ease;
 }
 
 .title {
-  font-size: 2.8rem;
+  font-size: 2rem;
   text-align: center;
-  margin-bottom: 1rem;
-  transition: color 0.3s ease;
+  margin-bottom: 3rem;
+  color: #1a1f2e;
+  font-weight: 600;
+  letter-spacing: -0.5px;
 }
 
 .signup-page {
   display: flex;
   justify-content: center;
-  padding: 1rem 3rem;
+  padding: 0 1.5rem;
 }
 
 .columns {
-  color: #303649;
+  margin: 0;
 }
 
-/* Pour les étiquettes de champs */
 .label {
-  color: white;
+  color: #2c3e50;
+  font-weight: 500;
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-/* Boîte du formulaire */
 .box {
-  padding: 2rem;
-  background-color: #303649;
+  padding: 3rem;
+  background: #ffffff;
   border-radius: 8px;
-  color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.3s ease;
+  border: 1px solid #e8e8e8;
+}
+
+.box:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.field {
+  margin-bottom: 1.5rem;
+}
+
+.control {
   position: relative;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Top gradient bar for the signup container */
-.box::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 5px;
-  background: linear-gradient(90deg, #00ffcc, #0077a6);
-  border-radius: 12px 12px 0 0;
-}
-
-/* Button styling for the sign-up page */
-.button.is-primary {
+.input {
   background-color: #ffffff;
-  border: none;
-  color: #121212;
-  font-size: 1rem;
-  font-weight: bold;
-  padding: 0.8rem;
-  border-radius: 4px;
-  cursor: pointer;
+  border: 1px solid #d1d5db;
+  color: #1a1f2e;
+  font-size: 0.95rem;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
   width: 100%;
-  transition: all 0.3s ease;
+  font-weight: 400;
 }
 
-.button.is-primary:hover {
-  background: linear-gradient(90deg, #00ffcc, #0077a6);
+.input::placeholder {
+  color: #9ca3af;
+}
+
+.input:hover {
+  border-color: #9ca3af;
 }
 
 .input:focus {
-  border-color: #4060ff;
-  box-shadow: 0 0 5px rgba(64, 96, 255, 0.5);
+  background-color: #ffffff;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+  outline: none;
 }
 
-/* Affichage de l'alerte d'erreur */
+.button.is-primary {
+  background: #3498db;
+  border: none;
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.875rem;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.2s ease;
+  letter-spacing: 0.3px;
+  margin-top: 1.5rem;
+}
+
+.button.is-primary:hover {
+  background: #2980b9;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(52, 152, 219, 0.2);
+}
+
+.button.is-primary:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
 .error-message {
-  background-color: #ff5252;
-  color: white;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  border-radius: 5px;
-  text-align: center;
+  background: #fee;
+  color: #c33;
+  padding: 0.875rem 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 6px;
+  text-align: left;
+  font-size: 0.9rem;
+  border-left: 3px solid #c33;
+  animation: fadeIn 0.3s ease;
 }
 
-/* Conditions de mot de passe */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .help-is-info {
-  font-size: 0.9rem;
-  color: #b0b0b0;
+  font-size: 0.8rem;
+  color: #6b7280;
+  margin-top: 0.625rem;
+  line-height: 1.5;
 }
 
 .help-is-info ul {
   list-style-type: none;
   padding-left: 0;
+  margin: 0.375rem 0 0 0;
 }
 
 .help-is-info li {
-  margin: 5px 0;
+  margin: 0.375rem 0;
+  padding-left: 1.25rem;
+  position: relative;
+  transition: color 0.2s ease;
+  color: #6b7280;
+}
+
+.help-is-info li::before {
+  content: '○';
+  position: absolute;
+  left: 0;
+  color: #9ca3af;
+  font-size: 0.7rem;
 }
 
 .has-text-success {
-  color: #34d399;
+  color: #059669;
 }
 
+.has-text-success::before {
+  content: '✓';
+  color: #059669;
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 1.75rem;
+    margin-bottom: 2rem;
+  }
+
+  .box {
+    padding: 2rem 1.5rem;
+  }
+
+  .signup-page {
+    padding: 0 1rem;
+  }
+
+  .button.is-primary {
+    padding: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .home {
+    padding: 2rem 0;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .box {
+    padding: 1.5rem 1rem;
+  }
+
+  .label {
+    font-size: 0.8rem;
+  }
+
+  .input {
+    font-size: 0.9rem;
+    padding: 0.65rem 0.875rem;
+  }
+}
 </style>

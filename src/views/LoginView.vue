@@ -4,7 +4,7 @@
     
     <div class="login-box">
       <div class="logo-container">
-        <img src="https://i.postimg.cc/mk088cKJ/Design-sans-titre-8.png" border="0" alt="Logo" class="logo" />
+        <img src="https://i.postimg.cc/Y2gHH3HL/1.png" border="0" alt="Logo" class="logo" />
       </div>
       <h1 class="welcome-title">Bienvenue sur DAT Commande</h1>
       <p class="subtitle">Connectez-vous pour continuer</p>
@@ -90,101 +90,115 @@ export default {
 </script>
 
 <style scoped>
-/* Global styles for the login page */
 .login-page {
+  min-height: 100vh;
+  background: #f8f9fa;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: #ffffff;
-  font-family: 'Arial', sans-serif;
+  padding: 3rem 1rem;
+  transition: background-color 0.3s ease;
 }
 
-.logo {
-  width: 200px;
-  height: auto;
-}
-
+/* Titre principal */
 .connexion-title {
-  font-size: 2.8rem;
-  font-weight: bold;
-  color: #303649;
-  margin-bottom: 1rem;
+  font-size: 2rem;
   text-align: center;
+  margin-bottom: 2.5rem;
+  color: #1a1f2e;
+  font-weight: 600;
+  letter-spacing: -0.5px;
 }
 
-/* Login box styling */
+/* Bloc principal */
 .login-box {
-  background-color: #303649;
-  border-radius: 5px;
-  padding: 2.5rem;
-  width: 400px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e8e8e8;
+  width: 100%;
+  max-width: 420px;
+  padding: 3rem 2.5rem;
   text-align: center;
-  position: relative;
+  transition: box-shadow 0.3s ease;
 }
 
-/* Top gradient bar on login box */
-.login-box::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 5px;
-  background: linear-gradient(90deg, #00ffcc, #0077a6);
-  border-radius: 12px 12px 0 0;
+.login-box:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Title and subtitle styling */
-.welcome-title {
-  font-size: 1.8rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  color: #ffffff;
-}
-
-.subtitle {
-  font-size: 1rem;
-  color: #bbbbbb;
-  margin-bottom: 2rem;
-}
-
-/* Form field styling */
-.form .field {
+/* Logo */
+.logo-container {
+  display: flex;
+  justify-content: center;
   margin-bottom: 1.5rem;
 }
 
-.label {
-  font-size: 0.9rem;
+.logo {
+  width: 160px;
+  height: auto;
+}
+
+/* Titres */
+.welcome-title {
+  font-size: 1.5rem;
   font-weight: 600;
-  color: #ffffff;
+  color: #1a1f2e;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  color: #6b7280;
+  margin-bottom: 2rem;
+}
+
+/* Champs */
+.field {
+  margin-bottom: 1.5rem;
   text-align: left;
 }
 
-.input {
-  background-color: #2a2a2a;
-  border: 1px solid #444444;
-  color: #ffffff;
-  padding: 0.8rem 0.8rem 0.8rem 2.5rem;
-  border-radius: 4px;
-  width: 100%;
-  font-size: 0.9rem;
+.label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-/* Placeholder color */
+.input {
+  background-color: #ffffff;
+  border: 1px solid #d1d5db;
+  color: #1a1f2e;
+  font-size: 0.95rem;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
 .input::placeholder {
-  color: rgb(105, 105, 105); /* Placeholder color (light grey) */
+  color: #9ca3af;
+}
+
+.input:hover {
+  border-color: #9ca3af;
 }
 
 .input:focus {
+  background-color: #ffffff;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
   outline: none;
-  border-color: #ffffff;
 }
 
-/* Styling for icons inside the input fields */
-.control.has-icons-left .input {
-  padding-left: 3rem;
+/* Icones dans les champs */
+.control.has-icons-left {
+  position: relative;
 }
 
 .control.has-icons-left .icon {
@@ -192,10 +206,15 @@ export default {
   top: 50%;
   left: 10px;
   transform: translateY(-50%);
-  color: #bbbbbb;
+  color: #9ca3af;
+  font-size: 0.9rem;
 }
 
-/* Password field styling */
+.control.has-icons-left .input {
+  padding-left: 2.5rem;
+}
+
+/* Mot de passe + œil */
 .password-field {
   position: relative;
 }
@@ -207,69 +226,136 @@ export default {
   transform: translateY(-50%);
   background: none;
   border: none;
-  color: #bbbbbb;
+  color: #9ca3af;
   cursor: pointer;
+  transition: color 0.2s ease;
 }
 
-.password-field .eye-icon i {
-  font-size: 1.2rem;
+.password-field .eye-icon:hover {
+  color: #3498db;
 }
 
-.password-field .icon {
-  color: #bbbbbb;
-}
-
-/* Remember me checkbox and forgot password link */
+/* Souvenir et lien */
 .remember-me {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-size: 0.85rem;
+  margin-bottom: 1.5rem;
 }
 
 .checkbox input {
-  margin-right: 0.5rem;
+  margin-right: 0.4rem;
 }
 
 .forgot-password {
-  font-size: 0.9rem;
-  color: #ffffff;
+  color: #3498db;
   text-decoration: none;
-  cursor: pointer;
+  transition: color 0.2s ease;
 }
 
 .forgot-password:hover {
+  color: #2980b9;
   text-decoration: underline;
 }
 
-/* Error and success message styling */
-.error-message {
-  color: #ff6b6b;
+/* Messages */
+.error-message,
+.success-message {
   font-size: 0.9rem;
-  margin-bottom: 1rem;
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.5rem;
+  text-align: left;
+  border-left: 3px solid;
+  animation: fadeIn 0.3s ease;
+}
+
+.error-message {
+  background: #fee;
+  color: #c33;
+  border-color: #c33;
 }
 
 .success-message {
-  color: #6bff6b;
-  font-size: 0.9rem;
-  margin-bottom: 1rem;
+  background: #e6ffed;
+  color: #0f5132;
+  border-color: #198754;
 }
 
-/* Button styling */
+/* Bouton */
 .button {
-  background-color: #ffffff;
+  background: #3498db;
   border: none;
-  color: #121212;
-  font-size: 1rem;
-  font-weight: bold;
-  padding: 0.8rem;
-  border-radius: 4px;
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.875rem;
+  border-radius: 6px;
   cursor: pointer;
   width: 100%;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
+  letter-spacing: 0.3px;
+  margin-top: 0.5rem;
 }
 
 .button:hover {
-  background: linear-gradient(90deg, #00ffcc, #0077a6);
+  background: #2980b9;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(52, 152, 219, 0.2);
 }
 
+.button:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .login-box {
+    padding: 2rem 1.5rem;
+  }
+
+  .connexion-title {
+    font-size: 1.75rem;
+    margin-bottom: 2rem;
+  }
+
+  .welcome-title {
+    font-size: 1.25rem;
+  }
+
+  .button {
+    padding: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-page {
+    padding: 2rem 1rem;
+  }
+
+  .connexion-title {
+    font-size: 1.5rem;
+  }
+
+  .label {
+    font-size: 0.8rem;
+  }
+
+  .input {
+    font-size: 0.9rem;
+    padding: 0.65rem 0.875rem;
+  }
+}
 </style>
