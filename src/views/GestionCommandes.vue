@@ -150,49 +150,102 @@ export default {
 <style scoped>
 .title {
   text-align: center;
-  font-size: 1.5rem;
-  margin-bottom: 20px;
-  color: #333;
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: #1a1f2e;
+  font-weight: 700;
+  letter-spacing: -0.5px;
 }
 
 .loading-indicator {
   text-align: center;
   font-size: 1.5rem;
+  color: #6b7280;
 }
 
 .table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
   margin-top: 20px;
-  margin-right: auto;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+.table th, .table td {
+  padding: 15px 12px;
+}
+
+.table th {
+  background-color: #f3f4f6;
+  color: #374151;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.table td {
+  background-color: #ffffff;
+  color: #4b5563;
+  font-size: 0.9rem;
+  vertical-align: middle;
+}
+
+.table tr:nth-child(even) td {
+  background-color: #f9fafb;
+}
+
+.table tr:hover td {
+  background-color: #eef2f7;
+  transition: background-color 0.3s;
 }
 
 .icon-space {
-  margin-right: 8px;
+  margin-right: 6px;
 }
 
-/* Pagination styles */
+/* Boutons */
+.button.is-info {
+  background: #3b82f6;
+  color: #ffffff;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  transition: all 0.2s ease;
+}
+
+.button.is-info:hover {
+  background: #2563eb;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+/* Pagination modernisée */
 .pagination {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
-}
-
-.button.is-light {
-  margin: 0 5px;
+  align-items: center;
+  margin-top: 25px;
+  gap: 12px;
 }
 
 .pagination span {
-  margin: 0 10px;
-  font-size: 1rem;
+  font-size: 0.95rem;
+  color: #374151;
 }
 
+/* Responsive */
 @media screen and (max-width: 768px) {
   .table {
-    font-size: 0.9rem;
-    width: 100%;
-    margin: 10px 0;
+    font-size: 0.85rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
   }
   
   .table thead {
@@ -201,64 +254,37 @@ export default {
 
   .table tr {
     display: block;
-    margin-bottom: 40px;
-    border-bottom: 2px solid #303649;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #e5e7eb;
   }
 
   .table td {
     display: flex;
     justify-content: space-between;
-    padding: 10px;
+    padding: 10px 8px;
     text-align: left;
-    font-size: 1.1rem;
-    border: none;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #e5e7eb;
     position: relative;
   }
 
   .table td::before {
     content: attr(data-label);
-    position: absolute;
-    left: 0;
-    font-weight: bold;
+    font-weight: 600;
     text-transform: capitalize;
-    color: #555;
+    color: #6b7280;
+    width: 50%;
+    flex-shrink: 0;
   }
 
   .table td:last-child {
     text-align: right;
     border-bottom: 0;
   }
+
+  .button.is-info {
+    font-size: 0.8rem;
+    padding: 5px 10px;
+  }
 }
 
-.table th, .table td {
-  border: 1px solid #ddd;
-  padding: 12px;
-  text-align: left;
-}
-
-.table th {
-  background-color: #f2f2f2;
-  color: #555;
-  font-weight: bold;
-}
-
-.table tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
-
-.table tr:hover {
-  background-color: #eaeaea;
-}
-
-/* Boutons */
-.button.is-primary {
-  background-color: #303649; 
-  color: white;
-  border-radius: 5%;
-}
-
-.button.is-primary:hover {
-  background-color: #303649; 
-}
 </style>
