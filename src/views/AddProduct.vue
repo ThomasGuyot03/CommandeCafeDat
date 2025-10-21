@@ -213,6 +213,15 @@ export default {
 .select select {
   appearance: none;
   cursor: pointer;
+  background-color: #ffffff;
+  border: 1px solid #d1d5db;
+  color: #1a1f2e;
+  font-size: 0.95rem;
+  padding: 0.65rem 1rem; /* ajusté */
+  border-radius: 6px;
+  line-height: 1.3; /* correction d'alignement du texte */
+  height: 42px; /* hauteur fixe pour aligner le texte verticalement */
+  transition: all 0.2s ease;
 }
 
 /* Zone de dépose d’image */
