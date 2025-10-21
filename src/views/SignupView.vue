@@ -8,7 +8,7 @@
           <!-- Formulaire divisé en 2 colonnes sur desktop et une seule sur mobile -->
           <div class="column is-12-mobile is-8-tablet is-6-desktop">
             <div class="box">
-              <form @submit-prevent="signup">
+              <form @submit.prevent="signup">
                 <!-- Ligne 1 - Prénom et Nom -->
                 <div class="columns is-multiline">
                   <div class="column is-12-mobile is-6-desktop">
@@ -86,15 +86,15 @@
                         <input class="input" type="password" v-model="password" placeholder="*******">
                       </div>
                       <!-- Instructions dynamiques pour le mot de passe -->
-                      <p class="help-is-info">
-                        Le mot de passe doit contenir :
+                      <div class="help-is-info">
+                        <p>Le mot de passe doit contenir :</p>
                         <ul>
                           <li :class="{ 'has-text-success': passwordLengthValid }">Au moins 8 caractères</li>
                           <li :class="{ 'has-text-success': passwordUppercaseValid }">Au moins une lettre majuscule</li>
                           <li :class="{ 'has-text-success': passwordLowercaseValid }">Au moins une lettre minuscule</li>
                           <li :class="{ 'has-text-success': passwordNumberValid }">Au moins un chiffre</li>
                         </ul>
-                      </p>
+                      </div>
                     </div>
                   </div>
                 </div>
