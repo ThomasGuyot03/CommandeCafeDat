@@ -118,173 +118,230 @@ export default {
 </script>
 
 <style scoped>
-/* Container global */
 .add-product-page {
+  min-height: 100vh;
+  background: #f8f9fa;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  color: #ffffff;
-  font-family: 'Arial', sans-serif;
+  justify-content: flex-start;
+  padding: 3rem 1.5rem;
+  transition: background-color 0.3s ease;
 }
 
-/* Titre de la page */
+/* Titre principal */
 .add-product-title {
-  font-size: 2.8rem;
-  font-weight: bold;
-  color: #303649;
-  margin-bottom: 2rem;
+  font-size: 2rem;
   text-align: center;
+  margin-bottom: 2.5rem;
+  color: #1a1f2e;
+  font-weight: 600;
+  letter-spacing: -0.5px;
 }
 
-/* Formulaire d'ajout de produit */
+/* Boîte du formulaire */
 .product-form-box {
-  background-color: #303649;
-  border-radius: 5px;
-  padding: 2.5rem;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e8e8e8;
   width: 100%;
-  max-width: 600px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-  text-align: center;
-  position: relative;
+  max-width: 640px;
+  padding: 3rem 2.5rem;
+  text-align: left;
+  transition: box-shadow 0.3s ease;
 }
 
-/* Gradient en haut du formulaire */
-.product-form-box::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 5px;
-  background: linear-gradient(90deg, #00ffcc, #0077a6);
-  border-radius: 12px 12px 0 0;
+.product-form-box:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Formulaire et champs */
-.product-form .field {
+/* Champs du formulaire */
+.field {
   margin-bottom: 1.5rem;
 }
 
 .label {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #ffffff;
-  text-align: left;
+  color: #2c3e50;
+  font-weight: 500;
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: block;
 }
 
-/* Champs de saisie */
+/* Inputs et textarea */
 .input,
 .textarea,
 .select select {
-  background-color: #2a2a2a;
-  border: 1px solid #d3d3d3;
-  color: #ffffff;
-  border-radius: 4px;
+  background-color: #ffffff;
+  border: 1px solid #d1d5db;
+  color: #1a1f2e;
+  font-size: 0.95rem;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
   width: 100%;
-  font-size: 0.9rem;
 }
 
-/* Focus sur les champs */
+.input::placeholder,
+.textarea::placeholder {
+  color: #9ca3af;
+}
+
+.input:hover,
+.textarea:hover,
+.select select:hover {
+  border-color: #9ca3af;
+}
+
 .input:focus,
 .textarea:focus,
 .select select:focus {
-  outline: none;
-  border-color: #ffffff;
-  box-shadow: 0 0 5px rgba(64, 96, 255, 0.5);
-}
-
-/* Placeholder des champs */
-.input::placeholder {
-  color: rgb(105, 105, 105); /* Placeholder color (light grey) */
-}
-
-.textarea {
-  color: #ffffff; /* Texte de la description maintenant avec la même couleur que le titre */
-}
-
-.textarea::placeholder {
-  color: rgb(105, 105, 105); /* Placeholder color (light grey) */
-  opacity: 1; /* Assure que la couleur soit pleinement visible */
-}
-
-/* Boutons */
-.button.is-link {
   background-color: #ffffff;
-  border-color: #ffffff;
-  color: rgb(0, 0, 0);
-  font-weight: bold;
-  padding: 0.8rem;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+  outline: none;
+}
+
+/* Sélecteur de catégorie */
+.select {
   width: 100%;
 }
 
-.button.is-link:hover {
-  background-color: #005bb5;
-}
-
-.button:hover {
-  background: linear-gradient(90deg, #00ffcc, #0077a6);
-}
-
-/* Styles de la zone de dépose (Dropbox) */
-.dropbox {
-  background-color: #2a2a2a;
-  border: 2px dashed #ffffff;
-  color: #ffffff;
-  padding: 1rem;
+.select select {
+  appearance: none;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+}
+
+/* Zone de dépose d’image */
+.dropbox {
+  background-color: #f9fafb;
+  border: 2px dashed #cbd5e1;
+  color: #6b7280;
+  padding: 2rem 1rem;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+}
+
+.dropbox:hover {
+  border-color: #3498db;
+  background-color: #f0f8ff;
+  color: #3498db;
 }
 
 .dropbox.is-dragover {
-  background-color: #0077a6;
-}
-
-.dropbox span {
-  display: block;
-  text-align: center;
-  font-size: 1rem;
-  color: #fff;
+  border-color: #3498db;
+  background-color: rgba(52, 152, 219, 0.05);
 }
 
 .file-input {
   display: none;
 }
 
-/* Styles des icônes dans les champs */
-.control.has-icons-left .input {
-  padding-left: 3rem;
+/* Bouton principal */
+.button.is-link {
+  background: #3498db;
+  border: none;
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.875rem;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.2s ease;
+  letter-spacing: 0.3px;
 }
 
-.control.has-icons-left .icon {
-  position: absolute;
-  top: 50%;
-  left: 10px;
-  transform: translateY(-50%);
-  color: #bbbbbb;
+.button.is-link:hover {
+  background: #2980b9;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(52, 152, 219, 0.2);
 }
 
-/* Message d'erreur */
-.error-message {
-  color: #ff6b6b;
-  font-size: 0.9rem;
-  margin-bottom: 1rem;
+.button.is-link:active {
+  transform: translateY(0);
+  box-shadow: none;
 }
 
-/* Message de succès */
+/* Messages (si ajoutés plus tard) */
+.error-message,
 .success-message {
-  color: #6bff6b;
   font-size: 0.9rem;
-  margin-bottom: 1rem;
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.5rem;
+  text-align: left;
+  border-left: 3px solid;
+  animation: fadeIn 0.3s ease;
 }
 
-/* Media Query pour réduire le titre en mobile */
+.error-message {
+  background: #fee;
+  color: #c33;
+  border-color: #c33;
+}
+
+.success-message {
+  background: #e6ffed;
+  color: #0f5132;
+  border-color: #198754;
+}
+
+/* Animation fade-in */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Responsive */
 @media (max-width: 768px) {
   .add-product-title {
-    font-size: 2rem; /* Taille réduite du titre pour les petits écrans */
+    font-size: 1.75rem;
+    margin-bottom: 2rem;
+  }
+
+  .product-form-box {
+    padding: 2rem 1.5rem;
+  }
+
+  .button.is-link {
+    padding: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .add-product-page {
+    padding: 2rem 1rem;
+  }
+
+  .add-product-title {
+    font-size: 1.5rem;
+  }
+
+  .label {
+    font-size: 0.8rem;
+  }
+
+  .input,
+  .textarea {
+    font-size: 0.9rem;
+    padding: 0.65rem 0.875rem;
+  }
+
+  .dropbox {
+    padding: 1.5rem 0.75rem;
+    font-size: 0.9rem;
   }
 }
 </style>
+
