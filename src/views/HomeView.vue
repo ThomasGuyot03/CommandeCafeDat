@@ -289,7 +289,6 @@ export default {
   align-items: center;
   max-height: 200px;
   overflow: hidden;
-  margin-bottom: 1rem;
   border-radius: 12px;
   transition: transform 0.3s ease;
 }
@@ -299,8 +298,8 @@ export default {
 }
 
 .card-image img {
-  max-width: 80%;
-  max-height: 80%;
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
 }
 
@@ -315,8 +314,7 @@ export default {
 .card-title {
   font-weight: 700;
   color: #2c3e50;
-  margin-bottom: 0.75rem;
-  word-wrap: break-word;
+    word-wrap: break-word;
   font-size: 1.1rem;
   text-align: center;
 }
