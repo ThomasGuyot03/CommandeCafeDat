@@ -91,107 +91,228 @@ export default {
 </script>
 
 <style>
-body {
-  font-family: 'Arial', sans-serif;
-}
-
 .title {
   text-align: center;
-  font-size: 2.5rem; /* Taille du titre */
-  margin-bottom: 20px; /* Espace en bas du titre */
-  color: #333; /* Couleur du titre */
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: #1a1f2e;
+  font-weight: 700;
+  letter-spacing: -0.5px;
 }
 
 .loading-indicator {
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
+  color: #6b7280;
+  margin-top: 30px;
 }
 
+/* TABLE */
 .table {
   width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px; 
-  margin-right: 5%;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); 
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
 }
 
-.table th, .table td {
-  border: 1px solid #ddd;
-  padding: 12px; /* Augmentation du padding */
-  text-align: left; /* Alignement à gauche */
+.table th,
+.table td {
+  padding: 15px 12px;
 }
 
 .table th {
-  background-color: #f2f2f2; /* Couleur de fond des en-têtes */
-  color: #555; /* Couleur du texte des en-têtes */
-  font-weight: bold; /* Gras pour les en-têtes */
+  background-color: #f3f4f6;
+  color: #374151;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.9rem;
 }
 
-.table tr:nth-child(even) {
-  background-color: #f9f9f9; /* Couleur de fond alternée */
+.table td {
+  background-color: #ffffff;
+  color: #4b5563;
+  font-size: 0.9rem;
+  vertical-align: middle;
 }
 
-.table tr:hover {
-  background-color: #eaeaea; /* Couleur de survol */
+.table tr:nth-child(even) td {
+  background-color: #f9fafb;
 }
 
+.table tr:hover td {
+  background-color: #eef2f7;
+  transition: background-color 0.3s;
+}
+
+/* BOUTONS */
+.button.is-info {
+  background: #3b82f6;
+  color: #ffffff;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  transition: all 0.2s ease;
+}
+
+.button.is-info:hover {
+  background: #2563eb;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+/* MODALE */
 .modal {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7);
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1000;
 }
 
 .modal-content {
-  background-color: #ffffff;
+  background: #ffffff;
   padding: 30px;
-  border-radius: 8px;
-  width: 400px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  border-radius: 12px;
+  width: 420px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  animation: modalFade 0.3s ease;
+}
+
+@keyframes modalFade {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .close {
   cursor: pointer;
   float: right;
   font-size: 1.5rem;
+  color: #6b7280;
+  transition: color 0.2s ease;
+}
+
+.close:hover {
+  color: #111827;
+}
+
+.modal-content h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #1a1f2e;
+  font-size: 1.4rem;
+  font-weight: 600;
 }
 
 .client-info p {
   margin: 10px 0;
-  font-size: 1rem;
-  line-height: 1.5;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #374151;
+}
+
+.client-info strong {
+  color: #1a1f2e;
 }
 
 .close-button {
-  background-color: #007bff;
+  background-color: #3b82f6;
   color: white;
   padding: 10px 15px;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 0.9rem;
   margin-top: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  transition: all 0.2s ease;
 }
 
 .close-button:hover {
-  background-color: #0056b3;
+  background-color: #2563eb;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
 }
 
-/* Styles de transition */
-.modal-enter-active, .modal-leave-active {
+/* TRANSITIONS */
+.modal-enter-active,
+.modal-leave-active {
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.modal-enter, .modal-leave-to {
+.modal-enter,
+.modal-leave-to {
   opacity: 0;
   transform: translateY(-50px);
 }
+
+/* RESPONSIVE */
+@media screen and (max-width: 768px) {
+  .table {
+    font-size: 0.85rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  }
+
+  .table thead {
+    display: none;
+  }
+
+  .table tr {
+    display: block;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #e5e7eb;
+  }
+
+  .table td {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 8px;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+    position: relative;
+  }
+
+  .table td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    text-transform: capitalize;
+    color: #6b7280;
+    width: 50%;
+    flex-shrink: 0;
+  }
+
+  .table td:last-child {
+    text-align: right;
+    border-bottom: 0;
+  }
+
+  .button.is-info {
+    font-size: 0.8rem;
+    padding: 5px 10px;
+  }
+
+  .modal-content {
+    width: 90%;
+    padding: 20px;
+  }
+}
+
 </style>
