@@ -333,7 +333,7 @@ export default {
 
 .table td {
   background: transparent;
-  color: #ecf0f1;
+  color: #000000;
   font-size: 1rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
