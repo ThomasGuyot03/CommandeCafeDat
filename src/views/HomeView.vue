@@ -3,7 +3,6 @@
     <!-- Hero Banner -->
       <div class="hero-banner">
         <div class="hero-content">
-          <h1>Le meilleur du café, livré chez vous ☕</h1>
           <p>Découvrez notre nouvelle game de café Lavazza.</p>
         </div>
       </div>
@@ -441,13 +440,6 @@ export default {
   padding: 1rem;
 }
 
-.hero-content h1 {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 0.8rem;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-}
-
 .hero-content p {
   font-size: 1.2rem;
   color: #e0e0e0;
@@ -604,10 +596,6 @@ export default {
   .hero-banner {
     height: 200px;
     border-radius: 10px;
-  }
-
-  .hero-content h1 {
-    font-size: 1.6rem;
   }
 
   .hero-content p {
