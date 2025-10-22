@@ -540,26 +540,31 @@ export default {
     background-color: #cfcfcf;
   }
 
-  /* --- BOUTON PANIER (icône seule) --- */
+ /* --- BOUTON PANIER (icône seule, mobile) --- */
+@media (max-width: 768px) {
   .button.custom-add-to-cart-button {
-    width: 48px;
-    height: 48px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     padding: 0;
     background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
     box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+    display: flex;
     justify-content: center;
     align-items: center;
-    display: flex;
     margin: 10px auto 0;
     transition: all 0.3s ease;
-    font-size: 0; /* cache le texte */
+    font-size: 0; /* masque le texte */
     overflow: hidden;
+    line-height: 0; /* supprime les écarts verticaux */
+    position: relative;
   }
 
   .button.custom-add-to-cart-button i {
     font-size: 1.4rem;
     margin: 0;
+    position: relative;
+    top: 1px; /* ajuste verticalement pour un centrage parfait */
   }
 
   .button.custom-add-to-cart-button:hover {
@@ -570,6 +575,7 @@ export default {
   .button.custom-add-to-cart-button:active {
     transform: scale(0.92);
   }
+}
 
   /* --- BOUTON MODIFIER (admin) --- */
   .custom-edit-button {
