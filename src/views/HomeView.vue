@@ -204,7 +204,6 @@ export default {
 </script>
 
 <style>
-
 .home {
   padding-left: 160px;
 }
@@ -242,6 +241,7 @@ export default {
   font-size: 1rem;
 }
 
+/* --- CARDS --- */
 .card {
   display: flex;
   flex-direction: column;
@@ -316,7 +316,7 @@ export default {
 .card-title {
   font-weight: 700;
   color: #2c3e50;
-    word-wrap: break-word;
+  word-wrap: break-word;
   font-size: 1.1rem;
   text-align: center;
 }
@@ -361,6 +361,7 @@ export default {
   background-color: #cfcfcf;
 }
 
+/* --- BOUTON PANIER --- */
 .button.custom-add-to-cart-button {
   margin-top: 1rem;
   width: 100%;
@@ -394,6 +395,7 @@ export default {
   font-size: 1.1rem;
 }
 
+/* --- BOUTON EDITION ADMIN --- */
 .custom-edit-button {
   color: rgb(107, 107, 107);
   border-color: #7e7e7e;
@@ -408,7 +410,7 @@ export default {
   background-color: #9e9e9e;
 }
 
-/* HERO BANNER */
+/* --- HERO BANNER --- */
 .hero-banner {
   width: 100%;
   height: 300px;
@@ -425,7 +427,6 @@ export default {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
 }
 
-/* Overlay sombre pour le contraste */
 .hero-banner::before {
   content: "";
   position: absolute;
@@ -433,7 +434,6 @@ export default {
   background: rgba(0, 0, 0, 0.5);
 }
 
-/* Contenu centré dans le hero */
 .hero-content {
   position: relative;
   color: #fff;
@@ -454,20 +454,6 @@ export default {
   color: #e0e0e0;
 }
 
-/* Version mobile */
-@media (max-width: 768px) {
-  .hero-banner {
-    height: 200px;
-  }
-
-  .hero-content h1 {
-    font-size: 1.6rem;
-  }
-
-  .hero-content p {
-    font-size: 0.95rem;
-  }
-}
 /* --- VERSION MOBILE --- */
 @media (max-width: 768px) {
   body {
@@ -531,9 +517,6 @@ export default {
   .quantity-selector {
     margin-top: 5px;
     margin-bottom: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 
   .quantity-input {
@@ -557,7 +540,7 @@ export default {
     background-color: #cfcfcf;
   }
 
-  /* --- BOUTON PANIER (version icône seulement sur mobile) --- */
+  /* --- BOUTON PANIER (icône seule) --- */
   .button.custom-add-to-cart-button {
     width: 48px;
     height: 48px;
@@ -570,21 +553,22 @@ export default {
     display: flex;
     margin: 10px auto 0;
     transition: all 0.3s ease;
-  }
-
-  /* Supprime le texte du bouton */
-  .button.custom-add-to-cart-button::before {
-    content: "";
+    font-size: 0; /* cache le texte */
+    overflow: hidden;
   }
 
   .button.custom-add-to-cart-button i {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     margin: 0;
   }
 
   .button.custom-add-to-cart-button:hover {
     background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
-    transform: scale(1.05);
+    transform: scale(1.08);
+  }
+
+  .button.custom-add-to-cart-button:active {
+    transform: scale(0.92);
   }
 
   /* --- BOUTON MODIFIER (admin) --- */
@@ -625,13 +609,7 @@ export default {
     font-size: 0.95rem;
   }
 
-  /* --- BOUTONS GÉNÉRAUX --- */
-  .button {
-    font-size: 0.75rem;
-    padding: 6px 10px;
-  }
-
-  /* --- STRUCTURE GLOBALE --- */
+  /* --- STRUCTURE --- */
   .page-padding {
     padding-top: 20px;
   }
@@ -641,13 +619,12 @@ export default {
   }
 }
 
-/* --- VERSION DESKTOP LARGE (pour l'équilibre des colonnes) --- */
+/* --- VERSION DESKTOP LARGE --- */
 @media screen and (min-width: 1024px) {
   .column.is-one-third-desktop {
     flex: none;
     width: 25%;
   }
 }
-
 
 </style>
