@@ -414,7 +414,7 @@ export default {
   height: 300px;
   background-image: url('https://i.postimg.cc/NG76ZdRz/tales-of-italy-menu.webp');
   background-size: cover;
-  background-position: center;
+  /* background-position: center; */
   border-radius: 12px;
   display: flex;
   align-items: center;
