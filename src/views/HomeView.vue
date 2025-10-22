@@ -378,7 +378,6 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
 }
 
 .button.custom-add-to-cart-button:hover {
