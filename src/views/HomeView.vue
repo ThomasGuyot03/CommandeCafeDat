@@ -468,8 +468,7 @@ export default {
     font-size: 0.95rem;
   }
 }
-
-
+/* --- VERSION MOBILE --- */
 @media (max-width: 768px) {
   body {
     width: 100%;
@@ -508,60 +507,147 @@ export default {
     margin-left: -15px;
   }
 
-  .quantity-selector {
-    margin-top: 5px;
-    margin-bottom: 10px;
-  }
-
-  .quantity-input {
-    width: 40px;
-    margin: 0 5px;
-  }
-
-  .quantity-btn {
-    padding: 4px 8px;
-  }
-
+  /* --- CARDS --- */
   .card {
     min-width: 120px;
     max-width: 100%;
     margin: 0 auto 15px;
     padding: 1.25rem;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
   }
 
   .card-title {
     font-size: 0.875rem;
   }
 
-  .button {
-    font-size: 0.75rem;
-    padding: 5px 10px;
+  .content {
+    font-size: 0.85rem;
+    color: #7f8c8d;
   }
 
-  .button.custom-add-to-cart-button {
-    max-width: 100%;
+  .quantity-selector {
+    margin-top: 5px;
+    margin-bottom: 10px;
     display: flex;
-    align-items: center;
     justify-content: center;
-    padding: 6px 10px;
-    margin-bottom: 5px;
+    align-items: center;
+  }
+
+  .quantity-input {
+    width: 40px;
+    margin: 0 5px;
+    border-radius: 5px;
+    text-align: center;
+  }
+
+  .quantity-btn {
+    background-color: #303649;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .quantity-btn:hover {
+    background-color: #cfcfcf;
+  }
+
+  /* --- BOUTON PANIER (version icône seulement sur mobile) --- */
+  .button.custom-add-to-cart-button {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    padding: 0;
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin: 10px auto 0;
+    transition: all 0.3s ease;
+  }
+
+  /* Supprime le texte du bouton */
+  .button.custom-add-to-cart-button::before {
+    content: "";
   }
 
   .button.custom-add-to-cart-button i {
-    margin-left: 5px;
-    font-size: 0.875rem;
+    font-size: 1.2rem;
+    margin: 0;
   }
 
-  .content {
-    font-size: 0.85rem;
+  .button.custom-add-to-cart-button:hover {
+    background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+    transform: scale(1.05);
+  }
+
+  /* --- BOUTON MODIFIER (admin) --- */
+  .custom-edit-button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    color: #555;
+    border: 1px solid #bbb;
+    margin: 0 auto;
+    transition: all 0.3s ease;
+  }
+
+  .custom-edit-button i {
+    margin: 0;
+  }
+
+  .custom-edit-button:hover {
+    background-color: #f0f0f0;
+    transform: scale(1.05);
+  }
+
+  /* --- HERO BANNER --- */
+  .hero-banner {
+    height: 200px;
+    border-radius: 10px;
+  }
+
+  .hero-content h1 {
+    font-size: 1.6rem;
+  }
+
+  .hero-content p {
+    font-size: 0.95rem;
+  }
+
+  /* --- BOUTONS GÉNÉRAUX --- */
+  .button {
+    font-size: 0.75rem;
+    padding: 6px 10px;
+  }
+
+  /* --- STRUCTURE GLOBALE --- */
+  .page-padding {
+    padding-top: 20px;
+  }
+
+  .loading-indicator {
+    font-size: 0.9rem;
   }
 }
 
+/* --- VERSION DESKTOP LARGE (pour l'équilibre des colonnes) --- */
 @media screen and (min-width: 1024px) {
   .column.is-one-third-desktop {
     flex: none;
     width: 25%;
   }
 }
+
 
 </style>
