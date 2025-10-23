@@ -303,25 +303,25 @@ export default {
 .hamburger {
   display: none;
   position: fixed;
-  top: 20px;
-  left: 20px;
-  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-  border: none;
+  top: 18px;
+  left: 18px;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
   color: white;
-  font-size: 24px;
-  z-index: 1001;
-  width: 50px;
-  height: 50px;
-  border-radius: 12px;
+  font-size: 1.4rem;
+  border: none;
+  display: none;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1001;
+  transition: all 0.3s ease;
 }
 
 .hamburger:hover {
-  background: linear-gradient(135deg, #3498db 0%, #2ecc71 100%);
-  transform: scale(1.05);
-  box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+  transform: scale(1.1);
 }
 
 .hamburger:active {
@@ -345,11 +345,12 @@ export default {
     width: 150px;
   }
 
+@media (max-width: 768px) {
   .hamburger {
     display: flex;
-    align-items: center;
-    justify-content: center;
   }
+}
+
 }
 
 .sidebar-item.to-ajouter-produit {
