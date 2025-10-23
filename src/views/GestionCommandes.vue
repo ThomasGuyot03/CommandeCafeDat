@@ -416,7 +416,7 @@ export default {
               <div class="header">
                 <div class="logo-section">
                   <div>
-                    <img src="../images/1.png" alt="Logo" class="logo" onerror="this.style.display='none'" />
+                    <img src="https://i.postimg.cc/Y2gHH3HL/1.png" alt="Logo" class="logo" onerror="this.style.display='none'" />
                   </div>
                   <div class="company-info">
                     <h2>DAT Développement</h2>
