@@ -419,7 +419,7 @@ export default {
                     <img src="https://i.postimg.cc/Y2gHH3HL/1.png" alt="Logo" class="logo" onerror="this.style.display='none'" />
                   </div>
                   <div class="company-info">
-                    <h2>DAT Développement</h2>
+                    <h2>DAT Café</h2>
                     <p>Solutions café innovantes</p>
                     <p>contact@dat-dev.fr</p>
                     <p>05.34.48.00.59</p>
@@ -441,7 +441,6 @@ export default {
                   <div class="info-box">
                     <h3>Informations Commande</h3>
                     <p><strong>Date :</strong> ${this.formatDate(order.createdAt)}</p>
-                    <p><strong>N° Commande :</strong> ${order._id || 'N/A'}</p>
                     <p><strong>Articles :</strong> ${order.products.length}</p>
                     <p><strong>Quantité totale :</strong> ${order.products.reduce((sum, p) => sum + p.quantity, 0)}</p>
                   </div>

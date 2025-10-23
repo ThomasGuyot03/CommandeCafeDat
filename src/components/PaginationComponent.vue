@@ -89,6 +89,11 @@ export default {
   gap: 8px;
   padding: 2rem 1rem;
   flex-wrap: wrap;
+
+  /* 🧩 Fix overflow horizontal */
+  max-width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 .pagination-previous,
@@ -164,6 +169,11 @@ export default {
   padding: 0;
   flex-wrap: wrap;
   justify-content: center;
+
+  /* 🧩 Empêche le débordement horizontal */
+  max-width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 .pagination-list li {
@@ -246,6 +256,7 @@ export default {
   user-select: none;
 }
 
+/* 📱 Tablettes */
 @media (max-width: 768px) {
   .pagination {
     gap: 6px;
@@ -273,6 +284,7 @@ export default {
   }
 }
 
+/* 📱 Mobiles */
 @media (max-width: 480px) {
   .pagination {
     gap: 4px;
@@ -299,3 +311,4 @@ export default {
   }
 }
 </style>
+
