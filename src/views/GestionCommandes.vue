@@ -157,6 +157,7 @@ printBL(order) {
             justify-content: space-between;
             align-items: flex-start;
             margin-bottom: 30px;
+            color: black;
           }
 
           .logo {
